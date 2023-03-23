@@ -1,0 +1,16 @@
+{
+    "incomes": [
+        {
+            "amount": "",
+            "date": "",
+            "name": ""
+        }
+    ],
+    "expenses": [
+        {
+            "amount": "",
+            "date": "",
+            "name": ""
+        }
+    ]
+}
