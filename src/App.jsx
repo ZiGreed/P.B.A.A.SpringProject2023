@@ -1,12 +1,14 @@
 import "bootstrap/dist/css/bootstrap.min.css";
-// import Navigation from "./components/Navigation";
-// import MainPage from "./components/MainPage";
+import Navigation from "./components/Navigation";
+import Layout from "./components/Layout";
+import MainPage from "./components/MainPage";
 
 function App() {
   return (
     <div>
-      <Navigation />
-      <MainPage />
+      <Layout>
+        <MainPage />
+      </Layout>
     </div>
   );
 }
