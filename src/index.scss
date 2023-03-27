@@ -1,0 +1,35 @@
+//USER IKONOS IR LOGOUT MYGTUKO PLACEMENT'AS APACIOJE
+.container__Bottom--Margin {
+  margin-top: 300px;
+}
+
+//NAVIGATION BACKGROUND SPALVA
+.nav__background--color {
+  background: linear-gradient(
+      180deg,
+      rgba(0, 140, 255, 0.2) 0%,
+      rgba(0, 0, 0, 0) 100%
+    ),
+    linear-gradient(360deg, rgba(105, 66, 239, 0.2) 0%, rgba(0, 0, 0, 0) 100%),
+    #0e0e30;
+}
+
+//PAGRINDINIU MYGTUKU BORDERIS IR HOVERIS
+#navButtons button {
+  background: linear-gradient(#0e0e30, #0e0e30) padding-box,
+    linear-gradient(to right, #008cff, #9900dd) border-box;
+  border-radius: 15px;
+  border: 2px solid transparent;
+  position: relative;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
+  color: #008cff;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  &:hover {
+    background: linear-gradient(270deg, #9900dd 0%, #008cff 100%);
+    color: #fff;
+  }
+}

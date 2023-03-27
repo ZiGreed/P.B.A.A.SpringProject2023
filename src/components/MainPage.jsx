@@ -4,9 +4,9 @@
 
 function MainPage() {
     return ( 
-        <>
-        
-        </>
+
+        <div>lalala</div>
+
      );
 }
 
