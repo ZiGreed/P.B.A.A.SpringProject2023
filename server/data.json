@@ -3,14 +3,16 @@
         {
             "amount": "",
             "date": "",
-            "name": ""
+            "name": "",
+            "category": ""
         }
     ],
     "expenses": [
         {
             "amount": "",
             "date": "",
-            "name": ""
+            "name": "",
+            "category": ""
         }
     ]
 }

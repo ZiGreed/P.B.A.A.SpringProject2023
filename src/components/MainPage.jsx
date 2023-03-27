@@ -2,8 +2,10 @@
 
 
 
-// function MainPage() {
-//     return (  );
-// }
+function MainPage() {
+    return ( 
+        <div>lalala</div>
+     );
+}
 
-// export default MainPage;
+export default MainPage;
