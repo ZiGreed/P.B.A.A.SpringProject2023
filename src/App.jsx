@@ -15,8 +15,6 @@ function App() {
       {/* <MainPage /> */}
       <Routes>
         {/* <Route path="/" element={<MainPage/>} /> */}
-        <Route path="/" element={<Dashboard />} />
-        <Route path="/expenses/" element={<Expenses />}/>
       </Routes>
 
     </div>
