@@ -2,8 +2,12 @@
 
 
 
-// function MainPage() {
-//     return (  );
-// }
+function MainPage() {
+    return ( 
+        <>
+        
+        </>
+     );
+}
 
-// export default MainPage;
+export default MainPage;
