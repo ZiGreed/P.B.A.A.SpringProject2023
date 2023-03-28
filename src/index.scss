@@ -33,3 +33,46 @@
     color: #fff;
   }
 }
+
+.offcanvas-body {
+  padding: 0;
+}
+
+.navigation-topbar {
+  background: linear-gradient(
+      180deg,
+      rgba(0, 140, 255, 0.1) 0%,
+      rgba(153, 0, 221, 0.1) 100%
+    ),
+    #0e0e30;
+}
+
+.navigation-topbar img {
+  width: 50px;
+  padding: 0;
+}
+
+.burger-button {
+  background-color: transparent;
+  border: 0;
+}
+
+//BUGFIX
+.modal-open {
+  overflow: auto;
+  padding-right: 0 !important;
+}
+
+.show-onMobile {
+  display: none !important;
+}
+
+.col {
+  padding-right: 0;
+}
+
+@media only screen and (max-width: 768px) {
+  .show-onMobile {
+    display: flex !important;
+  }
+}
