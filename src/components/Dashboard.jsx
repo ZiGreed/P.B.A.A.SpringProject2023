@@ -3,9 +3,7 @@ import { Link } from "react-router-dom";
 
 function Dashboard() {
     return ( 
-        <>
-
-        </>
+        <div>dashboard</div>
      );
 }
 
