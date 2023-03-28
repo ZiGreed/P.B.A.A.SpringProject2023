@@ -15,6 +15,7 @@ function MainPage() {
 
   let windowSize = useWindowSize();
 
+
   return (
     <div className="cntr">
       <div className="navigation-topbar d-flex flex-row justify-content-between p-10 show-onMobile">
@@ -42,6 +43,7 @@ function MainPage() {
       {windowSize < 768 && <Outlet />}
     </div>
   );
+
 }
 
 export default MainPage;
