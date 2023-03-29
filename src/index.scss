@@ -76,3 +76,38 @@
     display: flex !important;
   }
 }
+
+.dashboard-background {
+  background: linear-gradient(
+      349.4deg,
+      rgba(0, 140, 255, 0.2) -12.53%,
+      rgba(14, 14, 48, 0.2) 77.77%
+    ),
+    #0e0e30;
+}
+
+.diagram-border {
+  background: linear-gradient(#0e0e30, #0e0e30) padding-box,
+    linear-gradient(to right, #008cff, #9900dd) border-box;
+  border-radius: 15px;
+  border: 2px solid transparent;
+  width: 75%;
+  font-size: 1.5rem;
+  color: #008cff;
+  margin-top: 20px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.dashboard-background img {
+  width: 100%;
+}
+
+.recharts-cartesian-axis-line {
+  stroke: #ff0000;
+  stroke-width: 2px;
+}
+
+.chart-wrapper {
+  width: 100%;
+}
