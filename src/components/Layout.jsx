@@ -5,7 +5,7 @@ function Layout({ children }) {
     <div>
       <Container fluid className="p-0">
         <Row>
-            <main style={{"padding-right":0}}>{children}</main>
+            <main>{children}</main>
         </Row>
       </Container>
     </div>
