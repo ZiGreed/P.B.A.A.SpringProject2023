@@ -2,10 +2,9 @@
 import { Row, Col, Container, Tab, Tabs } from "react-bootstrap";
 import { DiagramIcon, HistoryIcon } from "./NavIcons";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { PieChart, Pie, Cell, ResponsiveContainer } from "recharts";
+import { PieChart, Pie, Cell } from "recharts";
 import { useState, useEffect } from "react";
 import axios from "axios";
-
 function Dashboard() {
   let [expensesData, setExpensesData] = useState([]);
   let expensesURL = "http://localhost:3000/expenses";
@@ -65,7 +64,7 @@ function Dashboard() {
         setExpensesData(finalResult);
       })
       .catch((error) => console.log(error));
-  }, []);
+  }, [expensesURL]);
 
   return (
     <div className="dashboard-background">
