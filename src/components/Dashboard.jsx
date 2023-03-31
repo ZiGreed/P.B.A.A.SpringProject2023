@@ -5,9 +5,12 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { PieChart, Pie, Cell } from "recharts";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import YearChart from "./YearChart";
 function Dashboard() {
   let [expensesData, setExpensesData] = useState([]);
   let expensesURL = "http://localhost:3000/expenses";
+  const currentDate = new Date();
+  const currentMonth = currentDate.getMonth() + 1;
 
   const COLORS = [
     "#0088FE",
@@ -51,8 +54,11 @@ function Dashboard() {
       .get(expensesURL)
       .then((response) => {
         const expensesArray = response.data.reduce(
-          (accumulator, { category, ammount }) => {
-            accumulator[category] = (accumulator[category] || 0) + ammount * 1;
+          (accumulator, { category, amount, date }) => {
+            const month = new Date(date).getMonth() + 1;
+            if (month === currentMonth) {
+              accumulator[category] = (accumulator[category] || 0) + amount * 1;
+            }
             return accumulator;
           },
           {}
@@ -64,7 +70,7 @@ function Dashboard() {
         setExpensesData(finalResult);
       })
       .catch((error) => console.log(error));
-  }, [expensesURL]);
+  }, [expensesURL, currentMonth]);
 
   return (
     <div className="dashboard-background">
@@ -104,7 +110,9 @@ function Dashboard() {
                   </Pie>
                 </PieChart>
               </Tab>
-              <Tab eventKey="chooseYear" title="Pasirinkti metus"></Tab>
+              <Tab eventKey="chooseYear" title="Pasirinkti metus">
+                  <YearChart />
+              </Tab>
             </Tabs>
           </Row>
           <Row>
