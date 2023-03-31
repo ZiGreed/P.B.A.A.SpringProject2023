@@ -1,11 +1,12 @@
-
 import { Formik } from "formik";
 import { Button, Form } from "react-bootstrap";
 
+
 function AddIncomes() {
   const today = new Date().toISOString().split("T")[0];
+  
   return (
-    <div className="incomes__background--color AddIncomes-onMobile">
+    <div className="incomes_expenses__background--color incomes_expenses-onMobile">
       <Formik
         initialValues={{
           name: "",
@@ -35,7 +36,7 @@ function AddIncomes() {
             <Form.Group className="p-2">
               <Form.Label>Pavadinimas</Form.Label>
               <Form.Control
-                className="incomesFields"
+                className="incomes_expensesFields"
                 type="text"
                 placeholder="Pavadinimas"
                 name="name"
@@ -49,22 +50,27 @@ function AddIncomes() {
             <Form.Group className="p-2">
               <Form.Label>Suma</Form.Label>
               <Form.Control
-                className="incomesFields"
+                className="incomes_expensesFields"
                 type="number"
-                step="0.01"
                 placeholder="Suma"
                 name="amount"
                 onChange={handleChange}
                 onBlur={handleBlur}
                 value={values.amount}
                 isInvalid={touched.amount && !values.amount}
+                onKeyDown={(event) => {
+                  const pattern = /[0-9]/;
+                  if (!pattern.test(event.key)) {
+                    event.preventDefault();
+                  }
+                }}
               />
               <Form.Control.Feedback type="invalid">{errors.amount}</Form.Control.Feedback>
             </Form.Group>
             <Form.Group className="p-2">
               <Form.Label>Data</Form.Label>
               <Form.Control
-                className="incomesFields"
+                className="incomes_expensesFields"
                 type="Date"
                 placeholder="YY-MM-DD"
                 name="date"
@@ -76,11 +82,11 @@ function AddIncomes() {
               />
               <Form.Control.Feedback type="invalid">{errors.date}</Form.Control.Feedback>
             </Form.Group>
-            <div className="incomebtn">
-              <Button className="incomebtn" type="button" onClick={resetForm} disabled={!dirty || isSubmitting}>
+            <div className="income_expensesBtn">
+              <Button className="income_expensesBtn" type="button" onClick={resetForm} disabled={!dirty || isSubmitting}>
                 Atšaukti
               </Button>
-              <Button className="incomebtn" variant="secondary" type="submit" disabled={!dirty || isSubmitting}>
+              <Button className="income_expensesBtn" variant="secondary" type="submit" disabled={!dirty || isSubmitting}>
                 Pateikti
               </Button>
             </div>

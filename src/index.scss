@@ -105,9 +105,9 @@
 
 
 
-//ADDINCOMES
+//ADDINCOMES IR ADDEXPENSES
 
-.incomes__background--color {
+.incomes_expenses__background--color {
   background: linear-gradient(
       rgba(0, 140, 255, 0.2) 0%,
       rgba(0, 0, 0, 0) 100%
@@ -115,15 +115,15 @@
     linear-gradient(360deg, rgba(105, 66, 239, 0.2) 0%, rgba(0, 0, 0, 0) 100%),
     #0e0e30;
     color: #008cff;
-    width: 40%;
+    width: 80%;
   }
 
-    .incomebtn {
+    .income_expensesBtn {
       display: flex;
       justify-content: center;
     }
     
-    .incomebtn button {
+    .income_expensesBtn button {
       margin: 0 auto;
       background: linear-gradient(#0e0e30, #0e0e30) padding-box,
         linear-gradient(to right, #008cff, #9900dd) border-box;
@@ -139,12 +139,12 @@
       cursor: pointer;
     }
     
-    .incomebtn button:hover {
+    .income_expensesBtn button:hover {
       background: linear-gradient(270deg, #9900dd 0%, #008cff 100%);
       color: #fff;
     }
 
-    .incomesFields {
+    .incomes_expensesFields {
       border: 2px solid transparent;
       background: linear-gradient(#0e0e30, #0e0e30) padding-box,
       linear-gradient(to right, #008cff, #9900dd) border-box;
@@ -155,7 +155,7 @@
     }
     
     @media only screen and (max-width: 768px) {
-      .AddIncomes-onMobile {
+      .incomes_expenses-onMobile {
         width: 100%;
       }
     }
