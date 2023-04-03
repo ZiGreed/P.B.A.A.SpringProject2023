@@ -1,11 +1,14 @@
 //ISLAIDU PUSLAPIS. JAME GRAFIKAS RODANTIS VISU METU ISLAIDU SUMA SUSKIRSTYTAS PAGAL MENESIUS IR SALIA PIRKIMU ISTORIJA (TIK ISLAIDOS)
 import { Formik } from "formik";
 import { Button, Form } from "react-bootstrap";
-import { useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom';
+import { postData } from "../../services/api";
+const expenseURL = "http://localhost:3000/expenses"
 
 function AddExpenses() {
     const today = new Date().toISOString().split('T')[0];
     const navigate = useNavigate();
+    
     return ( 
         <>
         <div style={{width: "100%"}}>
@@ -17,11 +20,13 @@ function AddExpenses() {
                 date: ""
             }}
             onSubmit={(values, resetForm) => {
+                postData(values, expenseURL);
+                resetForm();
                 console.log(values)
             }}
             >
                 {({values, handleChange, handleBlur, handleSubmit, dirty}) => (
-                    <Form onSubmit={handleSubmit} classname>
+                    <Form onSubmit={handleSubmit}>
                         <Form.Group >
                             <Form.Label>Expense title</Form.Label>
                             <Form.Control
