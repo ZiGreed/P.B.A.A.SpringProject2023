@@ -47,6 +47,7 @@ function AddExpenses() {
                                 value={values.name}
                                 isInvalid={touched.name && !values.name}
                             />
+                            <Form.Control.Feedback type="invalid">{errors.name}</Form.Control.Feedback>
                         </Form.Group>
                         <Form.Group className="p-2">
                             <Form.Label>Suma</Form.Label>
@@ -61,11 +62,13 @@ function AddExpenses() {
                                 isInvalid={touched.amount && !values.amount}
                                 onKeyDown={(event) => {
                                   const pattern = /[0-9]/;
-                                  if (!pattern.test(event.key)) {
+                                  if (!pattern.test(event.key) && event.key !== "Backspace" && event.key !== "Delete") {
                                     event.preventDefault();
                                   }
                                 }}
+                                
                             />
+                            <Form.Control.Feedback type="invalid">{errors.amount}</Form.Control.Feedback>
                         </Form.Group>
                         <Form.Group className="p-2">
                             <Form.Label>Data</Form.Label>
@@ -80,6 +83,7 @@ function AddExpenses() {
                                 value={values.date}
                                 isInvalid={touched.date && !values.date}
                             />
+                            <Form.Control.Feedback type="invalid">{errors.date}</Form.Control.Feedback>
                         </Form.Group>
                         <div className="income_expensesBtn">
               <Button className="income_expensesBtn" type="button" onClick={resetForm} disabled={!dirty || isSubmitting}>
