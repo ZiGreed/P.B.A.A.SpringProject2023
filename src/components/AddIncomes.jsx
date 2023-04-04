@@ -51,6 +51,7 @@ function AddIncomes() {
                 onBlur={handleBlur}
                 value={values.name}
                 isInvalid={touched.name && !values.name}
+                maxLength={50}
               />
               <Form.Control.Feedback type="invalid">{errors.name}</Form.Control.Feedback>
             </Form.Group>
@@ -67,7 +68,7 @@ function AddIncomes() {
                 isInvalid={touched.amount && !values.amount}
                 onKeyDown={(event) => {
                   const pattern = /[0-9]/;
-                  if (!pattern.test(event.key)) {
+                  if (!pattern.test(event.key) && event.key !== "Backspace" && event.key !== "Delete") {
                     event.preventDefault();
                   }
                 }}
