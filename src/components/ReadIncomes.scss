@@ -1,4 +1,4 @@
-.readExpensejsx{
+.readIncomejsx{
     overflow: hidden;
     width: 100%;
 }
@@ -40,7 +40,7 @@
 
     }
 }
-@media only screen and (max-width: 1200px) {
+@media only screen and (max-width: 1000px) {
     .cardsContainer {
         grid-template-columns: repeat(1, 1fr);
     }
@@ -79,8 +79,8 @@
     justify-self: start;
     align-self: center;
 }
-.cardPriceRed{
-    color: #EF0107 ;
+.cardPriceGreen{
+    color: #52ff00;
     justify-self: center;
     align-self: center;
 }
