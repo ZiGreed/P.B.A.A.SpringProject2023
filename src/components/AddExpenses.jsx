@@ -1,11 +1,14 @@
 //ISLAIDU PUSLAPIS. JAME GRAFIKAS RODANTIS VISU METU ISLAIDU SUMA SUSKIRSTYTAS PAGAL MENESIUS IR SALIA PIRKIMU ISTORIJA (TIK ISLAIDOS)
 import { Formik } from "formik";
 import { Button, Form } from "react-bootstrap";
-import { useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom';
+import { postData } from "../../services/api";
+const expenseURL = "http://localhost:3000/expenses"
 
 function AddExpenses() {
     const today = new Date().toISOString().split('T')[0];
     const navigate = useNavigate();
+    
     return ( 
         <>
         <div className="incomes_expenses__background--color incomes_expenses-onMobile">
@@ -15,6 +18,7 @@ function AddExpenses() {
                 amount: "",
                 date: ""
             }}
+
             validate={(values) => {
                 const errors = {};
                 if (!values.name) {
@@ -29,6 +33,7 @@ function AddExpenses() {
                 return errors;
               }}
               onSubmit={(values, { resetForm }) => {
+                postData(values, expenseURL);
                 console.log(values);
                 resetForm();
               }}
@@ -37,6 +42,7 @@ function AddExpenses() {
                     <Form onSubmit={handleSubmit} className="diagram-border p-4">
                         <Form.Group className="p-2">
                             <Form.Label>Pavadinimas</Form.Label>
+
                             <Form.Control
                             className="incomes_expensesFields"
                                 type="text"
