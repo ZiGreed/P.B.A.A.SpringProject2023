@@ -1,23 +1,70 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { Line } from "react-chartjs-2";
 import {
-  LineChart,
-  Line,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
+  Chart as ChartJS,
+  LineElement,
+  CategoryScale,
+  LinearScale,
+  PointElement,
   Legend,
-  ResponsiveContainer,
-} from "recharts";
-import moment from "moment/moment";
-import "moment/locale/lt";
+  Title
+} from "chart.js";
+
+ChartJS.register(LineElement, CategoryScale, LinearScale, PointElement, Legend, Title);
 
 const YearChart = () => {
   const [incomes, setIncomes] = useState([]);
   const [expenses, setExpenses] = useState([]);
   const baseURL = "http://localhost:3000/";
-  moment.locale("lt");
+
+  const labels = [
+    "Sau",
+    "Vas",
+    "Kov",
+    "Bal",
+    "Geg",
+    "Bir",
+    "Lie",
+    "Rugp",
+    "Rugs",
+    "Spa",
+    "Lap",
+    "Gru",
+  ];
+
+  const incomeData = {
+    labels,
+    datasets: [
+      {
+        label: "Incomes",
+        data: transformData(incomes, expenses).map(item => item.income),
+        backgroundColor: "green",
+        borderColor: "black",
+        pointBorderColor: "green",
+      },
+      {
+        label: "Expenses",
+        data: transformData(incomes, expenses).map(item => item.expense),
+        backgroundColor: 'red',
+        borderColor: 'black',
+        pointBorderColor: 'red'
+      }
+    ],
+  };
+
+  const options = {
+    maintainAspectRatio : false,
+    plugins: {
+      legend: {
+        position: 'top',
+      },
+      title: {
+        display: true,
+        text: "Incomes and expenses comparison chart"
+      }
+    },
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -36,8 +83,8 @@ const YearChart = () => {
     const groupedData = {};
 
     allData.forEach((item) => {
-      const date = moment(item.date);
-      const month = date.format("MMMM");
+      const date = new Date(item.date);
+      const month = date.getMonth() + 1;
 
       if (!groupedData[month]) {
         groupedData[month] = { income: 0, expense: 0 };
@@ -55,32 +102,30 @@ const YearChart = () => {
     Object.entries(groupedData).forEach(([month, { income, expense }]) => {
       chartData.push({ month, income, expense });
     });
+    const getMonthName = (monthNumber) => {
+      const date = new Date();
+      date.setMonth(monthNumber - 1);
 
-    return chartData;
+      return date.toLocaleString("lt-LT", {
+        month: "long",
+      });
+    };
+
+    let sortedArray = chartData.map((item) => {
+      return {
+        income: item.income,
+        expense: item.expense,
+        month: getMonthName(item.month),
+      };
+    });
+    console.log(sortedArray);
+    return sortedArray;
   }
 
   return (
-    <ResponsiveContainer width="100%" height={400}>
-      <LineChart width={400} height={200}>
-        <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="month" height={100} tick={{ angle: 90, textAnchor: 'start', 'dominantBaseline': 'ideographic' }}/>
-        <YAxis />
-        <Tooltip />
-        <Legend />
-        <Line
-          type="monotone"
-          dataKey="income"
-          data={transformData(incomes, expenses)}
-          stroke="#82ca9d"
-        />
-        <Line
-          type="monotone"
-          dataKey="expense"
-          data={transformData(incomes, expenses)}
-          stroke="#f5a623"
-        />
-      </LineChart>
-    </ResponsiveContainer>
+    <div className="line-chart">
+      <Line data={incomeData} options={options}></Line>
+    </div>
   );
 };
 
