@@ -11,59 +11,90 @@ function AddExpenses() {
     
     return ( 
         <>
-        <div style={{width: "100%"}}>
-            <h2>Expenses Form</h2>
+        <div className="incomes_expenses__background--color incomes_expenses-onMobile">
             <Formik
             initialValues={{
                 name: "",
                 amount: "",
                 date: ""
             }}
-            onSubmit={(values, resetForm) => {
+
+            validate={(values) => {
+                const errors = {};
+                if (!values.name) {
+                  errors.name = "Privalomas laukelis";
+                }
+                if (!values.amount) {
+                  errors.amount = "Privalomas laukelis";
+                }
+                if (!values.date) {
+                  errors.date = "Privalomas laukelis";
+                }
+                return errors;
+              }}
+              onSubmit={(values, { resetForm }) => {
                 postData(values, expenseURL);
+                console.log(values);
                 resetForm();
-                console.log(values)
-            }}
+              }}
             >
-                {({values, handleChange, handleBlur, handleSubmit, dirty}) => (
-                    <Form onSubmit={handleSubmit}>
-                        <Form.Group >
-                            <Form.Label>Expense title</Form.Label>
+                {({ values, errors, touched, handleChange, handleBlur, handleSubmit, dirty, isSubmitting, resetForm }) => (
+                    <Form onSubmit={handleSubmit} className="diagram-border p-4">
+                        <Form.Group className="p-2">
+                            <Form.Label>Pavadinimas</Form.Label>
+
                             <Form.Control
+                            className="incomes_expensesFields"
                                 type="text"
-                                placeholder="Expense title"
+                                placeholder="Pavadinimas"
                                 name="name"
                                 onChange={handleChange}
                                 onBlur={handleBlur}
                                 value={values.name}
+                                isInvalid={touched.name && !values.name}
                             />
                         </Form.Group>
-                        <Form.Group>
-                            <Form.Label>Sum</Form.Label>
+                        <Form.Group className="p-2">
+                            <Form.Label>Suma</Form.Label>
                             <Form.Control
+                            className="incomes_expensesFields"
                                 type="number"
-                                placeholder="Sum"
+                                placeholder="Suma"
                                 name="amount"
                                 onChange={handleChange}
                                 onBlur={handleBlur}
                                 value={values.amount}
+                                isInvalid={touched.amount && !values.amount}
+                                onKeyDown={(event) => {
+                                  const pattern = /[0-9]/;
+                                  if (!pattern.test(event.key)) {
+                                    event.preventDefault();
+                                  }
+                                }}
                             />
                         </Form.Group>
-                        <Form.Group>
-                            <Form.Label>Date</Form.Label>
+                        <Form.Group className="p-2">
+                            <Form.Label>Data</Form.Label>
                             <Form.Control
+                            className="incomes_expensesFields"
                                 type="date"
-                                placeholder="Date"
+                                placeholder="YY-MM-DD"
                                 name="date"
                                 max={today}
                                 onChange={handleChange}
                                 onBlur={handleBlur}
                                 value={values.date}
+                                isInvalid={touched.date && !values.date}
                             />
                         </Form.Group>
-                        <Button variant="secondary" type="submit" disabled={!dirty}>
-                        Submit
-                        </Button>
+                        <div className="income_expensesBtn">
+              <Button className="income_expensesBtn" type="button" onClick={resetForm} disabled={!dirty || isSubmitting}>
+                Atšaukti
+              </Button>
+              <Button className="income_expensesBtn" variant="secondary" type="submit" disabled={!dirty || isSubmitting}>
+                Pateikti
+              </Button>
+            </div>
                     </Form>
                 )}
             </Formik>

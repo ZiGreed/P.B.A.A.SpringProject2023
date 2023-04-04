@@ -57,11 +57,13 @@ function ReadIncomes() {
             <div className="readincomejsx">
                 <div className="cardsWrapper">
                     <div className="cardsContainerBorder">
+
                         <div className={`cardsContainer ${activeIndex !== -1 ? 'overflowHidden' : ''}`}>
                             {incomesjsx}
                         </div>
                     </div>
                     <Link to="/addexpense/" className="buttonAddLink">
+
                         <button className="buttonAdd"><img src={Vector} alt="" /></button>
                     </Link>
                 </div>
