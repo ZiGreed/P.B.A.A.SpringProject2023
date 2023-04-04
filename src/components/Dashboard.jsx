@@ -1,6 +1,6 @@
 //VISAS DASHBOARD, KURIAME YRA GRAFIKAS IR PIRKIMU ISTORIJA
-import { Row, Col, Container, Tab, Tabs } from "react-bootstrap";
-import { DiagramIcon, HistoryIcon } from "./NavIcons";
+import { Row, Col, Container, Tab, Tabs, Button } from "react-bootstrap";
+import { DiagramIcon, HistoryIcon, ExpenseIcon, IncomeIcon } from "./NavIcons";
 import "bootstrap/dist/css/bootstrap.min.css";
 import YearChart from "./YearChart";
 // import CurrentMonthChart from "./CurrentMonthChart";
@@ -31,10 +31,14 @@ function Dashboard() {
               <YearChart />
             </Tab>
           </Tabs>
-          <Row>
-            <Col>btn</Col>
-            <Col>btn</Col>
-          </Row>
+        </div>
+        <div className="d-flex justify-content-between w-100 pt-3 mx-auto pb-5">
+          <Button className="burger-button">
+            <ExpenseIcon />
+          </Button>
+          <Button className="burger-button">
+            <IncomeIcon />
+          </Button>
         </div>
       </Container>
     </div>

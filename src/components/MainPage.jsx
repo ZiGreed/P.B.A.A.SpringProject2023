@@ -18,13 +18,11 @@ function MainPage() {
 
   return (
     <div className="cntr">
-      <div className="navigation-topbar d-flex flex-row justify-content-between p-10 show-onMobile">
+      <div className="navigation-topbar d-flex flex-row justify-content-between p-1 show-onMobile">
           <Button className="burger-button" onClick={handleShow}>
             <BurgerIcon />
           </Button>
-        <div>
           <NavigationLogo />
-        </div>
       </div>
       <Offcanvas
         show={show}

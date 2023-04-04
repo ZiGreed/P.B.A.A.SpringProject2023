@@ -7,9 +7,11 @@ import {
   CategoryScale,
   LinearScale,
   PointElement,
+  Legend,
+  Title
 } from "chart.js";
 
-ChartJS.register(LineElement, CategoryScale, LinearScale, PointElement);
+ChartJS.register(LineElement, CategoryScale, LinearScale, PointElement, Legend, Title);
 
 const YearChart = () => {
   const [incomes, setIncomes] = useState([]);
@@ -35,18 +37,32 @@ const YearChart = () => {
     labels,
     datasets: [
       {
-        labels: "Income and expense comparison",
+        label: "Incomes",
         data: transformData(incomes, expenses).map(item => item.income),
-        backgroundColor: "aqua",
+        backgroundColor: "green",
         borderColor: "black",
-        pointBorderColor: "aqua",
+        pointBorderColor: "green",
       },
+      {
+        label: "Expenses",
+        data: transformData(incomes, expenses).map(item => item.expense),
+        backgroundColor: 'red',
+        borderColor: 'black',
+        pointBorderColor: 'red'
+      }
     ],
   };
 
   const options = {
+    maintainAspectRatio : false,
     plugins: {
-      legend: true,
+      legend: {
+        position: 'top',
+      },
+      title: {
+        display: true,
+        text: "Incomes and expenses comparison chart"
+      }
     },
   };
 
@@ -107,8 +123,8 @@ const YearChart = () => {
   }
 
   return (
-    <div>
-      <Line data={incomeData} options={options} className="line-chart"></Line>
+    <div className="line-chart">
+      <Line data={incomeData} options={options}></Line>
     </div>
   );
 };

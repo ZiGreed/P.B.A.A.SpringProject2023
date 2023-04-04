@@ -45,7 +45,7 @@
       rgba(153, 0, 221, 0.1) 100%
     ),
     #0e0e30;
-    min-width: 350px;
+  min-width: 350px;
 }
 
 .navigation-topbar img {
@@ -56,6 +56,11 @@
 .burger-button {
   background-color: transparent;
   border: 0;
+  padding: 0;
+  &:hover {
+    color: linear-gradient(270deg, #9900dd 0%, #008cff 100%);
+    color: #fff;
+  }
 }
 
 //BUGFIX
@@ -88,7 +93,7 @@ main {
       rgba(14, 14, 48, 0.2) 77.77%
     ),
     #0e0e30;
-    min-width: 350px;
+  min-width: 350px;
 }
 
 .diagram-border {
@@ -128,8 +133,15 @@ main {
 .container {
   padding-top: 50px;
   min-width: 350px;
+  min-height: 300px;
 }
 
 .line-chart {
   width: 100%;
+  display: flex;
+  justify-content: center;
+  min-height: 300px;
+  & canvas {
+    height: 100%;
+  }
 }
