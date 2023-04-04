@@ -5,7 +5,7 @@ import "./ReadIncomes.scss"
 import Vector from "./../assets/images/Vector.svg";
 
 
-const incomesURL = "http://localhost:3000/addincomes";
+const incomesURL = "http://localhost:3000/incomes";
 
 function ReadIncomes() {
     const [incomes, setIncomes] = useState([]);

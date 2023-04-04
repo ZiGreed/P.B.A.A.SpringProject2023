@@ -1,10 +1,13 @@
 import { Formik } from "formik";
 import { Button, Form } from "react-bootstrap";
+import axios from "axios";
+import { useState } from "react";
 
+let baseURL = "http://localhost:3000/incomes";
 
 function AddIncomes() {
   const today = new Date().toISOString().split("T")[0];
-  
+  const[submitted, setSubmitted] = useState(false);
   return (
     <div className="incomes_expenses__background--color incomes_expenses-onMobile">
       <Formik
@@ -28,7 +31,11 @@ function AddIncomes() {
         }}
         onSubmit={(values, { resetForm }) => {
           console.log(values);
+          axios
+          .post(baseURL, values)
+          .then(response=>console.log(response.data))
           resetForm();
+          setSubmitted(true)
         }}
       >
         {({ values, errors, touched, handleChange, handleBlur, handleSubmit, dirty, isSubmitting, resetForm }) => (
@@ -93,6 +100,7 @@ function AddIncomes() {
           </Form>
         )}
       </Formik>
+      {submitted&&<h6 className="MessageIncome">Pajamos sėkmingai pridėtos!</h6>}
     </div>
   );
 }
