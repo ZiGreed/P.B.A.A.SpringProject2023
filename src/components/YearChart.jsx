@@ -1,21 +1,54 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { Line } from "react-chartjs-2";
 import {
-  LineChart,
-  Line,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  Legend,
-  ResponsiveContainer,
-} from "recharts";
-import { sort } from "d3-array";
+  Chart as ChartJS,
+  LineElement,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+} from "chart.js";
+
+ChartJS.register(LineElement, CategoryScale, LinearScale, PointElement);
 
 const YearChart = () => {
   const [incomes, setIncomes] = useState([]);
   const [expenses, setExpenses] = useState([]);
   const baseURL = "http://localhost:3000/";
+
+  const labels = [
+    "Sau",
+    "Vas",
+    "Kov",
+    "Bal",
+    "Geg",
+    "Bir",
+    "Lie",
+    "Rugp",
+    "Rugs",
+    "Spa",
+    "Lap",
+    "Gru",
+  ];
+
+  const incomeData = {
+    labels,
+    datasets: [
+      {
+        labels: "Income and expense comparison",
+        data: transformData(incomes, expenses).map(item => item.income),
+        backgroundColor: "aqua",
+        borderColor: "black",
+        pointBorderColor: "aqua",
+      },
+    ],
+  };
+
+  const options = {
+    plugins: {
+      legend: true,
+    },
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -57,10 +90,9 @@ const YearChart = () => {
       const date = new Date();
       date.setMonth(monthNumber - 1);
 
-      return date
-        .toLocaleString("lt-LT", {
-          month: "long",
-        })
+      return date.toLocaleString("lt-LT", {
+        month: "long",
+      });
     };
 
     let sortedArray = chartData.map((item) => {
@@ -70,49 +102,14 @@ const YearChart = () => {
         month: getMonthName(item.month),
       };
     });
-    console.log(sortedArray)
+    console.log(sortedArray);
     return sortedArray;
   }
 
   return (
-    <ResponsiveContainer width="100%" height={400}>
-      <LineChart width={400} height={200} margin={{ top: 10, right: 30, left: 0, bottom: 5 }}>
-        {/* <CartesianGrid strokeDasharray="1" vertical="" horizontal="true" /> */}
-        <XAxis
-          dataKey="month"
-          height={50}
-          tick={{
-            angle: 90,
-            textAnchor: "start",
-            dominantBaseline: "ideographic",
-          }}
-          type="category"
-          tickCount={12}
-          allowDuplicatedCategory={false}
-          minTickGap={0}
-          domain={["Sau", "Vas", "Kov", "Bal", "Geg", "Bir", "Lie", "Rugp", "Rugs", "Spa", "Lap", "Gru"]}
-          />
-        <YAxis />
-        <Tooltip />
-        {/* <Legend /> */}
-        <Line
-          type="monotone"
-          dataKey="income"
-          data={transformData(incomes, expenses)}
-          stroke="green"
-          activeDot={{ r: 2 }}
-          strokeWidth={5}
-        />
-        <Line
-          type="monotone"
-          dataKey="expense"
-          data={transformData(incomes, expenses)}
-          stroke="red"
-          activeDot={{ r: 2 }}
-          strokeWidth={5}
-        />
-      </LineChart>
-    </ResponsiveContainer>
+    <div>
+      <Line data={incomeData} options={options} className="line-chart"></Line>
+    </div>
   );
 };
 

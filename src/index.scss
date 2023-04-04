@@ -45,6 +45,7 @@
       rgba(153, 0, 221, 0.1) 100%
     ),
     #0e0e30;
+    min-width: 350px;
 }
 
 .navigation-topbar img {
@@ -87,6 +88,7 @@ main {
       rgba(14, 14, 48, 0.2) 77.77%
     ),
     #0e0e30;
+    min-width: 350px;
 }
 
 .diagram-border {
@@ -125,4 +127,9 @@ main {
 
 .container {
   padding-top: 50px;
+  min-width: 350px;
+}
+
+.line-chart {
+  width: 100%;
 }

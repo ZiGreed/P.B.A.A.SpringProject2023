@@ -1,15 +1,9 @@
 //VISAS DASHBOARD, KURIAME YRA GRAFIKAS IR PIRKIMU ISTORIJA
-import {
-  Row,
-  Col,
-  Container,
-  Tab,
-  Tabs,
-} from "react-bootstrap";
+import { Row, Col, Container, Tab, Tabs } from "react-bootstrap";
 import { DiagramIcon, HistoryIcon } from "./NavIcons";
 import "bootstrap/dist/css/bootstrap.min.css";
 import YearChart from "./YearChart";
-import CurrentMonthChart from "./CurrentMonthChart";
+// import CurrentMonthChart from "./CurrentMonthChart";
 function Dashboard() {
   return (
     <div className="dashboard-background">
@@ -23,23 +17,23 @@ function Dashboard() {
           </div>
         </div>
         <div className="diagram-border w-100">
-              <Tabs
-                defaultActiveKey="currentMonth"
-                className="d-flex justify-content-center"
-                variant="pills"
-                fill
-                id="controlled-tab-example"
-              >
-                <Tab eventKey="currentMonth" title="Šis mėnuo">
-                    <CurrentMonthChart />
-                </Tab>
-                <Tab eventKey="chooseYear" title="Pasirinkti metus">
-                  <YearChart />
-                </Tab>
-              </Tabs>
+          <Tabs
+            defaultActiveKey="currentMonth"
+            className="d-flex justify-content-center"
+            variant="pills"
+            fill
+            id="controlled-tab-example"
+          >
+            <Tab eventKey="currentMonth" title="Šis mėnuo">
+              {/* <CurrentMonthChart /> */}
+            </Tab>
+            <Tab eventKey="chooseYear" title="Pasirinkti metus">
+              <YearChart />
+            </Tab>
+          </Tabs>
           <Row>
-            <Col></Col>
-            <Col></Col>
+            <Col>btn</Col>
+            <Col>btn</Col>
           </Row>
         </div>
       </Container>
