@@ -3,6 +3,8 @@ import { Formik } from "formik";
 import { Button, Form } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
+cosnt expenseURL = "http://localhost:3000/expenses";
+
 function AddExpenses() {
   const today = new Date().toISOString().split("T")[0];
   const navigate = useNavigate();
@@ -29,6 +31,7 @@ function AddExpenses() {
             return errors;
           }}
           onSubmit={(values, { resetForm }) => {
+            postData(values, expenseURL);
             console.log(values);
             resetForm();
           }}
