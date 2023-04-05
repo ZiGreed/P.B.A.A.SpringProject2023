@@ -4,7 +4,7 @@ import { Button, Form } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { postData } from "../../services/api";
 
-cosnt expenseURL = "http://localhost:3000/expenses";
+const expenseURL = "http://localhost:3000/expenses";
 
 function AddExpenses() {
   const today = new Date().toISOString().split("T")[0];
