@@ -7,7 +7,7 @@ let baseURL = "http://localhost:3000/incomes";
 
 function AddIncomes() {
   const today = new Date().toISOString().split("T")[0];
-  const[submitted, setSubmitted] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
   return (
     <div className="incomes_expenses__background--color incomes_expenses-onMobile">
       <Formik
@@ -32,13 +32,23 @@ function AddIncomes() {
         onSubmit={(values, { resetForm }) => {
           console.log(values);
           axios
-          .post(baseURL, values)
-          .then(response=>console.log(response.data))
+            .post(baseURL, values)
+            .then((response) => console.log(response.data));
           resetForm();
-          setSubmitted(true)
+          setSubmitted(true);
         }}
       >
-        {({ values, errors, touched, handleChange, handleBlur, handleSubmit, dirty, isSubmitting, resetForm }) => (
+        {({
+          values,
+          errors,
+          touched,
+          handleChange,
+          handleBlur,
+          handleSubmit,
+          dirty,
+          isSubmitting,
+          resetForm,
+        }) => (
           <Form onSubmit={handleSubmit} className="diagram-border p-4">
             <Form.Group className="p-2">
               <Form.Label>Pavadinimas</Form.Label>
@@ -53,28 +63,49 @@ function AddIncomes() {
                 isInvalid={touched.name && !values.name}
                 maxLength={50}
               />
-              <Form.Control.Feedback type="invalid">{errors.name}</Form.Control.Feedback>
+              <Form.Control.Feedback type="invalid">
+                {errors.name}
+              </Form.Control.Feedback>
             </Form.Group>
             <Form.Group className="p-2">
               <Form.Label>Suma</Form.Label>
               <Form.Control
                 className="incomes_expensesFields"
                 type="number"
+                step="0.01"
                 placeholder="Suma"
                 name="amount"
                 onChange={handleChange}
-                onBlur={handleBlur}
+                onBlur={(e) => {
+                  let value = parseFloat(e.target.value).toFixed(2);
+                  if (isNaN(value)) {
+                    value = "";
+                  }
+                  e.target.value = value;
+                  handleBlur(e);
+                }}
                 value={values.amount}
                 isInvalid={touched.amount && !values.amount}
                 onKeyDown={(event) => {
                   const pattern = /[0-9]/;
-                  if (!pattern.test(event.key) && event.key !== "Backspace" && event.key !== "Delete") {
+                  const input = event.target.value;
+                  if (
+                    (input.indexOf(".") !== -1 &&
+                      input.split(".")[1].length === 2) ||
+                    (!pattern.test(event.key) &&
+                      event.key !== "Backspace" &&
+                      event.key !== "Delete" &&
+                      event.key !== ".")
+                  ) {
                     event.preventDefault();
                   }
                 }}
               />
-              <Form.Control.Feedback type="invalid">{errors.amount}</Form.Control.Feedback>
+              <Form.Control.Feedback type="invalid">
+                {errors.amount}
+              </Form.Control.Feedback>
             </Form.Group>
+
             <Form.Group className="p-2">
               <Form.Label>Data</Form.Label>
               <Form.Control
@@ -88,20 +119,31 @@ function AddIncomes() {
                 value={values.date}
                 isInvalid={touched.date && !values.date}
               />
-              <Form.Control.Feedback type="invalid">{errors.date}</Form.Control.Feedback>
+              <Form.Control.Feedback type="invalid">
+                {errors.date}
+              </Form.Control.Feedback>
             </Form.Group>
             <div className="income_expensesBtn">
-              <Button className="income_expensesBtn" type="button" onClick={resetForm} disabled={!dirty || isSubmitting}>
+              <Button
+                className="income_expensesBtn"
+                type="button"
+                onClick={resetForm}
+                disabled={!dirty || isSubmitting}
+              >
                 Atšaukti
               </Button>
-              <Button className="income_expensesBtn" variant="secondary" type="submit" disabled={!dirty || isSubmitting}>
+              <Button
+                className="income_expensesBtn"
+                variant="secondary"
+                type="submit"
+                disabled={!dirty || isSubmitting}
+              >
                 Pateikti
               </Button>
             </div>
           </Form>
         )}
       </Formik>
-      {submitted&&<h6 className="MessageIncome">Pajamos sėkmingai pridėtos!</h6>}
     </div>
   );
 }
