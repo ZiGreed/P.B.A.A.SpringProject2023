@@ -37,7 +37,7 @@ function ReadExpenses() {
             <div className="cardPriceRed">-{expense.amount} €</div>
             {activeIndex !== -1 && 
                 <div className="activeButtonsContainer">
-                    <Link to="/updateexpense/:id">
+                    <Link to={"/editexpenses/" + expense.id}>
                         <button className="activeButton">
                             Redaguoti
                         </button>
