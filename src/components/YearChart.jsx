@@ -39,16 +39,16 @@ const YearChart = () => {
       {
         label: "Incomes",
         data: transformData(incomes, expenses).map(item => item.income),
-        backgroundColor: "green",
-        borderColor: "black",
-        pointBorderColor: "green",
+        backgroundColor: "#2E63F5", 
+        borderColor: "#2E63F5",
+        pointBorderColor: "#2E63F5",
       },
       {
         label: "Expenses",
         data: transformData(incomes, expenses).map(item => item.expense),
-        backgroundColor: 'red',
-        borderColor: 'black',
-        pointBorderColor: 'red'
+        backgroundColor: '#FF10F0',
+        borderColor: '#FF10F0',
+        pointBorderColor: '#FF10F0'
       }
     ],
   };
