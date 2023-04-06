@@ -143,13 +143,13 @@ function AddExpenses() {
                 >
                   Pateikti
                 </Button>
+                <Button variant="primary" className="income_expensesBtn" onClick={() => navigate("/expenses/")}>
+                  Back
+                </Button>
               </div>
             </Form>
           )}
         </Formik>
-        <Button variant="primary" onClick={() => navigate("/expenses/")}>
-          Back
-        </Button>
       </div>
     </>
   );
