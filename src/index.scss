@@ -208,6 +208,12 @@ main {
     display: flex;
     justify-content: space-between;
   }
+  .dashboard-background {
+    height: 100vh;
+  }
+  .nav__background--color {
+    height: 100vh;
+  }
 }
 
 @media screen and (min-width: 768px) {
