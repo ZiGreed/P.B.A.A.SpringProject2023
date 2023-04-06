@@ -6,6 +6,8 @@ import diagram from "./../assets/images/diagram.svg"
 import history from "./../assets/images/history.svg"
 import expenseButton from "./../assets/images/expenseButton.svg"
 import incomeButton from "./../assets/images/incomeButton.svg"
+import "bootstrap/dist/css/bootstrap.min.css";
+
 
 export function NavLogoutButton() {
   return (
@@ -25,8 +27,8 @@ export function NavUserLogo() {
 
 export function NavigationLogo() {
   return (
-    <div className="p-1">
-      <img src={logo} alt="Logo"></img>
+    <div className="d-flex justify-content-center">
+      <img src={logo} alt="Logo" className="nav-logo"></img>
     </div>
   );
 }
