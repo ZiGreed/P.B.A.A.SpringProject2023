@@ -29,6 +29,9 @@ function AddIncomes() {
           if (!values.date) {
             errors.date = "Privalomas laukelis";
           }
+          if(!values.category) {
+            errors.category = "Privalomas laukelis";
+          }
           return errors;
         }}
         onSubmit={(values, { resetForm }) => {
@@ -125,6 +128,27 @@ function AddIncomes() {
                 {errors.date}
               </Form.Control.Feedback>
             </Form.Group>
+            <Form.Group className="p-2">
+    <Form.Label>Kategorija</Form.Label>
+    <Form.Control
+      as="select"
+      className="incomes_expensesFields select-dark"
+      name="category"
+      onChange={handleChange}
+      onBlur={handleBlur}
+      value={values.category}
+      isInvalid={touched.category && !values.category}
+    >
+      <option value="">Pasirinkite Kategoriją</option>
+      <option value="Alga">Alga</option>
+      <option value="PapildomiDarbai">Papildomi darbai</option>
+      <option value="Dovana">Dovana</option>
+    </Form.Control>
+    <Form.Control.Feedback type="invalid">
+      {errors.category}
+    </Form.Control.Feedback>
+  </Form.Group>
+
             <div className="income_expensesBtn">
               <Button
                 className="income_expensesBtn"

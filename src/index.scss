@@ -241,6 +241,12 @@ main {
   }
 }
 
+
+.select-dark option{
+  color: black;
+}
+
+
 .nav-tabs {
   border-bottom: none;
   border-radius: 15px;
@@ -301,3 +307,4 @@ main {
   text-align: center;
   transition: all 0.2s ease-in-out;
 }
+
