@@ -52,7 +52,6 @@ function AddIncomes() {
           handleChange,
           handleBlur,
           handleSubmit,
-
           dirty,
           isSubmitting,
           resetForm,
@@ -79,6 +78,7 @@ function AddIncomes() {
                 {errors.name}
               </Form.Control.Feedback> */}
             </Form.Group>
+
             <Form.Group className="p-2">
               <Form.Label>Suma</Form.Label>
               <Form.Control
@@ -98,24 +98,7 @@ function AddIncomes() {
                 }}
                 value={values.amount}
                 isInvalid={touched.amount && !values.amount}
-                // onKeyDown={(event) => {
-                //   const pattern = /[0-9]/;
-                //   const input = event.target.value;
-                //   if (
-                //     (input.indexOf(".") !== -1 &&
-                //       input.split(".")[1].length === 2) ||
-                //     (!pattern.test(event.key) &&
-                //       event.key !== "Backspace" &&
-                //       event.key !== "Delete" &&
-                //       event.key !== ".")
-                //   ) {
-                //     event.preventDefault();
-                //   }
-                // }}
               />
-              {/* <Form.Control.Feedback type="invalid">
-                {errors.amount}
-              </Form.Control.Feedback> */}
               <span className="formError">
                 <ErrorMessage name="amount" />
               </span>
@@ -143,6 +126,7 @@ function AddIncomes() {
               <ErrorMessage name="date" />
               </span>
             </Form.Group>
+            
             <Form.Group className="p-2">
               <Form.Label>Kategorija</Form.Label>
               <Form.Control
