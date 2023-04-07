@@ -13,6 +13,8 @@ function AddIncomes() {
   const [submitted, setSubmitted] = useState(false);
   const navigate = useNavigate();
   return (
+    <>
+    {/* <div className="marginDiv"></div> */}
     <div className="incomes_expenses__background--color incomes_expenses-onMobile">
       <Formik
         initialValues={{
@@ -174,6 +176,7 @@ function AddIncomes() {
       </Formik>
         
     </div>
+    </>
   );
 }
 
