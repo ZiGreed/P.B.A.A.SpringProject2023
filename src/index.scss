@@ -98,14 +98,17 @@ main {
   width: 75%;
   font-size: 1.5rem;
   color: #008cff;
-  margin-top: 20px;
+  // margin-top: 20px;
+  // padding-top: 20px;
   margin-left: auto;
   margin-right: auto;
+  position: relative;
+  top: 25px;
 }
 
-.dashboard-background img {
-  width: 100%;
-}
+// .dashboard-background img {
+//   width: 100%;
+// }
 
 //ADDINCOMES IR ADDEXPENSES
 
@@ -115,6 +118,7 @@ main {
     #0e0e30;
     color: #008cff;
     width: 80%;
+    height: 100vh;
   }
 
     .income_expensesBtn, .MessageIncome {
@@ -137,6 +141,7 @@ main {
       padding: 0.5rem 1rem;
       cursor: pointer;
     }
+
     
     .income_expensesBtn button:hover {
       background: linear-gradient(270deg, #9900dd 0%, #008cff 100%);
