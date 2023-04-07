@@ -2,12 +2,14 @@ import { Formik } from "formik";
 import { Button, Form } from "react-bootstrap";
 import axios from "axios";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 let baseURL = "http://localhost:3000/incomes";
 
 function AddIncomes() {
   const today = new Date().toISOString().split("T")[0];
   const [submitted, setSubmitted] = useState(false);
+  const navigate = useNavigate();
   return (
     <div className="incomes_expenses__background--color incomes_expenses-onMobile">
       <Formik
@@ -164,6 +166,9 @@ function AddIncomes() {
               >
                 Pateikti
               </Button>
+              <Button variant="primary" onClick={() => navigate("/expenses/")}>
+                  Back
+                </Button>
             </div>
           </Form>
         )}

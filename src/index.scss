@@ -1,6 +1,11 @@
 //USER IKONOS IR LOGOUT MYGTUKO PLACEMENT'AS APACIOJE
+@import url("https://fonts.googleapis.com/css2?family=Arimo:wght@500&family=Livvic:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,900&display=swap");
+
 .container__Bottom--Margin {
-  margin-top: 300px;
+  margin: auto;
+  padding: 10px;
+  width: 75%;
+  margin-top: 75px;
 }
 
 //NAVIGATION BACKGROUND SPALVA
@@ -16,18 +21,6 @@
 
 //PAGRINDINIU MYGTUKU BORDERIS IR HOVERIS
 #navButtons button {
-  background: linear-gradient(#0e0e30, #0e0e30) padding-box,
-    linear-gradient(to right, #008cff, #9900dd) border-box;
-  border-radius: 15px;
-  border: 2px solid transparent;
-  position: relative;
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 1.5rem;
-  color: #008cff;
-  padding: 0.5rem 1rem;
-  cursor: pointer;
   &:hover {
     background: linear-gradient(270deg, #9900dd 0%, #008cff 100%);
     color: #fff;
@@ -36,6 +29,7 @@
 
 .offcanvas-body {
   padding: 0;
+  height: 100vh;
 }
 
 .navigation-topbar {
@@ -113,15 +107,10 @@ main {
   width: 100%;
 }
 
-
-
 //ADDINCOMES IR ADDEXPENSES
 
 .incomes_expenses__background--color {
-  background: linear-gradient(
-      rgba(0, 140, 255, 0.2) 0%,
-      rgba(0, 0, 0, 0) 100%
-    ),
+  background: linear-gradient(rgba(0, 140, 255, 0.2) 0%, rgba(0, 0, 0, 0) 100%),
     linear-gradient(360deg, rgba(105, 66, 239, 0.2) 0%, rgba(0, 0, 0, 0) 100%),
     #0e0e30;
     color: #008cff;
@@ -202,13 +191,120 @@ main {
   justify-content: center;
   min-height: 300px;
   & canvas {
-    height: 100%;
+    height: 400px !important;
   }
 }
+
+@media screen and (max-width: 767px) {
+  .nav-logo {
+    padding: 10px;
+    width: 50%;
+  }
+  .income-expense-buttons-dashboard {
+    display: flex;
+    justify-content: space-between;
+  }
+  .diagram-history-buttons-dashboard {
+    display: flex;
+    justify-content: space-between;
+  }
+  .dashboard-background {
+    height: 100vh;
+  }
+  .nav__background--color {
+    height: 100vh;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .nav-logo {
+    width: 50%;
+    padding: 10px;
+  }
+  .income-expense-buttons-dashboard {
+    display: flex;
+    justify-content: space-around;
+  }
+  .dashboard-background {
+    width: 100%;
+  }
+
+  .line-chart {
+    height: 90%;
+  }
+
+  .tab-content {
+    height: 100%;
+  }
+  .nav__background--color {
+    height: 100vh;
+  }
+}
+
 
 .select-dark option{
   color: black;
 }
 
 
-///
+.nav-tabs {
+  border-bottom: none;
+  border-radius: 15px;
+  & .nav-link {
+    border: none;
+  }
+  & .nav-link:hover {
+    background: linear-gradient(270deg, #9900dd 0%, #008cff 100%);
+    color: #fff;
+    border-radius: 10px;
+  }
+  & .nav-link.active {
+    background: linear-gradient(270deg, #9900dd 0%, #008cff 100%);
+    border-radius: 10px;
+    color: #fff;
+  }
+}
+
+.dashboard-component-color {
+  background: linear-gradient(#0e0e30, #0e0e30) padding-box,
+    linear-gradient(to right, #008cff, #9900dd) border-box;
+  border-radius: 15px;
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
+  color: #008cff;
+  width: 90%;
+  padding: 0.5rem 1rem;
+  margin: 10px;
+  font-family: "Arimo", sans-serif;
+  cursor: pointer;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
+  text-align: center;
+  transition: all 0.2s ease-in-out;
+}
+
+.gradient-class {
+  background: linear-gradient(#0e0e30, #0e0e30) padding-box,
+    linear-gradient(to right, #008cff, #9900dd) border-box;
+  border-radius: 15px;
+  border: 2px solid transparent;
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
+  color: #008cff;
+  width: 90%;
+  padding: 0.5rem 1rem;
+  margin: 10px;
+  font-family: "Arimo", sans-serif;
+  cursor: pointer;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
+  text-align: center;
+  transition: all 0.2s ease-in-out;
+}
+

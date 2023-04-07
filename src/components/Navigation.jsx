@@ -2,37 +2,41 @@
 //IF LOGGED IN = TRUE, TADA RODOME NavMainButtons ir NavLogoutButton, IF LOGGED IN = FALSE, RODOME NavLoginForm
 
 import { NavigationLogo, NavUserLogo, NavLogoutButton } from "./NavIcons";
-import { Container, Row, Col } from "react-bootstrap";
+import { Col } from "react-bootstrap";
 import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 function Navigation() {
   return (
     <>
-      <Col md={4}>
+      <Col md={3}>
         <div className="nav__background--color pt-5">
           <div className="d-flex justify-content-center">
             <NavigationLogo />
           </div>
           <div className="mt-5">
-            <Container id="navButtons">
-              <Row>
-                <Link to="/dashboard/" className="mb-2 w-75 mx-auto">
-                  <Button className="w-100 mx-auto">Pagrindinis</Button>
-                </Link>
-                <Link to="/incomes/" className="mb-2 w-75 mx-auto">
-                  <Button className="w-100 mx-auto">Pajamos</Button>
-                </Link>
-                <Link to="/expenses/" className="mb-2 w-75 mx-auto">
-                  <Button className="w-100 mx-auto">Išlaidos</Button>
-                </Link>
-              </Row>
-            </Container>
+            <div id="navButtons" className="w-75 mx-auto">
+              <Link to="/" className="mb-2 w-50 mx-auto text-decoration-none">
+                <Button className="w-100 mx-auto gradient-class">Pagrindinis</Button>
+              </Link>
+              <Link
+                to="/incomes/"
+                className="mb-2 w-50 mx-auto text-decoration-none"
+              >
+                <Button className="w-100 mx-auto gradient-class">Pajamos</Button>
+              </Link>
+              <Link
+                to="/expenses/"
+                className="mb-2 w-50 mx-auto text-decoration-none"
+              >
+                <Button className="w-100 mx-auto gradient-class">Išlaidos</Button>
+              </Link>
+            </div>
           </div>
-          <Container className="container__Bottom--Margin d-flex justify-content-between">
+          <div className="container__Bottom--Margin d-flex justify-content-between">
             <NavUserLogo />
             <NavLogoutButton />
-          </Container>
+          </div>
         </div>
       </Col>
     </>

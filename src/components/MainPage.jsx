@@ -32,8 +32,8 @@ function MainPage() {
         responsive="md"
       >
         <Offcanvas.Body>
-          <Navigation />
-          {windowSize >= 768 && <Outlet />}
+          <Navigation/ >
+          {windowSize >= 768 && <Outlet/>}
         </Offcanvas.Body>
       </Offcanvas>
       {windowSize < 768 && <Outlet />}

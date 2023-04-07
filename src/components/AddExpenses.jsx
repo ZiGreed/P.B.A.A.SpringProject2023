@@ -2,6 +2,9 @@
 import { Formik } from "formik";
 import { Button, Form } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+import { postData } from "../../services/api";
+
+const expenseURL = "http://localhost:3000/expenses";
 
 function AddExpenses() {
   const today = new Date().toISOString().split("T")[0];
@@ -29,6 +32,7 @@ function AddExpenses() {
             return errors;
           }}
           onSubmit={(values, { resetForm }) => {
+            postData(values, expenseURL);
             console.log(values);
             resetForm();
           }}
@@ -139,13 +143,13 @@ function AddExpenses() {
                 >
                   Pateikti
                 </Button>
+                <Button variant="primary" onClick={() => navigate("/expenses/")}>
+                  Back
+                </Button>
               </div>
             </Form>
           )}
         </Formik>
-        <Button variant="primary" onClick={() => navigate("/expenses/")}>
-          Back
-        </Button>
       </div>
     </>
   );

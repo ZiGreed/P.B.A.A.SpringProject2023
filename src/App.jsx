@@ -8,6 +8,8 @@ import ReadIncomes from "./components/ReadIncomes";
 import AddExpenses from "./components/AddExpenses";
 import ReadExpenses from "./components/ReadExpenses";
 import AddIncomes from "./components/AddIncomes";
+import EditExpenses from "./components/EditExpenses";
+import EditIncomes from "./components/EditIncomes";
 
 
 
@@ -18,10 +20,12 @@ function App() {
         <Routes>
           <Route path="/" element={<MainPage />}>
             <Route path="addIncomes" element={<AddIncomes/>} />
-            <Route path="dashboard" element={<Dashboard />} />
+            <Route path="/" element={<Dashboard />} />
             <Route path="expenses" element={<ReadExpenses />} />
             <Route path="incomes" element={<ReadIncomes />} />
             <Route path="addexpense" element={<AddExpenses />} />
+            <Route path="editexpenses/:id" element={<EditExpenses />}/>
+            <Route path="editincomes/:id" element={<EditIncomes />}/>
           </Route>
         </Routes>
       </Layout>
