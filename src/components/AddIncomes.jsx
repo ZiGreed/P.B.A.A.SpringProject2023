@@ -1,13 +1,15 @@
-import { Formik } from "formik";
+import { Formik, ErrorMessage } from "formik";
 import { Button, Form } from "react-bootstrap";
 import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import * as Yup from 'yup';
+import "./AddIncomes.scss"
 
 let baseURL = "http://localhost:3000/incomes";
 
 function AddIncomes() {
-  const today = new Date().toISOString().split("T")[0];
+  
   const [submitted, setSubmitted] = useState(false);
   const navigate = useNavigate();
   return (
@@ -16,24 +18,24 @@ function AddIncomes() {
         initialValues={{
           name: "",
           amount: "",
-          date: "",
+          date: new Date().toISOString().slice(0, 10),
+          category: ""
         }}
-        validate={(values) => {
-          const errors = {};
-          if (!values.name) {
-            errors.name = "Privalomas laukelis";
-          }
-          if (!values.amount) {
-            errors.amount = "Privalomas laukelis";
-          }
-          if (!values.date) {
-            errors.date = "Privalomas laukelis";
-          }
-          if(!values.category) {
-            errors.category = "Privalomas laukelis";
-          }
-          return errors;
-        }}
+        validationSchema={
+          Yup.object({
+            name: Yup.string()
+            .required("langelis būtinas")
+            .min(2, "pavadinimas per trumpas")
+            .max(40, "pavadinimas per ilgas"),
+            amount: Yup.number()
+            .required("langelis būtinas")
+            .lessThan(1000000, "suma turi būti mažesnė nei milijonas"),
+            date: Yup.date()
+            .max(new Date("2023-04-07"), "data negali būti ateityje"),
+            category: Yup.string()
+            .required("Būtina pasirinkti kategoriją")
+          })
+        }
         onSubmit={(values, { resetForm }) => {
           console.log(values);
           axios
@@ -50,11 +52,13 @@ function AddIncomes() {
           handleChange,
           handleBlur,
           handleSubmit,
+
           dirty,
           isSubmitting,
           resetForm,
         }) => (
           <Form onSubmit={handleSubmit} className="diagram-border p-4">
+            {submitted && (<h4 style={{color: "orange"}}>Pateikta!</h4>)}
             <Form.Group className="p-2">
               <Form.Label>Pavadinimas</Form.Label>
               <Form.Control
@@ -68,9 +72,12 @@ function AddIncomes() {
                 isInvalid={touched.name && !values.name}
                 maxLength={50}
               />
-              <Form.Control.Feedback type="invalid">
+              <span className="formError">
+                <ErrorMessage name="name" />
+              </span>
+              {/* <Form.Control.Feedback type="invalid">
                 {errors.name}
-              </Form.Control.Feedback>
+              </Form.Control.Feedback> */}
             </Form.Group>
             <Form.Group className="p-2">
               <Form.Label>Suma</Form.Label>
@@ -91,63 +98,71 @@ function AddIncomes() {
                 }}
                 value={values.amount}
                 isInvalid={touched.amount && !values.amount}
-                onKeyDown={(event) => {
-                  const pattern = /[0-9]/;
-                  const input = event.target.value;
-                  if (
-                    (input.indexOf(".") !== -1 &&
-                      input.split(".")[1].length === 2) ||
-                    (!pattern.test(event.key) &&
-                      event.key !== "Backspace" &&
-                      event.key !== "Delete" &&
-                      event.key !== ".")
-                  ) {
-                    event.preventDefault();
-                  }
-                }}
+                // onKeyDown={(event) => {
+                //   const pattern = /[0-9]/;
+                //   const input = event.target.value;
+                //   if (
+                //     (input.indexOf(".") !== -1 &&
+                //       input.split(".")[1].length === 2) ||
+                //     (!pattern.test(event.key) &&
+                //       event.key !== "Backspace" &&
+                //       event.key !== "Delete" &&
+                //       event.key !== ".")
+                //   ) {
+                //     event.preventDefault();
+                //   }
+                // }}
               />
-              <Form.Control.Feedback type="invalid">
+              {/* <Form.Control.Feedback type="invalid">
                 {errors.amount}
-              </Form.Control.Feedback>
+              </Form.Control.Feedback> */}
+              <span className="formError">
+                <ErrorMessage name="amount" />
+              </span>
             </Form.Group>
 
             <Form.Group className="p-2">
               <Form.Label>Data</Form.Label>
               <Form.Control
                 className="incomes_expensesFields"
-                type="Date"
-                placeholder="YY-MM-DD"
+                type="date"
+                // placeholder="YY-MM-DD"
                 name="date"
-                max={today}
                 onChange={handleChange}
                 onBlur={handleBlur}
                 value={values.date}
                 isInvalid={touched.date && !values.date}
               />
-              <Form.Control.Feedback type="invalid">
+              {/* <Form.Control.Feedback type="invalid">
+                {console.log(errors.date)}
+                {console.log(values.date)}
                 {errors.date}
-              </Form.Control.Feedback>
+                {errors.date && touched.date ? <p>{errors.date}</p> : <p>{errors.date}</p>}
+              </Form.Control.Feedback> */}
+              <span className="formError">
+              <ErrorMessage name="date" />
+              </span>
             </Form.Group>
             <Form.Group className="p-2">
-    <Form.Label>Kategorija</Form.Label>
-    <Form.Control
-      as="select"
-      className="incomes_expensesFields select-dark"
-      name="category"
-      onChange={handleChange}
-      onBlur={handleBlur}
-      value={values.category}
-      isInvalid={touched.category && !values.category}
-    >
-      <option value="">Pasirinkite Kategoriją</option>
-      <option value="Alga">Alga</option>
-      <option value="PapildomiDarbai">Papildomi darbai</option>
-      <option value="Dovana">Dovana</option>
-    </Form.Control>
-    <Form.Control.Feedback type="invalid">
-      {errors.category}
-    </Form.Control.Feedback>
-  </Form.Group>
+              <Form.Label>Kategorija</Form.Label>
+              <Form.Control
+                as="select"
+                className="incomes_expensesFields select-dark"
+                name="category"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.category}
+                isInvalid={touched.category && !values.category}
+              >
+                <option value="">Pasirinkite Kategoriją</option>
+                <option value="Alga">Alga</option>
+                <option value="PapildomiDarbai">Papildomi darbai</option>
+                <option value="Dovana">Dovana</option>
+              </Form.Control>
+            <span className="formError">
+            <ErrorMessage name="category" />
+            </span>
+          </Form.Group>
 
             <div className="income_expensesBtn">
               <Button
@@ -173,6 +188,7 @@ function AddIncomes() {
           </Form>
         )}
       </Formik>
+        
     </div>
   );
 }
