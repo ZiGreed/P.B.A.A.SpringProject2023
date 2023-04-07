@@ -5,7 +5,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import YearChart from "./YearChart";
 import { Link } from "react-router-dom";
 import useWindowSize from "./useWindowSize";
-// import CurrentMonthChart from "./CurrentMonthChart";
+import CurrentMonthChart from "./CurrentMonthChart";
 function Dashboard() {
   let windowSize = useWindowSize();
   return (
@@ -30,10 +30,10 @@ function Dashboard() {
             id="controlled-tab-example"
           >
             <Tab eventKey="currentMonth" title="Šis mėnuo">
-              {/* <CurrentMonthChart /> */}
+              <CurrentMonthChart />
             </Tab>
             <Tab eventKey="chooseYear" title="Pasirinkti metus">
-                <YearChart />
+              <YearChart />
             </Tab>
           </Tabs>
         </div>
