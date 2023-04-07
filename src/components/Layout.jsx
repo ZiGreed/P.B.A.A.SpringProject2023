@@ -4,9 +4,7 @@ function Layout({ children }) {
   return (
     <div>
       <Container fluid className="p-0">
-        <Row>
             <main>{children}</main>
-        </Row>
       </Container>
     </div>
   );

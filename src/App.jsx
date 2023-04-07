@@ -4,8 +4,13 @@ import Layout from "./components/Layout";
 import MainPage from "./components/MainPage";
 import { Route, Routes } from "react-router-dom";
 import Dashboard from "./components/Dashboard";
-import Incomes from "./components/Incomes";
-import Expenses from "./components/Expenses";
+import ReadIncomes from "./components/ReadIncomes";
+import AddExpenses from "./components/AddExpenses";
+import ReadExpenses from "./components/ReadExpenses";
+import AddIncomes from "./components/AddIncomes";
+import EditExpenses from "./components/EditExpenses";
+import EditIncomes from "./components/EditIncomes";
+
 
 
 function App() {
@@ -14,9 +19,13 @@ function App() {
       <Layout>
         <Routes>
           <Route path="/" element={<MainPage />}>
-            <Route path="dashboard" element={<Dashboard />} />
-            <Route path="incomes" element={<Incomes />} />
-            <Route path="expenses" element={<Expenses />} />
+            <Route path="addIncomes" element={<AddIncomes/>} />
+            <Route path="/" element={<Dashboard />} />
+            <Route path="expenses" element={<ReadExpenses />} />
+            <Route path="incomes" element={<ReadIncomes />} />
+            <Route path="addexpense" element={<AddExpenses />} />
+            <Route path="editexpenses/:id" element={<EditExpenses />}/>
+            <Route path="editincomes/:id" element={<EditIncomes />}/>
           </Route>
         </Routes>
       </Layout>
