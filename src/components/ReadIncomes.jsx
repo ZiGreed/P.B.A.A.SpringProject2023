@@ -3,13 +3,14 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import "./ReadIncomes.scss"
 import Vector from "./../assets/images/Vector.svg";
+import { RiDeleteBinLine, RiEdit2Line } from "react-icons/ri";
+import { deleteHandler } from "./servicces/deleteHandler";
 
 
 const IncomesURL = "http://localhost:3000/incomes";
 
 function ReadIncomes() {
     const [incomes, setIncomes] = useState([]);
-    const [activeIndex, setActiveIndex] = useState(-1);
 
     useEffect(() => {
         axios
@@ -17,37 +18,47 @@ function ReadIncomes() {
             .then((response) => setIncomes(response.data))
             .catch((error) => console.log(error));
     }, [])
+
+    function deleteIncome(id) {
+        axios
+          .delete(IncomesURL + "/" + id)
+          .then((response) => {
+            setIncomes(incomes.filter((expense) => expense.id !== id));
+          })
+          .catch((error) => console.log(error));
+      }
+
     let incomesjsx = incomes.map((income, index) => {
-        const isActive = index === activeIndex;
-      
-        const toggleActive = () => {
-          setActiveIndex(isActive ? -1 : index);
-        };
       
         return (
-          <div className={`card ${isActive ? 'activeCard' : ''}`} onClick={toggleActive} key={index}>
-            <div className="cardIcon"><img src="#" alt="icon/category" /></div>
+          <div className="card" key={index}>
+            <div className="cardIcon">
+                {/* <img src="#" alt="icon/category" /> */}
+                <RiDeleteBinLine size={40}/>
+            </div>
             <div className="cardInfoWrapper">
               <div>{income.name}</div>
               <div>{income.date}</div>
               
             </div>
             <div className="cardPriceGreen">+{income.amount} €</div>
-            {activeIndex !== -1 && 
-                <div className="activeButtonsContainer">
-                    <Link to={"/editexpenses/" + income.id}>
-                        <button className="activeButton">
-                            Redaguoti
-                        </button>
-                    </Link>
-                    <Link to="/deleteincome/:id">
-                        <button className="activeButton">
-                            Ištrinti
-                        </button>
-                    </Link>
-                    <button className="activeButton" onClick={toggleActive}>Atgal</button>
+                <div className="ButtonsContainer">
+                <div className="buttonIcons">
+                  <Link to={"/editexpenses/" + income.id} className="buttonIcons">
+                    <RiEdit2Line
+                    size={30}
+                    />
+                  </Link>
                 </div>
-            }
+                <div className="buttonIcons">
+                  <RiDeleteBinLine
+                    size={30}
+                    onClick={() => {
+                      deleteHandler(income, deleteIncome);
+                    }}
+                  />
+                </div>
+              </div>
           </div>
         );
       });
@@ -58,7 +69,7 @@ function ReadIncomes() {
                 <div className="cardsWrapper">
                     <div className="cardsContainerBorder">
 
-                        <div className={`cardsContainer ${activeIndex !== -1 ? 'overflowHidden' : ''}`}>
+                        <div className="cardsContainer">
                             {incomesjsx}
                         </div>
                     </div>

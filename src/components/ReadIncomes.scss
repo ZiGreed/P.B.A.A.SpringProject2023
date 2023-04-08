@@ -23,6 +23,8 @@
     position: relative;
     overflow-x: auto;
     height: 800px;
+    justify-items: stretch;
+    justify-content: stretch;
 }
 .cardsContainerBorder{
     background: linear-gradient(#0e0e30, #0e0e30) padding-box,
@@ -44,7 +46,7 @@
     .cardsContainer {
         grid-template-columns: repeat(1, 1fr);
     }
-    .activeButtonsContainer{
+    .ButtonsContainer{
         justify-self: center;
         align-self: center;
         display: flex;
@@ -69,11 +71,15 @@
     overflow: hidden;
     transition: height 0.3s ease-out;
     position: relative;
-    align-self: center;
-    justify-self: center;
+    align-self: stretch;
+    justify-self: stretch;
 }
-.card:hover {
+.buttonIcons:hover {
     cursor: pointer;
+    color: #8d0b7e !important;
+}
+.buttonIcons {
+    color: #0d6efd !important;
 }
 .cardInfoWrapper {
     justify-self: start;
@@ -130,7 +136,7 @@
     border: 1px solid transparent;
     margin: 0 30px;
 }
-.activeButtonsContainer{
+.ButtonsContainer{
     grid-column-start: 1;
     grid-column-end: 4;
     justify-self: center;
