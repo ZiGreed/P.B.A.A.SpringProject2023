@@ -73,10 +73,13 @@ function ReadIncomes() {
                             {incomesjsx}
                         </div>
                     </div>
-                    <Link to="/addincomes/" className="buttonAddLink">
-
-                        <button className="buttonAdd"><img src={Vector} alt="" /></button>
-                    </Link>
+            <div className="LinkWrapper">
+              <Link to="/addexpense/" className="LinkButton">
+                <button className="buttonAdd">
+                    <img src={Vector} alt="" />
+                </button>
+              </Link>
+            </div>
                 </div>
             </div>
         </>

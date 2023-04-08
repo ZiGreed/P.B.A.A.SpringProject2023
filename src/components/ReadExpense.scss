@@ -1,5 +1,5 @@
 .readExpensejsx{
-    overflow: hidden;
+    overflow: visible;
     width: 100%;
 }
 
@@ -7,7 +7,7 @@
     padding: 25px;
     background: rgb(14,14,48);
     background: linear-gradient(90deg, rgba(14,14,48,1) 0%, rgba(11,39,89,  1) 100%);
-    height: 100%;
+    height: 100vh;
 }
 
 .cardsContainer {
@@ -21,10 +21,12 @@
     gap: 10px;
     padding: 15px;
     position: relative;
+
     overflow-y: scroll;
-    height: 800px;
+    height: 750px;
     justify-items: stretch;
     justify-content: stretch;
+
 }
 .cardsContainerBorder{
     background: linear-gradient(#0e0e30, #0e0e30) padding-box,
@@ -45,8 +47,10 @@
         gap:20px;
     }
 }
-
-
+.LinkButton {
+    width: 160px;
+    height: 185px;
+}
 .card {
     background-color: #0e0e30;
     color: #fff;
@@ -85,6 +89,10 @@
     justify-self: center;
     align-self: center;
 }
+.LinkWrapper {
+    width: 200px;
+    margin: 15px auto 0px auto;
+}
 .buttonAdd {
     background: linear-gradient(#0e0e30, #0e0e30) padding-box,
         linear-gradient(to bottom, #008cff, #9900dd) border-box;
@@ -93,11 +101,11 @@
     width: 200px;
     height: 150px;
     color: #fff;
-    margin: 20px auto 50px auto;
-    display: block;
+    margin-bottom: 0px;
+    display: inline-block;
 }
-.buttonAddLink{
-    width: 10%;
+.buttonLink{
+    display: inline-block;
 }
 .activeButton{
     font-size: 2rem;
@@ -117,23 +125,43 @@
 }
 
 //Scrollbar
-::-webkit-scrollbar {
+.cardsContainer::-webkit-scrollbar {
     width: 20px;
   }
   
-::-webkit-scrollbar-track {
+  .cardsContainer::-webkit-scrollbar-track {
     background-color: transparent;
   }
   
-::-webkit-scrollbar-thumb {
+  .cardsContainer::-webkit-scrollbar-thumb {
     background-color: #333;
     border-radius: 20px;
     border: 6px solid transparent;
     background-clip: content-box;
   }
   
-::-webkit-scrollbar-thumb:hover {
+  .cardsContainer::-webkit-scrollbar-thumb:hover {
     background-color: darken(#333, 5%);;
+  }
+
+::-webkit-scrollbar {
+  width: 9px;
+  height: 5px;
+  background-color: transparent;
+}
+  
+::-webkit-scrollbar-track {
+    background-color: #f5f5f5;
+    border-radius: 10px;
+  }
+  
+::-webkit-scrollbar-thumb {
+    background-color: #aaa;
+    border-radius: 10px;
+  }
+  
+::-webkit-scrollbar-thumb:hover {
+    background-color: #888;
   }
 
   .confirmation-modal {
