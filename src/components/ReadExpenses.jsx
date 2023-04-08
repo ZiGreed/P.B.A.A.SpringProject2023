@@ -84,11 +84,13 @@ function ReadExpenses() {
             {expensesjsx}
           </div>
         </div>
-        <Link to="/addexpense/" className="buttonAddLink">
-          <button className="buttonAdd">
-            <img src={Vector} alt="" />
-          </button>
-        </Link>
+            <div className="LinkWrapper">
+              <Link to="/addexpense/" className="LinkButton">
+              <button className="buttonAdd">
+                <img src={Vector} alt="" />
+              </button>
+              </Link>
+            </div>
       </div>
     </div>
   );
