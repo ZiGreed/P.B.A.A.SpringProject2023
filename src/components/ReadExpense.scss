@@ -159,7 +159,7 @@
     position: absolute;
     top: 50%;
     left: 50%;
-
+    z-index: 99999;
   }
   
   .deleteCard {
@@ -170,6 +170,15 @@
   border-radius: 15px;
   border: 2px solid transparent;
   color: #ffffff;
+
+  }
+
+  @media only screen and (max-width: 1400px) {
+    .deleteCard {
+        top:40%;
+        left: 40%;
+        width: 500px;
+    }
   }
 
   .deleteBtn {
@@ -178,14 +187,11 @@
 
   .react-confirm-alert-overlay--deleteHandler {
     position: fixed;
-    top: 0;
-    left: 0;
+    top: 50%;
+    left: 50%;
     width: 100%;
-    height: 100%;
-    z-index: 9999;
     display: flex;
-    align-items: center;
-    justify-content: center;
+    z-index: 99999;
   }
   
   .react-confirm-alert-overlay--deleteHandler .react-confirm-alert {

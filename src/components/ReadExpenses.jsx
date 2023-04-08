@@ -4,14 +4,12 @@ import { Link } from "react-router-dom";
 import "./ReadExpense.scss";
 import Vector from "./../assets/images/Vector.svg";
 import { deleteHandler } from "./servicces/deleteHandler";
-import { useNavigate } from "react-router-dom";
 
 const expensesURL = "http://localhost:3000/expenses";
 
 function ReadExpenses() {
   const [expenses, setExpenses] = useState([]);
   const [activeIndex, setActiveIndex] = useState(-1);
-  const navigate = useNavigate();
 
   useEffect(() => {
     axios
@@ -25,7 +23,6 @@ function ReadExpenses() {
       .delete(expensesURL + "/" + id)
       .then((response) => {
         setExpenses(expenses.filter((expense) => expense.id !== id));
-        navigate("/expenses")
       })
       .catch((error) => console.log(error));
   }
@@ -62,7 +59,6 @@ function ReadExpenses() {
               color={"#8d0b7e"}
               onClick={() => {
                 deleteHandler(expense, deleteExpense);
-                navigate("/expenses/");
               }}
             >
               Ištrinti
