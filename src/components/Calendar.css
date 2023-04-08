@@ -13,8 +13,9 @@
   overflow-y: auto;
   color: #ffffff;
   height: 86vh;
-  margin-top: 50px;
+  margin-top: 40px;
   margin-bottom: 50px;
+  width: 100%;
 }
 
 .historyTab p,
@@ -32,7 +33,7 @@ h2 {
   margin-bottom: 20px;
   display: flex;
   justify-content: space-between;
-  gap: 20px;
+  gap: 0px;
   align-items: center;
   background-color: #0e0e30;
 }
@@ -69,4 +70,14 @@ h2 {
 .redClass {
   color: #d0342c;
   white-space: nowrap;
+}
+
+@media screen and (max-width: 767px){
+  .historyTab {
+    height: 50vh;
+    margin-bottom: 30px;
+  }
+  .transferInfo {
+    width: 60%;
+  }
 }

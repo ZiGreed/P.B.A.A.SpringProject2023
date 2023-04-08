@@ -15,14 +15,14 @@ function Calendar() {
   const expenseSign = expenses.map((income) => {
     return {
       ...income,
-      ammount: "- " + income.ammount + " €",
+      amount: "- " + income.amount + " €",
     };
   });
 
   const incomeSign = incomes.map((expense) => {
     return {
       ...expense,
-      ammount: "+ " + expense.ammount + " €",
+      amount: "+ " + expense.amount + " €",
     };
   });
 
@@ -42,9 +42,9 @@ function Calendar() {
     return new Date(b.date) - new Date(a.date);
   });
 
-  let transferjsx = allData.map((transfer) => {
+  let transferjsx = allData.map((transfer, index) => {
     return (
-      <div className="historyCard">
+      <div className="historyCard" key={index}>
         <div className="cardInfo">
           <IconHistory />
           <div className="transferInfo">
@@ -52,8 +52,8 @@ function Calendar() {
             <p className="transferDate">{transfer.date}</p>
           </div>
         </div>
-        <p className={transfer.ammount[0] === "+" ? "greenClass" : "redClass"}>
-          {transfer.ammount}
+        <p className={transfer.amount[0] === "+" ? "greenClass" : "redClass"}>
+          {transfer.amount}
         </p>
       </div>
     );
