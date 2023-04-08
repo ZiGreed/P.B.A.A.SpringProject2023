@@ -118,7 +118,6 @@ const YearChart = () => {
         month: getMonthName(item.month),
       };
     });
-    console.log(sortedArray);
     return sortedArray;
   }
 

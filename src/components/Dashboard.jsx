@@ -1,26 +1,25 @@
 //VISAS DASHBOARD, KURIAME YRA GRAFIKAS IR PIRKIMU ISTORIJA
-import { Container, Tab, Tabs, Button } from "react-bootstrap";
+import { Tab, Tabs, Button } from "react-bootstrap";
 import { DiagramIcon, HistoryIcon, ExpenseIcon, IncomeIcon } from "./NavIcons";
 import "bootstrap/dist/css/bootstrap.min.css";
 import YearChart from "./YearChart";
 import { Link } from "react-router-dom";
 import useWindowSize from "./useWindowSize";
 import CurrentMonthChart from "./CurrentMonthChart";
+import Calendar from "./Calendar";
+import { useState } from "react";
 function Dashboard() {
   let windowSize = useWindowSize();
-  return (
-    <div className="dashboard-background">
-      <div className="p-3">
-        {windowSize < 768 && (
-          <div className="diagram-history-buttons-dashboard w-100 mx-auto">
-            <div>
-              <DiagramIcon />
-            </div>
-            <div>
-              <HistoryIcon />
-            </div>
-          </div>
-        )}
+  const [historyClicked, setHistoryClicked] = useState(false);
+
+  let openClose = () => {
+    if (historyClicked) setHistoryClicked(false);
+    else setHistoryClicked(true);
+  };
+
+  let renderHandle = () => {
+    if (windowSize >= 768 || !historyClicked)
+      return (
         <div className="diagram-border w-100">
           <Tabs
             defaultActiveKey="currentMonth"
@@ -37,6 +36,26 @@ function Dashboard() {
             </Tab>
           </Tabs>
         </div>
+      );
+    else if (windowSize < 768 && historyClicked) return <Calendar />;
+  };
+
+  return (
+    <div className="dashboard-background">
+      <div className="p-3 main-graph">
+        {windowSize < 768 && (
+          <div className="diagram-history-buttons-dashboard w-100 mx-auto">
+            <div>
+              <DiagramIcon />
+            </div>
+            <div>
+              <button id="history-button" onClick={openClose}>
+                <HistoryIcon />
+              </button>
+            </div>
+          </div>
+        )}
+        {renderHandle()}
         <div className="income-expense-buttons-dashboard w-100 pt-3 mx-auto pb-5">
           <Link to="/addexpense">
             <Button className="burger-button">
@@ -50,6 +69,11 @@ function Dashboard() {
           </Link>
         </div>
       </div>
+      {windowSize > 768 && (
+        <div>
+          <Calendar />
+        </div>
+      )}
     </div>
   );
 }
