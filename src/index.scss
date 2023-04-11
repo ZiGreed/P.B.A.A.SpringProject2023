@@ -4,10 +4,9 @@
 .container__Bottom--Margin {
   margin: auto;
   padding: 10px;
-  width: 75%;
-  margin-top: 75px;
-  position: relative;
-  bottom: -280px;
+  width: 80%;
+  display: flex;
+  justify-content: space-between;
 }
 
 //NAVIGATION BACKGROUND SPALVA
@@ -20,6 +19,10 @@
     linear-gradient(360deg, rgba(105, 66, 239, 0.2) 0%, rgba(0, 0, 0, 0) 100%),
     #0e0e30;
     position: relative;
+    display: flex;
+    align-items:stretch;
+    justify-content: center;
+    flex-direction: column;
 }
 
 //PAGRINDINIU MYGTUKU BORDERIS IR HOVERIS
@@ -106,7 +109,7 @@ main {
   margin-left: auto;
   margin-right: auto;
   position: relative;
-  top: 25px;
+  top: 75px;
 }
 
 // .dashboard-background img {
@@ -211,17 +214,27 @@ main {
   .income-expense-buttons-dashboard {
     display: flex;
     justify-content: space-between;
-    margin-top: 30px;
+    padding-top: 0;
   }
   .diagram-history-buttons-dashboard {
     display: flex;
     justify-content: space-between;
   }
   .dashboard-background {
-    height: 100vh;
+    height: 100%;
   }
   .nav__background--color {
     height: 100vh;
+  }
+  .main-graph {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+  }
+  .diagram-border {
+    top: 0;
   }
 }
 
@@ -252,7 +265,13 @@ main {
     height: 100vh;
   }
   .main-graph {
-    width: 65%;
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: center;
+    position: relative;
+    top: -30px;
   }
   
 }

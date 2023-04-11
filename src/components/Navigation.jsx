@@ -33,7 +33,7 @@ function Navigation() {
               </Link>
             </div>
           </div>
-          <div className="container__Bottom--Margin d-flex justify-content-between">
+          <div className="container__Bottom--Margin">
             <NavUserLogo />
             <NavLogoutButton />
           </div>

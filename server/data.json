@@ -1,5 +1,4 @@
 {
-
   "incomes": [
     {
       "id": 1,
@@ -104,6 +103,20 @@
       "amount": 123,
       "date": "2023-04-04",
       "id": 15
+    },
+    {
+      "name": "aawdaw",
+      "amount": 123,
+      "date": "2022-04-08",
+      "category": "Alga",
+      "id": 16
+    },
+    {
+      "name": "aaaaaa",
+      "amount": 123,
+      "date": "2022-04-11",
+      "category": "Dovana",
+      "id": 17
     }
   ],
   "expenses": [
@@ -207,4 +220,3 @@
     }
   ]
 }
-
