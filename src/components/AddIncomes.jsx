@@ -167,7 +167,7 @@ function AddIncomes() {
               >
                 Pateikti
               </Button>
-              <Button variant="primary" onClick={() => navigate("/expenses/")}>
+              <Button variant="primary" onClick={() => navigate("/incomes/")}>
                   Back
                 </Button>
             </div>
