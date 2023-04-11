@@ -214,17 +214,27 @@ main {
   .income-expense-buttons-dashboard {
     display: flex;
     justify-content: space-between;
-    margin-top: 30px;
+    padding-top: 0;
   }
   .diagram-history-buttons-dashboard {
     display: flex;
     justify-content: space-between;
   }
   .dashboard-background {
-    height: 100vh;
+    height: 100%;
   }
   .nav__background--color {
     height: 100vh;
+  }
+  .main-graph {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+  }
+  .diagram-border {
+    top: 0;
   }
 }
 
@@ -260,6 +270,8 @@ main {
     flex-direction: column;
     align-items: stretch;
     justify-content: center;
+    position: relative;
+    top: -30px;
   }
   
 }

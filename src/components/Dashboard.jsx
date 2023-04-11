@@ -56,7 +56,7 @@ function Dashboard() {
           </div>
         )}
         {renderHandle()}
-        <div className="income-expense-buttons-dashboard w-100 pt-3 mx-auto pb-5">
+        <div className="income-expense-buttons-dashboard w-100 mx-auto">
           <Link to="/addexpense">
             <Button className="burger-button">
               <ExpenseIcon />
