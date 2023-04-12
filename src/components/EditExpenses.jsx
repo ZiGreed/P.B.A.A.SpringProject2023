@@ -2,10 +2,11 @@
 
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { Formik } from "formik";
+import { Formik, ErrorMessage } from "formik";
 import { Button, Form } from "react-bootstrap";
 import { useNavigate, useParams } from "react-router-dom";
 import "./EditExpensesAndIncomes.scss";
+import * as Yup from "yup";
 
 const baseURL = "http://localhost:3000/expenses/";
 
@@ -33,6 +34,21 @@ function EditExpenses() {
       <h1 className="editHeader">Redaguoti</h1>
       <Formik
         initialValues={selectedEdit}
+        validationSchema={
+          Yup.object({
+            name: Yup.string()
+            .required("langelis būtinas")
+            .min(2, "pavadinimas per trumpas")
+            .max(40, "pavadinimas per ilgas"),
+            amount: Yup.number()
+            .required("langelis būtinas")
+            .lessThan(1000000, "suma turi būti mažesnė nei milijonas"),
+            date: Yup.date()
+            .max(new Date(), "data negali būti ateityje"),
+            category: Yup.string()
+            .required("Būtina pasirinkti kategoriją")
+          })
+        }
         onSubmit={(values) => {
           // console.log(values);
           axios
@@ -43,7 +59,7 @@ function EditExpenses() {
         }}
         enableReinitialize
       >
-        {({ values, handleChange, handleBlur, handleSubmit, dirty }) => (
+        {({ values, handleChange, handleBlur, handleSubmit, dirty, touched }) => (
           <Form onSubmit={handleSubmit} className="diagram-border p-4">
             <Form.Group className="p-2">
               <Form.Label>Pavadinimas</Form.Label>
@@ -55,7 +71,11 @@ function EditExpenses() {
                 value={values.name}
                 onBlur={handleBlur}
                 onChange={handleChange}
+                isInvalid={touched.name && !values.name}
               />
+              <span className="formError">
+                <ErrorMessage name="name" />
+              </span>
             </Form.Group>
             <Form.Group className="p-2">
               <Form.Label>Suma</Form.Label>
@@ -63,11 +83,23 @@ function EditExpenses() {
                 className="incomes_expensesFields"
                 type="number"
                 placeholder="Suma"
+                step="0.01"
                 name="amount"
                 value={values.amount}
-                onBlur={handleBlur}
+                onBlur={(e) => {
+                  let value = parseFloat(e.target.value).toFixed(2);
+                  if (isNaN(value)) {
+                    value = "";
+                  }
+                  e.target.value = value;
+                  handleBlur(e);
+                }}
+                isInvalid={touched.amount && !values.amount}
                 onChange={handleChange}
               />
+              <span className="formError">
+                <ErrorMessage name="amount" />
+              </span>
             </Form.Group>
             <Form.Group className="p-2">
               <Form.Label>Data</Form.Label>
@@ -79,7 +111,11 @@ function EditExpenses() {
                 value={values.date}
                 onBlur={handleBlur}
                 onChange={handleChange}
+                isInvalid={touched.date && !values.date}
               />
+              <span className="formError">
+                <ErrorMessage name="date" />
+              </span>
             </Form.Group>
             <Form.Group className="p-2">
               <Form.Label>Kategorija</Form.Label>
@@ -91,7 +127,11 @@ function EditExpenses() {
                 value={values.categoryEdit}
                 onBlur={handleBlur}
                 onChange={handleChange}
+                isInvalid={touched.category && !values.category}
               />
+              <span className="formError">
+                <ErrorMessage name="category" />
+              </span>
             </Form.Group>
             <div className="income_expensesBtn">
               <Button className="income_expensesBtn" variant="secondary" onClick={() => navigate("/expenses/")}>

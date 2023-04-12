@@ -31,7 +31,7 @@ function AddExpenses() {
               .required("langelis būtinas")
               .lessThan(1000000, "suma turi būti mažesnė nei milijonas"),
               date: Yup.date()
-              .max(new Date("2023-04-07"), "data negali būti ateityje"),
+              .max(new Date(), "data negali būti ateityje"),
               category: Yup.string()
               .required("Būtina pasirinkti kategoriją")
             })

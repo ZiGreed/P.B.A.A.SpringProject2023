@@ -7,6 +7,7 @@ import { RiDeleteBinLine, RiEdit2Line } from "react-icons/ri";
 import { deleteHandler } from "./servicces/deleteHandler";
 
 
+
 const IncomesURL = "http://localhost:3000/incomes";
 
 function ReadIncomes() {
@@ -23,7 +24,7 @@ function ReadIncomes() {
         axios
           .delete(IncomesURL + "/" + id)
           .then((response) => {
-            setIncomes(incomes.filter((expense) => expense.id !== id));
+            setIncomes(incomes.filter((income) => income.id !== id));
           })
           .catch((error) => console.log(error));
       }
@@ -44,7 +45,7 @@ function ReadIncomes() {
             <div className="cardPriceGreen">+{income.amount} €</div>
                 <div className="ButtonsContainer">
                 <div className="buttonIcons">
-                  <Link to={"/editexpenses/" + income.id} className="buttonIcons">
+                  <Link to={"/editincomes/" + income.id} className="buttonIcons">
                     <RiEdit2Line
                     size={30}
                     />
@@ -74,7 +75,7 @@ function ReadIncomes() {
                         </div>
                     </div>
             <div className="LinkWrapper">
-              <Link to="/addexpense/" className="LinkButton">
+              <Link to="/addincomes/" className="LinkButton">
                 <button className="buttonAdd">
                     <img src={Vector} alt="" />
                 </button>
