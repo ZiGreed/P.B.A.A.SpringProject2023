@@ -10,10 +10,10 @@ export let deleteHandler = (item, deleteFunction) => {
         <div className="react-confirm-alert-overlay confirmation-modal income_expensesBtn income_expensesBtn deleteCard button:hover deleteCard" style={{ zIndex: 9999 }}>
           <div className="react-confirm-alert">
             <div className="react-confirm-alert-body">
-              <h1>Are you sure?</h1>
-              <p>{`You want to delete ${item.amount}, ${item.date}, ${item.name}, ${item.category}, id: ${item.id} ?`}</p>
+              <h1>Ar tikrai norite pašalinti šį įrašą?</h1>
+              <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
               <Button className="deleteBtn" onClick={onClose} variant="secondary">
-                No
+                Atšaukti
               </Button>
               <Button
                 variant="secondary"
@@ -23,8 +23,9 @@ export let deleteHandler = (item, deleteFunction) => {
                   window.location.reload();
                 }}
               >
-                Yes, Delete it!
+                Ištrinti
               </Button>
+              </div>
             </div>
           </div>
         </div>
