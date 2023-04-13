@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import * as Yup from 'yup';
 import "./AddIncomes.scss"
 
-let baseURL = "http://localhost:3000/incomes";
+let BaseURL = "http://localhost:3000/incomes";
 
 function AddIncomes() {
   
@@ -26,12 +26,12 @@ function AddIncomes() {
         validationSchema={
           Yup.object({
             name: Yup.string()
-            .required("langelis būtinas")
-            .min(2, "pavadinimas per trumpas")
-            .max(40, "pavadinimas per ilgas"),
+            .required("Langelis būtinas")
+            .min(2, "Pavadinimas per trumpas")
+            .max(40, "Pavadinimas per ilgas"),
             amount: Yup.number()
-            .required("langelis būtinas")
-            .lessThan(1000000, "suma turi būti mažesnė nei milijonas"),
+            .required("Langelis būtinas")
+            .lessThan(1000000, "Suma turi būti mažesnė nei milijonas"),
             date: Yup.date()
             .max(new Date(), "data negali būti ateityje"),
             category: Yup.string()
@@ -41,7 +41,7 @@ function AddIncomes() {
         onSubmit={(values, { resetForm }) => {
           console.log(values);
           axios
-            .post(baseURL, values)
+            .post(BaseURL, values)
             .then((response) => console.log(response.data));
           resetForm();
           setSubmitted(true);
@@ -142,8 +142,8 @@ function AddIncomes() {
               >
                 <option value="">Pasirinkite Kategoriją</option>
                 <option value="Alga">Alga</option>
-                <option value="PapildomiDarbai">Papildomi darbai</option>
                 <option value="Dovana">Dovana</option>
+                <option value="Kita">Kita</option>
               </Form.Control>
             <span className="formError">
             <ErrorMessage name="category" />
@@ -168,7 +168,7 @@ function AddIncomes() {
                 Pateikti
               </Button>
               <Button variant="primary" onClick={() => navigate("/incomes/")}>
-                  Back
+                  Pajamų sąrašas
                 </Button>
             </div>
           </Form>

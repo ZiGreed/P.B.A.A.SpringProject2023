@@ -37,14 +37,14 @@ const YearChart = () => {
     labels,
     datasets: [
       {
-        label: "Incomes",
+        label: "Pajamos",
         data: transformData(incomes, expenses).map(item => item.income),
         backgroundColor: "#2E63F5", 
         borderColor: "#2E63F5",
         pointBorderColor: "#2E63F5",
       },
       {
-        label: "Expenses",
+        label: "Išlaidos",
         data: transformData(incomes, expenses).map(item => item.expense),
         backgroundColor: '#FF10F0',
         borderColor: '#FF10F0',
@@ -61,7 +61,7 @@ const YearChart = () => {
       },
       title: {
         display: true,
-        text: "Incomes and expenses comparison chart"
+        text: "Pajamų ir išlaidų palyginimo lentelė"
       }
     },
   };
