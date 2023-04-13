@@ -121,14 +121,18 @@ function EditExpenses() {
               <Form.Label>Kategorija</Form.Label>
               <Form.Control
                 className="incomes_expensesFields"
-                type="text"
+                as="select"
                 placeholder="Kategorija"
-                name="categoryEdit"
-                value={values.categoryEdit}
+                name="category"
+                value={values.category}
                 onBlur={handleBlur}
                 onChange={handleChange}
                 isInvalid={touched.category && !values.category}
-              />
+              >
+                <option value="Alga">Alga</option>
+                <option value="Dovana">Dovana</option>
+                <option value="Kita">Kita</option>
+              </Form.Control>
               <span className="formError">
                 <ErrorMessage name="category" />
               </span>

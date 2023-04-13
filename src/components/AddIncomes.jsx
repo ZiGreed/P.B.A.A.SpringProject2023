@@ -132,8 +132,8 @@ function AddIncomes() {
             <Form.Group className="p-2">
               <Form.Label>Kategorija</Form.Label>
               <Form.Control
-                as="select"
                 className="incomes_expensesFields select-dark"
+                as="select"
                 name="category"
                 onChange={handleChange}
                 onBlur={handleBlur}
