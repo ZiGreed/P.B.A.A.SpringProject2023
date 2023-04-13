@@ -12,7 +12,6 @@ exports.getExpenses = (req, res) => {
 };
 
 exports.postExpense = (req, res) => {
-  console.log(req.body)
   let {name, date, amount, category} = req.body
   let expense = new Expense({
     name: name,
@@ -25,7 +24,6 @@ exports.postExpense = (req, res) => {
   .then((doc) => {
     res.status(200).json(doc);
   })
-  console.log(expense)
 };
 
 exports.editExpense = (req, res) => {
