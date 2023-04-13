@@ -7,6 +7,7 @@ import { RiDeleteBinLine, RiEdit2Line } from "react-icons/ri";
 import { deleteHandler } from "./servicces/deleteHandler";
 
 
+
 const IncomesURL = "http://localhost:3000/incomes";
 
 function ReadIncomes() {
