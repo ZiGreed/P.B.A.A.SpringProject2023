@@ -7,6 +7,7 @@ import { RiDeleteBinLine, RiEdit2Line } from "react-icons/ri";
 import { deleteHandler } from "./servicces/deleteHandler";
 
 
+
 const IncomesURL = "http://localhost:3000/incomes";
 
 function ReadIncomes() {
@@ -23,7 +24,7 @@ function ReadIncomes() {
         axios
           .delete(IncomesURL + "/" + id)
           .then((response) => {
-            setIncomes(incomes.filter((expense) => expense.id !== id));
+            setIncomes(incomes.filter((income) => income.id !== id));
           })
           .catch((error) => console.log(error));
       }
@@ -75,6 +76,7 @@ function ReadIncomes() {
                     </div>
             <div className="LinkWrapper">
               <Link to="/addIncomes/" className="LinkButton">
+
                 <button className="buttonAdd">
                     <img src={Vector} alt="" />
                 </button>
