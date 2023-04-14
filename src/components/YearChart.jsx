@@ -8,10 +8,17 @@ import {
   LinearScale,
   PointElement,
   Legend,
-  Title
+  Title,
 } from "chart.js";
 
-ChartJS.register(LineElement, CategoryScale, LinearScale, PointElement, Legend, Title);
+ChartJS.register(
+  LineElement,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  Legend,
+  Title
+);
 
 const YearChart = () => {
   const [incomes, setIncomes] = useState([]);
@@ -33,36 +40,42 @@ const YearChart = () => {
     "Gru",
   ];
 
+  const sortedArray = transformData(incomes, expenses);
+  const includedMonths = sortedArray.map((item) => item.month);
+  const filteredLabels = labels.filter((label) =>
+    includedMonths.includes(label)
+  );
+
   const incomeData = {
-    labels,
+    labels: filteredLabels,
     datasets: [
       {
         label: "Incomes",
-        data: transformData(incomes, expenses).map(item => item.income),
-        backgroundColor: "#2E63F5", 
+        data: sortedArray.map((item) => item.income),
+        backgroundColor: "#2E63F5",
         borderColor: "#2E63F5",
         pointBorderColor: "#2E63F5",
       },
       {
         label: "Expenses",
-        data: transformData(incomes, expenses).map(item => item.expense),
-        backgroundColor: '#FF10F0',
-        borderColor: '#FF10F0',
-        pointBorderColor: '#FF10F0'
-      }
+        data: sortedArray.map((item) => item.expense),
+        backgroundColor: "#FF10F0",
+        borderColor: "#FF10F0",
+        pointBorderColor: "#FF10F0",
+      },
     ],
   };
 
   const options = {
-    maintainAspectRatio : false,
+    maintainAspectRatio: false,
     plugins: {
       legend: {
-        position: 'top',
+        position: "top",
       },
       title: {
         display: true,
-        text: "Incomes and expenses comparison chart"
-      }
+        text: "Incomes and expenses comparison chart",
+      },
     },
   };
 
@@ -85,7 +98,6 @@ const YearChart = () => {
     allData.forEach((item) => {
       const date = new Date(item.date);
       const month = date.getMonth() + 1;
-
       if (!groupedData[month]) {
         groupedData[month] = { income: 0, expense: 0 };
       }
@@ -102,6 +114,12 @@ const YearChart = () => {
     Object.entries(groupedData).forEach(([month, { income, expense }]) => {
       chartData.push({ month, income, expense });
     });
+
+    const includedMonths = chartData.map((item) => item.month);
+    const filteredData = chartData.filter((item) =>
+      includedMonths.includes(item.month)
+    );
+
     const getMonthName = (monthNumber) => {
       const date = new Date();
       date.setMonth(monthNumber - 1);
@@ -111,11 +129,13 @@ const YearChart = () => {
       });
     };
 
-    let sortedArray = chartData.map((item) => {
+    let sortedArray = filteredData.map((item) => {
       return {
         income: item.income,
         expense: item.expense,
-        month: getMonthName(item.month),
+        month:
+          getMonthName(item.month).charAt(0).toUpperCase() +
+          getMonthName(item.month).slice(1, 3),
       };
     });
     return sortedArray;

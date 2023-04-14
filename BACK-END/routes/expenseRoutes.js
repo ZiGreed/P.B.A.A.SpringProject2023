@@ -5,11 +5,12 @@ const expenseRouter = express.Router();
 expenseRouter
   .route("/")
   .get(expenseController.getExpenses)
-  .post(expenseController.postExpense);
+  .post(expenseController.postExpense)
 
 expenseRouter
   .route("/:id")
   .patch(expenseController.editExpense)
-  .delete(expenseController.deleteExpense);
+  .delete(expenseController.deleteExpense)
+  .get(expenseController.getExpenseById)
 
   module.exports = expenseRouter;

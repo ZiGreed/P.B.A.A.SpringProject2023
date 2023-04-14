@@ -36,7 +36,7 @@ function EditExpenses() {
         onSubmit={(values) => {
           // console.log(values);
           axios
-            .put(baseURL + id, values)
+            .patch(baseURL + id, values)
             .then((response) => console.log(response.data));
           setUpdated(true);
           navigate("/expenses");

@@ -92,7 +92,7 @@ function EditIncomes() {
               />
             </Form.Group>
             <div className="income_expensesBtn">
-                <Button className="income_expensesBtn" variant="secondary" onClick={() => navigate("/expenses/")}>
+                <Button className="income_expensesBtn" variant="secondary" onClick={() => navigate("/incomes/")}>
                 Atgal
                 </Button>
                 <Button variant="secondary" className="income_expensesBtn" type="submit" disabled={!dirty}>

@@ -39,13 +39,13 @@ function ReadExpenses() {
         </div>
         <div className="cardInfoWrapper">
           <div>{expense.name}</div>
-          <div>{expense.date}</div>
+          <div>{expense.date.slice(0,10)}</div>
         </div>
         <div className="cardPriceRed">-{expense.amount} €</div>
         
           <div className="ButtonsContainer">
             <div className="buttonIcons">
-              <Link to={"/editexpenses/" + expense.id} className="buttonIcons">
+              <Link to={"/expenses/" + expense._id} className="buttonIcons">
                 <RiEdit2Line
                 size={30}
                 />
