@@ -32,7 +32,7 @@ function ReadExpenses() {
 
   let expensesjsx = expenses.map((expense, index) => {
     return (
-      <div className={"card"} key={index}>
+      <div className={"card"} key={expense.id}>
         <div className="cardIcon">
           {/* <img src="#" alt="icon/category" /> */}
           {expense.category === "Kita" ? (
@@ -55,7 +55,7 @@ function ReadExpenses() {
         <div className="cardPriceRed">-{expense.amount} €</div>
 
         
-          <div className="ButtonsContainer">
+          {/* <div className="ButtonsContainer">
             <div className="buttonIcons">
               <Link to={"/expenses/" + expense._id} className="buttonIcons">
                 <RiEdit2Line
@@ -70,7 +70,7 @@ function ReadExpenses() {
                   deleteHandler(expense, deleteExpense);
                 }}
               />
-            </div>
+            </div> */}
 
         <div className="ButtonsContainer">
           <div className="buttonIcons">
