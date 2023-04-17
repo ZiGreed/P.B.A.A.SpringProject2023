@@ -68,7 +68,7 @@ function ReadIncomes() {
         </div>
       </div>
 
-    );hg
+    );
   });
 
   return (
