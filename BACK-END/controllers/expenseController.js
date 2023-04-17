@@ -11,6 +11,15 @@ exports.getExpenses = (req, res) => {
     .catch((error) => res.status(404).json(error));
 };
 
+exports.getExpenseById = (req, res) => {
+  let {id} = req.params;
+  Expense.findById(id)
+  .then(doc => {
+    res.status(200).json(doc);
+  })
+  .catch(error => res.status(404).json(error))
+}
+
 exports.postExpense = (req, res) => {
   let {name, date, amount, category} = req.body
   let expense = new Expense({
@@ -44,6 +53,6 @@ exports.deleteExpense = (req, res) => {
       .then((doc) => {
         res.status(200).json(doc);
       })
-      .catch((error) => res.status(404).json(doc));
+      .catch((error) => res.status(404).json(error));
   };
   

@@ -10,6 +10,7 @@ incomeRouter
 incomeRouter
   .route("/:id")
   .patch(incomeController.editIncome)
-  .delete(incomeController.deleteIncome);
+  .delete(incomeController.deleteIncome)
+  .get(incomeController.getIncomeById)
 
   module.exports = incomeRouter;

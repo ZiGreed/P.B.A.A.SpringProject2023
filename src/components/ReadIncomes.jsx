@@ -39,13 +39,13 @@ function ReadIncomes() {
             </div>
             <div className="cardInfoWrapper">
               <div>{income.name}</div>
-              <div>{income.date}</div>
+              <div>{income.date.slice(0, 10)}</div>
               
             </div>
             <div className="cardPriceGreen">+{income.amount} €</div>
                 <div className="ButtonsContainer">
                 <div className="buttonIcons">
-                  <Link to={"/editincomes/" + income.id} className="buttonIcons">
+                  <Link to={"/incomes/" + income._id} className="buttonIcons">
                     <RiEdit2Line
                     size={30}
                     />
@@ -75,7 +75,8 @@ function ReadIncomes() {
                         </div>
                     </div>
             <div className="LinkWrapper">
-              <Link to="/addincomes/" className="LinkButton">
+              <Link to="/addIncomes/" className="LinkButton">
+
                 <button className="buttonAdd">
                     <img src={Vector} alt="" />
                 </button>
