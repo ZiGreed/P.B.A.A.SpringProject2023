@@ -5,6 +5,10 @@ import { useNavigate } from "react-router-dom";
 import { postData } from "../../services/api";
 import { useState } from "react";
 import * as Yup from "yup";
+import { FaCat, FaHouseUser } from "react-icons/fa";
+import { GiGluttonousSmile } from "react-icons/gi";
+import { MdFastfood } from "react-icons/md";
+
 
 const expenseURL = "http://localhost:3000/expenses";
 
@@ -55,6 +59,26 @@ function AddExpenses() {
             resetForm,
           }) => (
             <Form onSubmit={handleSubmit} className="diagram-border p-4">
+               {values.category === "Kita" && (
+                <div className="text-center">
+                  <FaCat size={32} />
+                </div>
+               )}
+                {values.category === "Buitis" && (
+                <div className="text-center">
+                  <FaHouseUser size={32} /> 
+                </div>
+               )}
+                {values.category === "Pramogos" && (
+                <div className="text-center">
+                  <GiGluttonousSmile size={32} /> 
+                </div>
+               )}
+                {values.category === "Maistas" && (
+                <div className="text-center">
+                  <MdFastfood size={32} /> 
+                </div>
+               )}
               {submitted && (<h4 style={{color: "orange"}}>Pateikta!</h4>)}
               <Form.Group className="p-2">
                 <Form.Label>Pavadinimas</Form.Label>
