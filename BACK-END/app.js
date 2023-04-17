@@ -18,8 +18,8 @@ app.use(cors(corsOptions));
 app.use(bodyParser.json());
 app.use(express.json());
 
-// app.use("/incomes", incomeRouter);
-// app.use("/expenses", expenseRouter);
+app.use("/incomes", incomeRouter);
+app.use("/expenses", expenseRouter);
 // app.use("/categories", categoryRouter);
 
 module.exports = app;

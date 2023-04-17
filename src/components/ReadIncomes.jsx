@@ -32,6 +32,7 @@ function ReadIncomes() {
 
   let incomesjsx = incomes.map((income, index) => {
     return (
+
       <div className="card" key={index}>
         <div className="cardIcon">
           {/* <img src="#" alt="icon/category" /> */}
@@ -66,7 +67,8 @@ function ReadIncomes() {
           </div>
         </div>
       </div>
-    );
+
+    );hg
   });
 
   return (

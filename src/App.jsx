@@ -23,8 +23,8 @@ function App() {
             <Route path="expenses" element={<ReadExpenses />} />
             <Route path="incomes" element={<ReadIncomes />} />
             <Route path="addexpense" element={<AddExpenses />} />
-            <Route path="editexpenses/:id" element={<EditExpenses />} />
-            <Route path="editincomes/:id" element={<EditIncomes />} />
+            <Route path="expenses/:id" element={<EditExpenses />} />
+            <Route path="incomes/:id" element={<EditIncomes />} />
           </Route>
         </Routes>
       </Layout>
