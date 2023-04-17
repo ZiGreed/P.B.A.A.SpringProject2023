@@ -13,18 +13,28 @@ export let deleteHandler = (item, deleteFunction) => {
           <div className="react-confirm-alert">
             <div className="react-confirm-alert-body">
               <h1>Ar tikrai norite pašalinti šį įrašą?</h1>
-              <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
-              <Button className="deleteBtn" onClick={onClose} variant="secondary">
-                Atšaukti
-              </Button>
-              <Button
-                variant="secondary"
-                onClick={() => {
-                  deleteFunction(item._id);
-                  onClose();
-                  window.location.reload();
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
                 }}
               >
+                <Button
+                  className="deleteBtn"
+                  onClick={onClose}
+                  variant="secondary"
+                >
+                  Atšaukti
+                </Button>
+                <Button
+                  variant="secondary"
+                  onClick={() => {
+                    deleteFunction(item._id);
+                    onClose();
+                    window.location.reload();
+                  }}
+                ></Button>
                 <Button
                   className="deleteBtn"
                   onClick={onClose}
