@@ -30,21 +30,6 @@ export let deleteHandler = (item, deleteFunction) => {
                 <Button
                   variant="secondary"
                   onClick={() => {
-                    deleteFunction(item._id);
-                    onClose();
-                    window.location.reload();
-                  }}
-                ></Button>
-                <Button
-                  className="deleteBtn"
-                  onClick={onClose}
-                  variant="secondary"
-                >
-                  Atšaukti
-                </Button>
-                <Button
-                  variant="secondary"
-                  onClick={() => {
                     deleteFunction(item.id);
                     onClose();
                     window.location.reload();
