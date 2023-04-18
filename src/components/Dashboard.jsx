@@ -31,7 +31,7 @@ function Dashboard() {
             <Tab eventKey="currentMonth" title="Šis mėnuo">
               <CurrentMonthChart />
             </Tab>
-            <Tab eventKey="chooseYear" title="Pasirinkti metus">
+            <Tab eventKey="chooseYear" title="Šie metai">
               <YearChart />
             </Tab>
           </Tabs>

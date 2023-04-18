@@ -10,6 +10,8 @@ import {
   Legend,
   Title,
 } from "chart.js";
+import SelectYear from "./SelectYear";
+import YearFilter from "./YearFilter";
 
 ChartJS.register(
   LineElement,
@@ -24,7 +26,6 @@ const YearChart = () => {
   const [incomes, setIncomes] = useState([]);
   const [expenses, setExpenses] = useState([]);
   const baseURL = "http://localhost:3000/";
-
   const labels = [
     "Sau",
     "Vas",
@@ -39,6 +40,11 @@ const YearChart = () => {
     "Lap",
     "Gru",
   ];
+
+  const [dataFilteredByYear, uniqueDates] = YearFilter();
+
+  console.log(dataFilteredByYear);
+  console.log(uniqueDates);
 
   const sortedArray = transformData(incomes, expenses);
   const includedMonths = sortedArray.map((item) => item.month);
@@ -142,8 +148,13 @@ const YearChart = () => {
   }
 
   return (
-    <div className="line-chart">
-      <Line data={incomeData} options={options}></Line>
+    <div>
+      <div className="d-flex justify-content-center p-3">
+          <SelectYear uniqueDates={uniqueDates}/>
+      </div>
+      <div className="line-chart">
+        <Line data={incomeData} options={options}></Line>
+      </div>
     </div>
   );
 };
