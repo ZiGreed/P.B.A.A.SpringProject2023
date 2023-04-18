@@ -24,14 +24,14 @@ function AddExpenses() {
           validationSchema={
             Yup.object({
               name: Yup.string()
-              .required("langelis būtinas")
-              .min(2, "pavadinimas per trumpas")
-              .max(40, "pavadinimas per ilgas"),
+              .required("Langelis būtinas")
+              .min(2, "Pavadinimas per trumpas")
+              .max(40, "Pavadinimas per ilgas"),
               amount: Yup.number()
-              .required("langelis būtinas")
-              .lessThan(1000000, "suma turi būti mažesnė nei milijonas"),
+              .required("Langelis būtinas")
+              .lessThan(1000000, "Suma turi būti mažesnė nei milijonas"),
               date: Yup.date()
-              .max(new Date("2023-04-07"), "data negali būti ateityje"),
+              .max(new Date(), "data negali būti ateityje"),
               category: Yup.string()
               .required("Būtina pasirinkti kategoriją")
             })
@@ -128,9 +128,10 @@ function AddExpenses() {
                 isInvalid={touched.category && !values.category}
               >
                 <option value="">Pasirinkite Kategoriją</option>
-                <option value="Alga">Alga</option>
-                <option value="PapildomiDarbai">Papildomi darbai</option>
-                <option value="Dovana">Dovana</option>
+                <option value="Maistas">Maistas</option>
+                <option value="Pramogos">Pramogos</option>
+                <option value="Buitis">Buitis</option>
+                <option value="Kita">Kita</option>
               </Form.Control>
             <span className="formError">
             <ErrorMessage name="category" />
@@ -155,7 +156,7 @@ function AddExpenses() {
                   Pateikti
                 </Button>
                 <Button variant="primary" onClick={() => navigate("/expenses/")}>
-                  Back
+                Išlaidų sąrašas
                 </Button>
               </div>
             </Form>
