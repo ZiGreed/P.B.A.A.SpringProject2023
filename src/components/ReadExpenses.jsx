@@ -74,7 +74,7 @@ function ReadExpenses() {
 
         <div className="ButtonsContainer">
           <div className="buttonIcons">
-            <Link to={"/editexpenses/" + expense.id} className="buttonIcons">
+            <Link to={"/expenses/" + expense.id} className="buttonIcons">
               <RiEdit2Line size={30} />
             </Link>
           </div>
