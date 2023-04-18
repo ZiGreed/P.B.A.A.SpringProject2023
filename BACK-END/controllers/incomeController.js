@@ -1,10 +1,14 @@
 const mongoose = require("mongoose");
 const Income = require("./../models/incomeModel");
 
-
-
 exports.getIncomes = (req, res) => {
-  Income.find(req.query)
+  const year = req.query.year;
+  let query = {};
+  if (year) {
+    const yearRegex = new RegExp(`^${year}`);
+    query.date = { $regex: yearRegex };
+  }
+  Income.find(query)
     .then((doc) => {
       res.status(200).json(doc);
     })
@@ -12,27 +16,25 @@ exports.getIncomes = (req, res) => {
 };
 
 exports.getIncomeById = (req, res) => {
-  let {id} = req.params;
+  let { id } = req.params;
   Income.findById(id)
-  .then(doc => {
-    res.status(200).json(doc);
-  })
-  .catch(error => res.status(404).json(error))
-}
+    .then((doc) => {
+      res.status(200).json(doc);
+    })
+    .catch((error) => res.status(404).json(error));
+};
 
 exports.postIncome = (req, res) => {
-  let {name, date, amount, category} = req.body
+  let { name, date, amount, category } = req.body;
   let income = new Income({
     name: name,
     date: date,
     amount: amount,
-    category: category
-  })
-  income
-  .save()
-  .then((doc) => {
+    category: category,
+  });
+  income.save().then((doc) => {
     res.status(200).json(doc);
-  })
+  });
 };
 
 exports.editIncome = (req, res) => {
@@ -48,11 +50,10 @@ exports.editIncome = (req, res) => {
 };
 
 exports.deleteIncome = (req, res) => {
-    let { id } = req.params;
-    Income.findByIdAndDelete(id)
-      .then((doc) => {
-        res.status(200).json(doc);
-      })
-      .catch((error) => res.status(404).json(error));
-  };
-  
+  let { id } = req.params;
+  Income.findByIdAndDelete(id)
+    .then((doc) => {
+      res.status(200).json(doc);
+    })
+    .catch((error) => res.status(404).json(error));
+};
