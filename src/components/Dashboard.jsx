@@ -1,5 +1,5 @@
 //VISAS DASHBOARD, KURIAME YRA GRAFIKAS IR PIRKIMU ISTORIJA
-import { Tab, Tabs, Button } from "react-bootstrap";
+import { Tab, Tabs, Button, Nav } from "react-bootstrap";
 import { DiagramIcon, HistoryIcon, ExpenseIcon, IncomeIcon } from "./NavIcons";
 import "bootstrap/dist/css/bootstrap.min.css";
 import YearChart from "./YearChart";

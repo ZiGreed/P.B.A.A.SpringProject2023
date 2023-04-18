@@ -49,7 +49,7 @@ function Calendar() {
           <IconHistory />
           <div className="transferInfo">
             <h2 className="transferName">{transfer.name}</h2>
-            <p className="transferDate">{transfer.date}</p>
+            <p className="transferDate">{transfer.date.slice(0, 10)}</p>
           </div>
         </div>
         <p className={transfer.amount[0] === "+" ? "greenClass" : "redClass"}>
