@@ -218,5 +218,22 @@
       "name": "Telefono taisymas",
       "category": "Parduotuve"
     }
+  ],
+  "budget": [
+    {
+      "id": 1,
+      "category": "Maistas",
+      "limit": 1200
+    },
+    {
+      "limit": 159,
+      "category": "Maistas",
+      "id": 2
+    },
+    {
+      "limit": "",
+      "category": "Maistas",
+      "id": 3
+    }
   ]
 }

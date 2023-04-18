@@ -11,6 +11,8 @@ import AddIncomes from "./components/AddIncomes";
 import EditExpenses from "./components/EditExpenses";
 import EditIncomes from "./components/EditIncomes";
 import Calendar from "./components/Calendar";
+import AddBudget from "./components/AddBudget";
+import Budget from "./components/ReadBudget"
 
 function App() {
   return (
@@ -25,6 +27,8 @@ function App() {
             <Route path="addexpense" element={<AddExpenses />} />
             <Route path="expenses/:id" element={<EditExpenses />} />
             <Route path="incomes/:id" element={<EditIncomes />} />
+            <Route path="addbudget" element={<AddBudget />} />
+            <Route path="budget" element={<Budget />} />
           </Route>
         </Routes>
       </Layout>
