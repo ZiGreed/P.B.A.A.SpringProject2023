@@ -53,7 +53,7 @@ function ReadIncomes() {
         <div className="cardPriceGreen">+{income.amount} €</div>
         <div className="ButtonsContainer">
           <div className="buttonIcons">
-            <Link to={"/editincomes/" + income.id} className="buttonIcons">
+            <Link to={"/incomes/" + income._id} className="buttonIcons">
               <RiEdit2Line size={30} />
             </Link>
           </div>

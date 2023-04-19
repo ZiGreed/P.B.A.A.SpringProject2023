@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 function Navigation() {
   return (
     <>
-      <Col md={3}>
+      {/* <Col md={3}> */}
         <div className="nav__background--color pt-5">
           <div className="d-flex justify-content-center">
             <NavigationLogo />
@@ -38,7 +38,7 @@ function Navigation() {
             <NavLogoutButton />
           </div>
         </div>
-      </Col>
+      {/* </Col> */}
     </>
   );
 }
