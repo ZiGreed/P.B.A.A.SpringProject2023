@@ -54,6 +54,7 @@ function ReadIncomes() {
         <div className="ButtonsContainer">
           <div className="buttonIcons">
             <Link to={"/incomes/" + income._id} className="buttonIcons">
+
               <RiEdit2Line size={30} />
             </Link>
           </div>
