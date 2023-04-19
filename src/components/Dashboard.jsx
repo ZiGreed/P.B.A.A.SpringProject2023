@@ -1,5 +1,5 @@
 //VISAS DASHBOARD, KURIAME YRA GRAFIKAS IR PIRKIMU ISTORIJA
-import { Tab, Tabs, Button} from "react-bootstrap";
+import { Tab, Tabs, Button } from "react-bootstrap";
 import { DiagramIcon, HistoryIcon, ExpenseIcon, IncomeIcon } from "./NavIcons";
 import "bootstrap/dist/css/bootstrap.min.css";
 import YearChart from "./YearChart";
@@ -11,11 +11,6 @@ import { useState } from "react";
 function Dashboard() {
   let windowSize = useWindowSize();
   const [historyClicked, setHistoryClicked] = useState(false);
-
-  let openClose = () => {
-    if (historyClicked) setHistoryClicked(false);
-    else setHistoryClicked(true);
-  };
 
   let renderHandle = () => {
     if (windowSize >= 768 || !historyClicked)
@@ -46,10 +41,18 @@ function Dashboard() {
         {windowSize < 768 && (
           <div className="diagram-history-buttons-dashboard w-100 mx-auto">
             <div>
-              <DiagramIcon />
+              <button
+                id="diagram-button"
+                onClick={() => setHistoryClicked(false)}
+              >
+                <DiagramIcon />
+              </button>
             </div>
             <div>
-              <button id="history-button" onClick={openClose}>
+              <button
+                id="history-button"
+                onClick={() => setHistoryClicked(true)}
+              >
                 <HistoryIcon />
               </button>
             </div>
@@ -70,7 +73,9 @@ function Dashboard() {
         </div>
       </div>
       {windowSize > 768 && (
+        <div className="calendar-container">
           <Calendar />
+        </div>
       )}
     </div>
   );
