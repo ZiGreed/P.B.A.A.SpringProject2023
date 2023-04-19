@@ -7,6 +7,8 @@
   width: 80%;
   display: flex;
   justify-content: space-between;
+  position: absolute;
+  bottom: 0px;
 }
 
 //NAVIGATION BACKGROUND SPALVA
@@ -20,9 +22,9 @@
     #0e0e30;
     position: relative;
     display: flex;
-    align-items:stretch;
-    justify-content: center;
+    align-items:center;
     flex-direction: column;
+    gap: 10%;
 }
 
 //PAGRINDINIU MYGTUKU BORDERIS IR HOVERIS
@@ -266,12 +268,13 @@ main {
   }
   .main-graph {
     width: 60%;
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    justify-content: center;
-    position: relative;
-    top: -30px;
+    height: 100%;
+    // display: flex;
+    // flex-direction: column;
+    // align-items: stretch;
+    // justify-content: center;
+    // position: relative;
+    // top: -30px;
   }
   
 }

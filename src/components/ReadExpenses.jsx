@@ -25,14 +25,14 @@ function ReadExpenses() {
     axios
       .delete(expensesURL + "/" + id)
       .then((response) => {
-        setExpenses(expenses.filter((expense) => expense.id !== id));
+        setExpenses(expenses.filter((expense) => expense._id !== id));
       })
       .catch((error) => console.log(error));
   }
 
   let expensesjsx = expenses.map((expense, index) => {
     return (
-      <div className={"card"} key={expense.id}>
+      <div className={"card"} key={expense._id}>
         <div className="cardIcon">
           {/* <img src="#" alt="icon/category" /> */}
           {expense.category === "Kita" ? (
@@ -74,7 +74,8 @@ function ReadExpenses() {
 
         <div className="ButtonsContainer">
           <div className="buttonIcons">
-            <Link to={"/expenses/" + expense.id} className="buttonIcons">
+            <Link to={"/expenses/" + expense._id} className="buttonIcons">
+
               <RiEdit2Line size={30} />
             </Link>
           </div>
