@@ -32,7 +32,7 @@ function ReadExpenses() {
 
   let expensesjsx = expenses.map((expense, index) => {
     return (
-      <div className={"card"} key={expense._id}>
+      <div className="card" key={expense._id}>
         <div className="cardIcon">
           {/* <img src="#" alt="icon/category" /> */}
           {expense.category === "Kita" ? (
@@ -93,7 +93,8 @@ function ReadExpenses() {
   });
 
   return (
-    <div className="readExpensejsx">
+    <>
+    <div className="readExpenseIncomejsx">
       <div className="cardsWrapper">
         <div className="cardsContainerBorder">
           <div className="cardsContainer overflowHidden">{expensesjsx}</div>
@@ -107,6 +108,7 @@ function ReadExpenses() {
         </div>
       </div>
     </div>
+    </>
   );
 }
 
