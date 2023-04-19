@@ -25,6 +25,7 @@
     align-items:center;
     flex-direction: column;
     gap: 10%;
+    width: 20%;
 }
 
 //PAGRINDINIU MYGTUKU BORDERIS IR HOVERIS
@@ -111,7 +112,7 @@ main {
   margin-left: auto;
   margin-right: auto;
   position: relative;
-  top: 75px;
+  // top: 75px;
 }
 
 // .dashboard-background img {
@@ -234,6 +235,8 @@ main {
     align-items: center;
     justify-content: center;
     gap: 20px;
+    padding: 15px;
+    padding-top: 70px;
   }
   .diagram-border {
     top: 0;
@@ -254,21 +257,19 @@ main {
     width: 100%;
     display: flex;
     flex-direction: row;
+    justify-content: space-evenly;
   }
 
   .line-chart {
     height: 100%;
   }
 
-  .tab-content {
-    height: 60vh;
-  }
   .nav__background--color {
     height: 100vh;
   }
   .main-graph {
-    width: 60%;
-    height: 100%;
+    width: 70%;
+    padding: 1%;
     // display: flex;
     // flex-direction: column;
     // align-items: stretch;
