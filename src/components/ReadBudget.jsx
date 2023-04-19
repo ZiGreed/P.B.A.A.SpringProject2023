@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import Vector from "./../assets/images/Vector.svg";
 import { RiDeleteBinLine, RiEdit2Line } from "react-icons/ri";
-
+import { AiOutlinePlusCircle } from "react-icons/ai";
 
 function ReadBudget() {
     return ( 
@@ -16,6 +16,30 @@ function ReadBudget() {
               <div>Maistas</div>
           </div>
           <div className="ButtonsContainer">
+          <div className="buttonIcons">
+          </div>
+          <div className="buttonIcons">
+            <Link to={"/addbudget/" + 1} className="buttonIcons">
+              <RiEdit2Line size={30} />
+            </Link>
+          </div>
+          <div className="buttonIcons">
+            <RiDeleteBinLine
+              size={30}
+              // onClick={() => {
+              //   deleteHandler(expense, deleteExpense);
+              // }}
+            />
+          </div>
+        </div>
+        </div>
+        <div className="card">
+          <div className="cardIndoWrapper">
+              <div>Pramogos</div>
+          </div>
+          <div className="ButtonsContainer">
+          <div className="buttonIcons">
+          </div>
           <div className="buttonIcons">
             {/* <Link to={"/editexpenses/" + expense.id} className="buttonIcons"> */}
               <RiEdit2Line size={30} />
@@ -33,18 +57,57 @@ function ReadBudget() {
         </div>
         <div className="card">
           <div className="cardIndoWrapper">
-              <div>Pramogos</div>
-          </div>
-        </div>
-        <div className="card">
-          <div className="cardIndoWrapper">
               <div>Buitis</div>
           </div>
+          <div className="ButtonsContainer">
+          <div className="buttonIcons">
+            <Link to={"/addbudget/"}>
+              <AiOutlinePlusCircle
+                size={30}
+              />
+            </Link>
+          </div>
+          <div className="buttonIcons">
+            {/* <Link to={"/editexpenses/" + expense.id} className="buttonIcons"> */}
+              <RiEdit2Line size={30} />
+            {/* </Link> */}
+          </div>
+          <div className="buttonIcons">
+            <RiDeleteBinLine
+              size={30}
+              // onClick={() => {
+              //   deleteHandler(expense, deleteExpense);
+              // }}
+            />
+          </div>
+        </div>
         </div>
         <div className="card">
           <div className="cardIndoWrapper">
               <div>Kita</div>
           </div>
+          <div className="ButtonsContainer">
+          <div className="buttonIcons">
+            <Link to={"/addbudget/"}>
+              <AiOutlinePlusCircle
+                size={30}
+              />
+            </Link>
+          </div>
+          <div className="buttonIcons">
+            {/* <Link to={"/editexpenses/" + expense.id} className="buttonIcons"> */}
+              <RiEdit2Line size={30} />
+            {/* </Link> */}
+          </div>
+          <div className="buttonIcons">
+            <RiDeleteBinLine
+              size={30}
+              // onClick={() => {
+              //   deleteHandler(expense, deleteExpense);
+              // }}
+            />
+          </div>
+        </div>
         </div>
             
           </div>
