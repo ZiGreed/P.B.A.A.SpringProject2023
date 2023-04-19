@@ -67,6 +67,7 @@ function CurrentMonthChart() {
       })
       .catch((error) => console.log(error));
   }, [expensesURL, currentMonth]);
+  console.log(expensesData)
   return (
       <ResponsiveContainer width="100%" height={400}>
         <PieChart>
