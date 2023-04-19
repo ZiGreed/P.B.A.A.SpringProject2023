@@ -2,6 +2,13 @@
   display: none;
 }
 
+.calendar-container {
+  padding-top: 1%;
+  width: 30%;
+  padding-right: 10px;
+  margin: 0;
+}
+
 .historyTab {
   box-sizing: border-box;
   background: linear-gradient(#0e0e30, #480068) padding-box,
@@ -14,8 +21,7 @@
   color: #ffffff;
   height: 86vh;
   margin-bottom: 50px;
-  width: 90%;
-  margin-top: 1%;
+  width: 100%;
 }
 
 .historyTab p,
