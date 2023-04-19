@@ -1,5 +1,5 @@
 //VISAS DASHBOARD, KURIAME YRA GRAFIKAS IR PIRKIMU ISTORIJA
-import { Tab, Tabs, Button, Nav } from "react-bootstrap";
+import { Tab, Tabs, Button} from "react-bootstrap";
 import { DiagramIcon, HistoryIcon, ExpenseIcon, IncomeIcon } from "./NavIcons";
 import "bootstrap/dist/css/bootstrap.min.css";
 import YearChart from "./YearChart";
@@ -42,7 +42,7 @@ function Dashboard() {
 
   return (
     <div className="dashboard-background">
-      <div className="p-3 main-graph">
+      <div className="main-graph">
         {windowSize < 768 && (
           <div className="diagram-history-buttons-dashboard w-100 mx-auto">
             <div>
@@ -70,9 +70,7 @@ function Dashboard() {
         </div>
       </div>
       {windowSize > 768 && (
-        <div>
           <Calendar />
-        </div>
       )}
     </div>
   );

@@ -10,7 +10,6 @@ import ReadExpenses from "./components/ReadExpenses";
 import AddIncomes from "./components/AddIncomes";
 import EditExpenses from "./components/EditExpenses";
 import EditIncomes from "./components/EditIncomes";
-import Calendar from "./components/Calendar";
 
 function App() {
   return (
