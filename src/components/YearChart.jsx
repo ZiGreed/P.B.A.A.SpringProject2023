@@ -25,6 +25,7 @@ ChartJS.register(
 const YearChart = () => {
   const [incomes, setIncomes] = useState([]);
   const [expenses, setExpenses] = useState([]);
+  const [year, setYear] = useState(new Date().getFullYear().toString());
   const baseURL = "http://localhost:3000/";
   const labels = [
     "Sau",
@@ -41,10 +42,8 @@ const YearChart = () => {
     "Gru",
   ];
 
-  const [dataFilteredByYear, uniqueDates] = YearFilter();
-
-  console.log(dataFilteredByYear);
-  console.log(uniqueDates);
+  const [dataFilteredByYear, uniqueDates] = YearFilter(year);
+  const transformedData = transformData(dataFilteredByYear);
 
   const sortedArray = transformData(incomes, expenses);
   const includedMonths = sortedArray.map((item) => item.month);
@@ -57,7 +56,7 @@ const YearChart = () => {
     datasets: [
       {
         label: "Pajamos",
-        data: sortedArray.map((item) => item.income),
+        data: transformedData.map((item) => item.income),
         backgroundColor: "#2E63F5",
 
         borderColor: "#2E63F5",
@@ -65,12 +64,11 @@ const YearChart = () => {
       },
       {
         label: "Išlaidos",
-        data: sortedArray.map((item) => item.expense),
+        data: transformedData.map((item) => item.expense),
         backgroundColor: "#FF10F0",
         borderColor: "#FF10F0",
         pointBorderColor: "#FF10F0",
       },
-
     ],
   };
 
@@ -99,24 +97,22 @@ const YearChart = () => {
     fetchData();
   }, []);
 
-  function transformData(incomes, expenses) {
-    const allData = [...incomes, ...expenses];
+  function transformData(dataFilteredByYear) {
     const groupedData = {};
-
-    allData.forEach((item) => {
+  
+    dataFilteredByYear.forEach((item) => {
       const date = new Date(item.date);
       const month = date.getMonth() + 1;
       if (!groupedData[month]) {
         groupedData[month] = { income: 0, expense: 0 };
       }
-
-      if (incomes.includes(item)) {
+  
+      if (item.type === 'income') {
         groupedData[month].income += parseFloat(item.amount);
-      } else if (expenses.includes(item)) {
+      } else if (item.type === 'expense') {
         groupedData[month].expense += parseFloat(item.amount);
       }
     });
-
     const chartData = [];
 
     Object.entries(groupedData).forEach(([month, { income, expense }]) => {
@@ -152,7 +148,7 @@ const YearChart = () => {
   return (
     <div>
       <div className="d-flex justify-content-center p-3">
-          <SelectYear uniqueDates={uniqueDates}/>
+        <SelectYear uniqueDates={uniqueDates} setYear={setYear} />
       </div>
       <div className="line-chart">
         <Line data={incomeData} options={options}></Line>
