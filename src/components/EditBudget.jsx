@@ -13,7 +13,7 @@ import { useParams } from "react-router-dom";
 
 const budgetURL = "http://localhost:3000/budget/";
 
-function AddBudget() {
+function EditBudget() {
   const { id } = useParams();
   const navigate = useNavigate();
 
@@ -122,4 +122,4 @@ function AddBudget() {
      );
 }
 
-export default AddBudget;
+export default EditBudget;

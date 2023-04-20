@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import Vector from "./../assets/images/Vector.svg";
 import { RiDeleteBinLine, RiEdit2Line } from "react-icons/ri";
 import { AiOutlinePlusCircle } from "react-icons/ai";
+import { Button } from "react-bootstrap";
 
 function ReadBudget() {
     return ( 
@@ -67,13 +68,28 @@ function ReadBudget() {
             
           </div>
         </div>
-        <div className="LinkWrapper">
+        {/* <div className="LinkWrapperBudget">
           <Link to="/addbudget/" className="LinkButton">
             <button className="buttonAdd">
               <img src={Vector} alt="" />
             </button>
           </Link>
-        </div>
+          <Link to="/addbudget/" className="LinkButton">
+            <button>Graph</button>
+          </Link>
+        </div> */}
+        <div className="budgetBtnContainer">
+                <Link to="/budgetgraph/">
+                  <Button
+                    className="budgetBtn"
+                  >
+                    Biudžeto diagrama
+                  </Button>
+                </Link>
+                <Button variant="primary" className="budgetBtn">
+                Placeholder
+                </Button>
+              </div>
       </div>
     </div>
         </>

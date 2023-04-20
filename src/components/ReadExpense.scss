@@ -93,6 +93,12 @@
     width: 200px;
     margin: 15px auto 0px auto;
 }
+.LinkWrapperBudget {
+    width: 200px;
+    margin: 15px auto 0px auto;
+    display: flex;
+    flex-direction: row;
+}
 .buttonAdd {
     background: linear-gradient(#0e0e30, #0e0e30) padding-box,
         linear-gradient(to bottom, #008cff, #9900dd) border-box;
