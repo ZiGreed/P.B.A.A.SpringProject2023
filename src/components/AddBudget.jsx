@@ -11,17 +11,19 @@ import { useParams } from "react-router-dom";
 // import { GiGluttonousSmile } from "react-icons/gi";
 // import { MdFastfood } from "react-icons/md";
 
-const budgetURL = "http://localhost:3000/budget";
+const budgetURL = "http://localhost:3000/budget/";
 
 function AddBudget() {
   const { id } = useParams();
+  const navigate = useNavigate();
+
     return ( 
         <>
         
         <div className="incomes_expenses__background--color incomes_expenses-onMobile">
         <Formik
           initialValues={{
-            category: "",
+            // category: "",
             limit: ""
           }}
           validationSchema={
@@ -108,9 +110,9 @@ function AddBudget() {
                 >
                   Pateikti
                 </Button>
-                {/* <Button variant="primary" onClick={() => navigate("/expenses/")}>
-                Išlaidų sąrašas
-                </Button> */}
+                <Button variant="primary" onClick={() => navigate("/budget/")}>
+                kategorijų sąrašas
+                </Button>
               </div>
             </Form>
           )}

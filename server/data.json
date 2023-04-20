@@ -223,22 +223,22 @@
     {
       "id": 1,
       "category": "Maistas",
-      "limit": 0
+      "limit": 100000
     },
     {
       "id": 2,
       "category": "Pramogos",
-      "limit": 159
+      "limit": 15900000
     },
     {
       "id": 3,
       "category": "Buitis",
-      "limit": 800
+      "limit": 8008080
     },
     {
       "id": 4,
       "category": "Kita",
-      "limit": 800
+      "limit": 8000000
     }
   ]
 }
