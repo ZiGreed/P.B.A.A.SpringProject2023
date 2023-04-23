@@ -1,4 +1,4 @@
-const Category = require("./../models/categoryModel");
+const Category = require("../models/categoryModel");
 
 exports.getCategory = (req, res) => {
   console.log(req.query);
@@ -14,32 +14,49 @@ exports.getCategory = (req, res) => {
 };
 
 exports.createCategory = (req, res) => {
-  const {category} = req.body;
+  const { category } = req.body;
 
   try {
-category.findOne({category : category})
-.then((existingCategory) => {
-  if(existingCategory) {
-    res
-    .status(422)
-    .json({ error: "Category already exists" });
-  }
-  else {
-    const createdCategory = new Category ({
-      category
-    });
+    Category.findOne({ category: category }).then((existingCategory) => {
+      if (existingCategory) {
+        res.status(422).json({ error: "Category already exists" });
+      } else {
+        const createdCategory = new Category({
+          category,
+        });
 
-    createdCategory
-    .save()
-    .then((doc) => {
-      res.status(201).json(doc);
-    })
-    .catch((err) =>  res.status(404).json({ error: err.message }))
-  }
-})
+        createdCategory
+          .save()
+          .then((doc) => {
+            res.status(201).json(doc);
+          })
+          .catch((err) => res.status(404).json({ error: err.message }));
+      }
+    });
   } catch {
     res
       .status(500)
       .json({ error: "Creating category failed, please try again later" });
-}
-}
+  }
+};
+
+exports.editCategory = (req, res) => {
+  let { id } = req.params;
+  Category.findByIdAndUpdate(id, req.body, {
+    new: true,
+    runValidators: true,
+  })
+    .then((doc) => {
+      res.status(200).json(doc);
+    })
+    .catch((error) => res.status(404).json(error));
+};
+
+exports.deleteCategory = (req, res) => {
+  let { id } = req.params;
+  Category.findByIdAndDelete(id)
+    .then((doc) => {
+      res.status(200).json(doc);
+    })
+    .catch((error) => res.status(404).json(error));
+};

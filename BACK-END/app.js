@@ -20,6 +20,6 @@ app.use(express.json());
 
 app.use("/incomes", incomeRouter);
 app.use("/expenses", expenseRouter);
-// app.use("/categories", categoryRouter);
+app.use("/categories", categoryRouter);
 
 module.exports = app;

@@ -1,4 +1,3 @@
-const mongoose = require("mongoose");
 const Expense = require("./../models/expenseModel");
 
 exports.getExpenses = (req, res) => {
