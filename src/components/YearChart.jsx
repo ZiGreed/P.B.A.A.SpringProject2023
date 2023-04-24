@@ -148,7 +148,7 @@ const YearChart = () => {
   return (
     <div>
       <div className="d-flex justify-content-center p-3">
-        <SelectYear uniqueDates={uniqueDates} setYear={setYear} />
+        <SelectYear uniqueDates={uniqueDates} setYear={setYear} year={year} />
       </div>
       <div className="line-chart">
         <Line data={incomeData} options={options}></Line>
