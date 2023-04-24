@@ -1,7 +1,7 @@
 import { DropdownButton } from "react-bootstrap";
 import DropdownItem from "react-bootstrap/esm/DropdownItem";
 
-function SelectYear({uniqueDates, setYear}) {
+function SelectYear({uniqueDates, setYear, year}) {
 
   let uniqueDatesjsx = uniqueDates.map(item => {
     return (
@@ -11,7 +11,7 @@ function SelectYear({uniqueDates, setYear}) {
 
   return (
     <div>
-      <DropdownButton id="dropdown-basic-button" title="Pasirinkti metus" onSelect={(eventKey)=>setYear(eventKey)}>
+      <DropdownButton id="dropdown-basic-button" title={year} onSelect={(eventKey)=>setYear(eventKey)}>
         {uniqueDatesjsx}
       </DropdownButton>
     </div>
