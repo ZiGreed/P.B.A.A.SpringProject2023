@@ -7,6 +7,7 @@
   width: 30%;
   padding-right: 10px;
   margin: 0;
+  height: 100vh;
 }
 
 .historyTab {
@@ -19,7 +20,7 @@
   float: left;
   overflow-y: auto;
   color: #ffffff;
-  height: 86vh;
+  height: 99%;
   margin-bottom: 50px;
   width: 100%;
 }
