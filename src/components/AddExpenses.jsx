@@ -3,18 +3,60 @@ import { Formik, ErrorMessage } from "formik";
 import { Button, Form } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { postData } from "../../services/api";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import * as Yup from "yup";
 import { FaCat, FaHouseUser } from "react-icons/fa";
 import { GiGluttonousSmile } from "react-icons/gi";
 import { MdFastfood } from "react-icons/md";
+import axios from "axios";
 
 
 const expenseURL = "http://localhost:3000/expenses";
+const budgetURL = "http://localhost:3000/budget/";
+
 
 function AddExpenses() {
   const [submitted, setSubmitted] = useState(false);
+  const [expenses, setExpenses] = useState([]);
+  const [budgets, setBudgets] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState("");
+  const [expenseAmount, setExpenseAmount] = useState(0);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    axios.get(expenseURL)
+    .then((response) => setExpenses(response.data))
+    .catch((error) => console.error("Error fetching expenses data:", error));
+
+    axios.get(budgetURL)
+    .then((response) => setBudgets(response.data))
+    .catch((error) => console.error("Error fetching budget data:", error));
+  }, []);
+
+  const getCategoryBudgetLimit = (category) => {
+    // Get the budget limit for a specific category from budgets data
+    const budget = budgets.find((budget) => budget.category === category);
+    return budget ? budget.limit : 0;
+  };
+  const calculateTotalExpenseAmount = () => {
+    // Calculate total sum of expenses amounts
+    let totalAmount = 0;
+    expenses.forEach((expense) => {
+      totalAmount += parseFloat(expense.amount);
+    });
+    return totalAmount;
+  };
+  const handleCategoryChange = (event) => {
+    // Update selectedCategory state with selected category from form
+    setSelectedCategory(event);
+    console.log(selectedCategory)
+  };
+
+  const handleExpenseAmountChange = (event) => {
+    // Update expenseAmount state with entered expense amount from form
+    setExpenseAmount(parseFloat(event));
+    console.log(expenseAmount)
+  };
   return (
     <>
       <div className="incomes_expenses__background--color incomes_expenses-onMobile">
@@ -80,6 +122,16 @@ function AddExpenses() {
                 </div>
                )}
               {submitted && (<h4 style={{color: "orange"}}>Pateikta!</h4>)}
+              {selectedCategory && expenseAmount > 0 && (
+        <div style={{ color: "red" }}>
+          {calculateTotalExpenseAmount(selectedCategory) + expenseAmount >
+            getCategoryBudgetLimit(selectedCategory) && (
+            <div>
+              Total expenses amount for {selectedCategory} exceeds the budget limit
+            </div>
+          )}
+        </div>
+      )}
               <Form.Group className="p-2">
                 <Form.Label>Pavadinimas</Form.Label>
                 <Form.Control
@@ -106,7 +158,10 @@ function AddExpenses() {
                 step="0.01"
                 placeholder="Suma"
                 name="amount"
-                onChange={handleChange}
+                onChange={(e) => {
+                  handleChange(e);
+                  handleExpenseAmountChange(e.target.value);
+                }}
                 onBlur={(e) => {
                   let value = parseFloat(e.target.value).toFixed(2);
                   if (isNaN(value)) {
@@ -146,7 +201,10 @@ function AddExpenses() {
                 as="select"
                 className="incomes_expensesFields select-dark"
                 name="category"
-                onChange={handleChange}
+                onChange={(e) => {
+                  handleChange(e);
+                  handleCategoryChange(e.target.value);
+                }}
                 onBlur={handleBlur}
                 value={values.category}
                 isInvalid={touched.category && !values.category}

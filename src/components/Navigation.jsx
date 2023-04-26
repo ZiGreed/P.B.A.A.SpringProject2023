@@ -50,6 +50,12 @@ function Navigation() {
             >
               <Button className="w-100 mx-auto gradient-class">Išlaidos</Button>
             </Link>
+            <Link
+                to="/budget/"
+                className="mb-2 w-50 mx-auto text-decoration-none"
+              >
+                <Button className="w-100 mx-auto gradient-class">Biudžetas</Button>
+              </Link>
           </div>
         </div>
 
