@@ -20,7 +20,7 @@ function ReadBudget() {
           <div className="buttonIcons">
           </div>
           <div className="buttonIcons">
-            <Link to={"/addbudget/" + 1} className="buttonIcons">
+            <Link to={"/editbudget/" + 1} className="buttonIcons">
               <RiEdit2Line size={30} />
             </Link>
           </div>
@@ -35,7 +35,7 @@ function ReadBudget() {
           <div className="buttonIcons">
           </div>
           <div className="buttonIcons">
-            <Link to={"/addbudget/" + 2} className="buttonIcons">
+            <Link to={"/editbudget/" + 2} className="buttonIcons">
               <RiEdit2Line size={30} />
             </Link>
           </div>
@@ -47,7 +47,7 @@ function ReadBudget() {
           </div>
           <div className="ButtonsContainer">
           <div className="buttonIcons">
-            <Link to={"/addbudget/" + 3} className="buttonIcons">
+            <Link to={"/editbudget/" + 3} className="buttonIcons">
               <RiEdit2Line size={30} />
             </Link>
           </div>
@@ -59,7 +59,7 @@ function ReadBudget() {
           </div>
           <div className="ButtonsContainer">
           <div className="buttonIcons">
-            <Link to={"/addbudget/" + 4} className="buttonIcons">
+            <Link to={"/editbudget/" + 4} className="buttonIcons">
               <RiEdit2Line size={30} />
             </Link>
           </div>

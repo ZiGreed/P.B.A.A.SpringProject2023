@@ -28,7 +28,7 @@ function App() {
             <Route path="addexpense" element={<AddExpenses />} />
             <Route path="expenses/:id" element={<EditExpenses />} />
             <Route path="incomes/:id" element={<EditIncomes />} />
-            <Route path="EditBudget/:id" element={<EditBudget />} />
+            <Route path="editbudget/:id" element={<EditBudget />} />
             <Route path="budget" element={<Budget />} />
             <Route path="budgetgraph" element={<BudgetGraph />} />
           </Route>
