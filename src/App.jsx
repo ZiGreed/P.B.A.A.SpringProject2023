@@ -15,6 +15,7 @@ import EditBudget from "./components/EditBudget";
 import Budget from "./components/ReadBudget"
 import BudgetGraph from "./components/BudgetGraph";
 
+
 function App() {
   return (
     <div>

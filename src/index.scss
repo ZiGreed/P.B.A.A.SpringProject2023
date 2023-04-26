@@ -7,6 +7,8 @@
   width: 80%;
   display: flex;
   justify-content: space-between;
+  position: absolute;
+  bottom: 0px;
 }
 
 //NAVIGATION BACKGROUND SPALVA
@@ -20,9 +22,10 @@
     #0e0e30;
     position: relative;
     display: flex;
-    align-items:stretch;
-    justify-content: center;
+    align-items:center;
     flex-direction: column;
+    gap: 10%;
+    width: 20%;
 }
 
 //PAGRINDINIU MYGTUKU BORDERIS IR HOVERIS
@@ -35,7 +38,7 @@
 
 .offcanvas-body {
   padding: 0;
-  height: 100vh;
+  // height: 100vh;
 }
 
 .navigation-topbar {
@@ -109,7 +112,7 @@ main {
   margin-left: auto;
   margin-right: auto;
   position: relative;
-  top: 75px;
+  // top: 75px;
 }
 
 // .dashboard-background img {
@@ -232,6 +235,8 @@ main {
     align-items: center;
     justify-content: center;
     gap: 20px;
+    padding: 15px;
+    padding-top: 70px;
   }
   .diagram-border {
     top: 0;
@@ -252,26 +257,25 @@ main {
     width: 100%;
     display: flex;
     flex-direction: row;
+    justify-content: space-evenly;
   }
 
   .line-chart {
     height: 100%;
   }
 
-  .tab-content {
-    height: 60vh;
-  }
-  .nav__background--color {
-    height: 100vh;
-  }
+  // .nav__background--color {
+  //   height: 100vh;
+  // }
   .main-graph {
-    width: 60%;
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    justify-content: center;
-    position: relative;
-    top: -30px;
+    width: 70%;
+    padding: 1%;
+    // display: flex;
+    // flex-direction: column;
+    // align-items: stretch;
+    // justify-content: center;
+    // position: relative;
+    // top: -30px;
   }
   
 }
@@ -344,5 +348,9 @@ main {
 }
 
 #history-button {
+  all: unset;
+}
+
+#diagram-button {
   all: unset;
 }

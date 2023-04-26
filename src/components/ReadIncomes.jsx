@@ -32,7 +32,6 @@ function ReadIncomes() {
 
   let incomesjsx = incomes.map((income, index) => {
     return (
-
       <div className="card" key={index}>
         <div className="cardIcon">
           {/* <img src="#" alt="icon/category" /> */}
@@ -46,14 +45,17 @@ function ReadIncomes() {
             <RiDeleteBinLine size={30} />
           )}
         </div>
+
         <div className="cardInfoWrapper">
           <div>{income.name}</div>
           <div>{income.date}</div>
         </div>
         <div className="cardPriceGreen">+{income.amount} €</div>
+
         <div className="ButtonsContainer">
           <div className="buttonIcons">
-            <Link to={"/editincomes/" + income.id} className="buttonIcons">
+            <Link to={"/incomes/" + income._id} className="buttonIcons">
+
               <RiEdit2Line size={30} />
             </Link>
           </div>
@@ -67,16 +69,15 @@ function ReadIncomes() {
           </div>
         </div>
       </div>
-
     );
   });
 
   return (
     <>
-      <div className="readincomejsx">
+      <div className="readExpenseIncomejsx">
         <div className="cardsWrapper">
           <div className="cardsContainerBorder">
-            <div className="cardsContainer">{incomesjsx}</div>
+            <div className="cardsContainer overflowHidden">{incomesjsx}</div>
           </div>
           <div className="LinkWrapper">
             <Link to="/addincomes/" className="LinkButton">

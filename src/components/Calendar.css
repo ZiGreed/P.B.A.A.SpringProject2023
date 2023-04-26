@@ -2,6 +2,14 @@
   display: none;
 }
 
+.calendar-container {
+  padding-top: 1%;
+  width: 30%;
+  padding-right: 10px;
+  margin: 0;
+  height: 100vh;
+}
+
 .historyTab {
   box-sizing: border-box;
   background: linear-gradient(#0e0e30, #480068) padding-box,
@@ -12,8 +20,7 @@
   float: left;
   overflow-y: auto;
   color: #ffffff;
-  height: 86vh;
-  margin-top: 40px;
+  height: 99%;
   margin-bottom: 50px;
   width: 100%;
 }
@@ -25,9 +32,23 @@ h2 {
 }
 
 .historyCard {
-  height: 100px;
   width: 100%;
   border-radius: 15px;
+  padding: 20px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: space-between;
+  gap: 0px;
+  align-items: center;
+  background-color: #0e0e30;
+  padding-right: 10px;
+}
+
+.historyInfo {
+  height: 100px;
+  width: 100%;
   padding: 20px;
   margin-top: 20px;
   margin-bottom: 20px;
@@ -35,8 +56,6 @@ h2 {
   justify-content: space-between;
   gap: 0px;
   align-items: center;
-  background-color: #0e0e30;
-  padding-right: 10px;
 }
 
 .cardInfo {
@@ -55,6 +74,14 @@ h2 {
 }
 
 /* .transferDate{} */
+
+.transferButtons {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  gap: 0px;
+  align-items: center;
+}
 
 .TransferAmmount {
   overflow: hidden;
