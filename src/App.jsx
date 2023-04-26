@@ -10,6 +10,11 @@ import ReadExpenses from "./components/ReadExpenses";
 import AddIncomes from "./components/AddIncomes";
 import EditExpenses from "./components/EditExpenses";
 import EditIncomes from "./components/EditIncomes";
+import Calendar from "./components/Calendar";
+import EditBudget from "./components/EditBudget";
+import Budget from "./components/ReadBudget"
+import BudgetGraph from "./components/BudgetGraph";
+
 
 function App() {
   return (
@@ -24,6 +29,9 @@ function App() {
             <Route path="addexpense" element={<AddExpenses />} />
             <Route path="expenses/:id" element={<EditExpenses />} />
             <Route path="incomes/:id" element={<EditIncomes />} />
+            <Route path="editbudget/:id" element={<EditBudget />} />
+            <Route path="budget" element={<Budget />} />
+            <Route path="budgetgraph" element={<BudgetGraph />} />
           </Route>
         </Routes>
       </Layout>

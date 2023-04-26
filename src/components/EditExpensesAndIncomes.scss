@@ -34,6 +34,32 @@
         background: linear-gradient(270deg, #9900dd 0%, #008cff 100%);
         color: #fff;
       }
+      .budgetBtnContainer{
+        display: flex;
+        margin: 10px 0px 0px 0px;
+        gap: 15px;
+      }
+      .budgetBtn {
+        display: flex;
+        justify-content: center;
+        margin: 0 auto;
+        background: linear-gradient(#0e0e30, #0e0e30) padding-box,
+          linear-gradient(to right, #008cff, #9900dd) border-box;
+        border-radius: 15px;
+        border: 2px solid transparent;
+        position: relative;
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 1.5rem;
+        color: #008cff;
+        padding: 0.5rem 1rem;
+        cursor: pointer;
+      }
+      .budgetBtn button:hover{
+        background: linear-gradient(270deg, #9900dd 0%, #008cff 100%);
+        color: #fff;
+      }
   
       .incomes_expensesFields {
         border: 2px solid transparent;
