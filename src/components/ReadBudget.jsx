@@ -7,7 +7,7 @@ import { Button } from "react-bootstrap";
 function ReadBudget() {
     return ( 
         <>
-        <div className="readExpensejsx">
+        <div style={{width: "100%"}} className="readExpensejsx">
       <div className="cardsWrapper">
         <div className="cardsContainerBorder">
           <div className="cardsContainer overflowHidden">

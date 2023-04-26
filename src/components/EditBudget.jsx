@@ -28,7 +28,9 @@ function EditBudget() {
           }}
           validationSchema={
             Yup.object({
-              
+              limit: Yup.number()
+              .required("langelis būtinas")
+              .lessThan(1000000, "limitas turi būti mažesnis nei milijonas")
             })
           }
           onSubmit={(values, { resetForm }) => {
