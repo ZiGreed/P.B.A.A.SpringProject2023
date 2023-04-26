@@ -10,24 +10,36 @@ import ReadExpenses from "./components/ReadExpenses";
 import AddIncomes from "./components/AddIncomes";
 import EditExpenses from "./components/EditExpenses";
 import EditIncomes from "./components/EditIncomes";
+import RegisterForm from "./components/RegisterForm";
+import LoginPage from "./components/LoginPage";
+import axios from "axios";
+import AuthContext from "./context/AuthContext";
+import { useContext } from "react";
+
+axios.defaults.withCredentials = true;
 
 function App() {
+  const { loggedIn } = useContext(AuthContext);
+
   return (
-    <div>
       <Layout>
         <Routes>
-          <Route path="/" element={<MainPage />}>
-            <Route path="addIncomes" element={<AddIncomes />} />
-            <Route path="/" element={<Dashboard />} />
-            <Route path="expenses" element={<ReadExpenses />} />
-            <Route path="incomes" element={<ReadIncomes />} />
-            <Route path="addexpense" element={<AddExpenses />} />
-            <Route path="expenses/:id" element={<EditExpenses />} />
-            <Route path="incomes/:id" element={<EditIncomes />} />
-          </Route>
+          {loggedIn ? (
+            <Route path="/" element={<MainPage />}>
+              <Route path="addIncomes" element={<AddIncomes />} />
+              <Route path="/" element={<Dashboard />} />
+              <Route path="expenses" element={<ReadExpenses />} />
+              <Route path="incomes" element={<ReadIncomes />} />
+              <Route path="addexpense" element={<AddExpenses />} />
+              <Route path="expenses/:id" element={<EditExpenses />} />
+              <Route path="incomes/:id" element={<EditIncomes />} />
+            </Route>
+          ) : (
+            <Route path="/" element={<LoginPage />} />
+          )}
+          <Route path="/signup" element={<RegisterForm />} />
         </Routes>
       </Layout>
-    </div>
   );
 }
 

@@ -1,4 +1,4 @@
-import { Col, Row, Container, Offcanvas, Button } from "react-bootstrap";
+import {Container } from "react-bootstrap";
 
 function Layout({ children }) {
   return (

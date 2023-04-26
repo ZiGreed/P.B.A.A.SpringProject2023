@@ -7,22 +7,22 @@ import { BurgerIcon, NavigationLogo } from "./NavIcons";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Outlet } from "react-router-dom";
 import useWindowSize from "./useWindowSize";
+import { AuthContextProvider } from "../context/AuthContext";
 
 function MainPage() {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  
-  let windowSize = useWindowSize();
 
+  let windowSize = useWindowSize();
 
   return (
     <div className="cntr">
       <div className="navigation-topbar d-flex flex-row justify-content-between p-1 show-onMobile">
-          <Button className="burger-button" onClick={handleShow}>
-            <BurgerIcon />
-          </Button>
-          <NavigationLogo />
+        <Button className="burger-button" onClick={handleShow}>
+          <BurgerIcon />
+        </Button>
+        <NavigationLogo />
       </div>
       <Offcanvas
         show={show}
@@ -32,14 +32,13 @@ function MainPage() {
         responsive="md"
       >
         <Offcanvas.Body>
-          <Navigation/ >
-          {windowSize >= 768 && <Outlet/>}
+            <Navigation />
+          {windowSize >= 768 && <Outlet />}
         </Offcanvas.Body>
       </Offcanvas>
       {windowSize < 768 && <Outlet />}
     </div>
   );
-
 }
 
 export default MainPage;
