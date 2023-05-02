@@ -1,5 +1,5 @@
 // Import dependencies
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Formik, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { Button, Form } from "react-bootstrap";
@@ -13,18 +13,8 @@ const categoryURL = "http://localhost:3000/categories";
 function AddCategory() {
   // Define state variables
   const [submitted, setSubmitted] = useState(false);
-  const [category, setCategories] = useState([]);
   const navigate = useNavigate();
    
-  // Fetch the categories data on component mount
-  useEffect(() => {
-    axios
-      .get(categoryURL)
-      .then((response) => setCategories(response.data))
-      .catch((error) =>
-        console.error("Error fetching categories data:", error)
-      );
-  }, []);
 
   // Render the component
   return (
@@ -32,10 +22,10 @@ function AddCategory() {
       <div className="incomes_expenses__background--color incomes_expenses-onMobile">
         <Formik
           initialValues={{
-            name: "",
+            category: "",
           }}
           validationSchema={Yup.object({
-            name: Yup.string()
+            category: Yup.string()
               .required("Langelis būtinas")
               .min(2, "Pavadinimas per trumpas")
               .max(40, "Pavadinimas per ilgas"),
@@ -71,15 +61,15 @@ function AddCategory() {
                   className="incomes_expensesFields"
                   type="text" 
                   placeholder="Kategorijos pavadinimas"
-                  name="name"
+                  name="category"
                   onChange={handleChange}
                   onBlur={handleBlur}
-                  value={values.name}
-                  isInvalid={touched.name && !!errors.name}
+                  value={values.category}
+                  isInvalid={touched.category && !!errors.category}
                   maxLength={50}
                 />
                 <span className="formError">
-                  <ErrorMessage name="name" />
+                  <ErrorMessage name="category" />
                 </span>
               </Form.Group>
 

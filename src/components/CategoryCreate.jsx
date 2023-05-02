@@ -27,11 +27,11 @@ function CategoryCreate() {
       .catch((error) => console.log(error));
   }
 
-  let categoryJSX = category.map((category, index) => {
+  let categoryJSX = category.map((category) => {
     return (
       <div className="card" key={category._id}>
         <div className="cardInfoWrapper">
-          <div>{category.name}</div>
+          <div>{category.category}</div>
         </div>
         <div className="ButtonsContainer">
           <div className="buttonIcons">

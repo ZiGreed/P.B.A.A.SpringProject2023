@@ -17,7 +17,6 @@ function Navigation() {
       .get("http://localhost:3000/users/getName")
       .then((res) => setUserName(res.data))
       .catch((error) => console.log(error));
-      
   }, []);
 
   const logOut = async () => {
@@ -51,18 +50,21 @@ function Navigation() {
               <Button className="w-100 mx-auto gradient-class">Išlaidos</Button>
             </Link>
             <Link
-                to="/budget/"
-                className="mb-2 w-50 mx-auto text-decoration-none"
-              >
-                <Button className="w-100 mx-auto gradient-class">Biudžetas</Button>
-              </Link>
-              <Link
-                to="/categorycreate/"
-                className="mb-2 w-50 mx-auto text-decoration-none"
-              >
-                <Button className="w-100 mx-auto gradient-class">Kategorijos</Button>
-              </Link>
-            </div>
+              to="/budget/"
+              className="mb-2 w-50 mx-auto text-decoration-none"
+            >
+              <Button className="w-100 mx-auto gradient-class">
+                Biudžetas
+              </Button>
+            </Link>
+            <Link
+              to="/categorycreate/"
+              className="mb-2 w-50 mx-auto text-decoration-none"
+            >
+              <Button className="w-100 mx-auto gradient-class">
+                Kategorijos
+              </Button>
+            </Link>
           </div>
         </div>
 
