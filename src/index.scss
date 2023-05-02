@@ -20,12 +20,12 @@
     ),
     linear-gradient(360deg, rgba(105, 66, 239, 0.2) 0%, rgba(0, 0, 0, 0) 100%),
     #0e0e30;
-    position: relative;
-    display: flex;
-    align-items:center;
-    flex-direction: column;
-    gap: 10%;
-    width: 20%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 10%;
+  width: 20%;
 }
 
 //PAGRINDINIU MYGTUKU BORDERIS IR HOVERIS
@@ -36,9 +36,43 @@
   }
 }
 
+.register-login-buttons {
+  width: 50%;
+  margin: auto;
+  & button {
+    padding: 0;
+    font-size: 100%;
+    &:hover {
+      background: linear-gradient(270deg, #9900dd 0%, #008cff 100%);
+      color: #fff;
+    }
+  }
+}
+
+.logout-button {
+  all: unset;
+}
+
+.user-profile {
+  color: #008CFF;
+  padding-top: 10%;
+}
+
+.user-logo {
+  display: flex;
+  gap: 5%;
+  width: 25%;
+  &img {
+    width: 100%;
+  }
+}
+
+.error {
+  color: red;
+}
+
 .offcanvas-body {
   padding: 0;
-  // height: 100vh;
 }
 
 .navigation-topbar {
@@ -125,56 +159,56 @@ main {
   background: linear-gradient(rgba(0, 140, 255, 0.2) 0%, rgba(0, 0, 0, 0) 100%),
     linear-gradient(360deg, rgba(105, 66, 239, 0.2) 0%, rgba(0, 0, 0, 0) 100%),
     #0e0e30;
-    color: #008cff;
-    width: 80%;
-    height: 100vh;
+  color: #008cff;
+  width: 80%;
+  height: 100vh;
+}
+
+.income_expensesBtn,
+.MessageIncome {
+  display: flex;
+  justify-content: center;
+}
+
+.income_expensesBtn button {
+  margin: 0 auto;
+  background: linear-gradient(#0e0e30, #0e0e30) padding-box,
+    linear-gradient(to right, #008cff, #9900dd) border-box;
+  border-radius: 15px;
+  border: 2px solid transparent;
+  position: relative;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
+  color: #008cff;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+}
+
+.income_expensesBtn button:hover {
+  background: linear-gradient(270deg, #9900dd 0%, #008cff 100%);
+  color: #fff;
+}
+
+.incomes_expensesFields {
+  border: 2px solid transparent;
+  background: linear-gradient(#0e0e30, #0e0e30) padding-box,
+    linear-gradient(to right, #008cff, #9900dd) border-box;
+  border-radius: 15px;
+  border: 2px solid transparent;
+  color: #ffffff;
+}
+
+.incomes_expensesFields:focus {
+  color: white;
+}
+
+@media only screen and (max-width: 768px) {
+  .incomes_expenses-onMobile {
+    width: 100%;
   }
-
-    .income_expensesBtn, .MessageIncome {
-      display: flex;
-      justify-content: center;
-    }
-    
-    .income_expensesBtn button {
-      margin: 0 auto;
-      background: linear-gradient(#0e0e30, #0e0e30) padding-box,
-        linear-gradient(to right, #008cff, #9900dd) border-box;
-      border-radius: 15px;
-      border: 2px solid transparent;
-      position: relative;
-      display: inline-flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 1.5rem;
-      color: #008cff;
-      padding: 0.5rem 1rem;
-      cursor: pointer;
-    }
-
-    
-    .income_expensesBtn button:hover {
-      background: linear-gradient(270deg, #9900dd 0%, #008cff 100%);
-      color: #fff;
-    }
-
-    .incomes_expensesFields {
-      border: 2px solid transparent;
-      background: linear-gradient(#0e0e30, #0e0e30) padding-box,
-      linear-gradient(to right, #008cff, #9900dd) border-box;
-    border-radius: 15px;
-    border: 2px solid transparent;
-    color: #ffffff;
-    }
-
-    .incomes_expensesFields:focus{
-      color: white;
-    }
-    
-    @media only screen and (max-width: 768px) {
-      .incomes_expenses-onMobile {
-        width: 100%;
-      }
-    }
+}
 
 .recharts-cartesian-axis-line {
   stroke: #ff0000;
@@ -277,14 +311,15 @@ main {
     // position: relative;
     // top: -30px;
   }
-  
+
+  .nav__background--color {
+    min-width: 280px;
+  }
 }
 
-
-.select-dark option{
+.select-dark option {
   color: black;
 }
-
 
 .nav-tabs {
   border-bottom: none;
