@@ -56,6 +56,13 @@ function Navigation() {
               >
                 <Button className="w-100 mx-auto gradient-class">Biudžetas</Button>
               </Link>
+              <Link
+                to="/categorycreate/"
+                className="mb-2 w-50 mx-auto text-decoration-none"
+              >
+                <Button className="w-100 mx-auto gradient-class">Kategorijos</Button>
+              </Link>
+            </div>
           </div>
         </div>
 
