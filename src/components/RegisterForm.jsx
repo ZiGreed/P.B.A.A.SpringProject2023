@@ -17,10 +17,13 @@ function RegisterForm() {
       password: "",
     },
     onSubmit: async (values) => {
-      await axios
-        .post(registerURL, values)
-        .catch((error) => setError(error.response.data.error));
-      getLoggedIn();
+      try {
+        await axios.post(registerURL, values);
+        getLoggedIn();
+      } catch (error) {
+        setError(error.response.data.error);
+      }
+      
     },
   });
   return (

@@ -48,7 +48,6 @@ function App() {
             <Route path="categorycreate" element={<CategoryCreate />} />
             <Route path="addcategory" element={<AddCategory />}/>
           </Route>
-            </Route>
           ) : (
             <Route path="/" element={<LoginPage />} />
           )}
