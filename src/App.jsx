@@ -15,10 +15,12 @@ import Budget from "./components/ReadBudget"
 import BudgetGraph from "./components/BudgetGraph";
 
 import CategoryCreate from "./components/CategoryCreate";
-import AddCategory from "./components/AddCategory"
+import AddCategory from "./components/AddCategory";
+import EditCategory from "./components/EditCategory";
 
 import RegisterForm from "./components/RegisterForm";
 import LoginPage from "./components/LoginPage";
+
 import axios from "axios";
 import AuthContext from "./context/AuthContext";
 import { useContext } from "react";
@@ -47,6 +49,7 @@ function App() {
             <Route path="budgetgraph" element={<BudgetGraph />} />
             <Route path="categorycreate" element={<CategoryCreate />} />
             <Route path="addcategory" element={<AddCategory />}/>
+            <Route path="categories/:id" element={<EditCategory />}/>
           </Route>
           ) : (
             <Route path="/" element={<LoginPage />} />

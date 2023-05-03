@@ -5,6 +5,7 @@ import { RiDeleteBinLine, RiEdit2Line } from 'react-icons/ri';
 import { Link } from 'react-router-dom';
 import './ReadExpense.scss';
 import Vector from './../assets/images/Vector.svg';
+import { deleteHandler } from "./servicces/deleteHandler";
 
 const categoryURL = 'http://localhost:3000/categories';
 
@@ -30,12 +31,12 @@ function CategoryCreate() {
   let categoryJSX = category.map((category) => {
     return (
       <div className="card" key={category._id}>
-        <div className="cardInfoWrapper">
-          <div>{category.category}</div>
+        <div className="cardInfoCategory">
+          <h2>{category.category}</h2>
         </div>
         <div className="ButtonsContainer">
           <div className="buttonIcons">
-            <Link to={`/categories/${category._id}`} className="buttonIcons">
+            <Link to={"/categories/" + category._id} className="buttonIcons">
               <RiEdit2Line size={30} />
             </Link>
           </div>
@@ -43,7 +44,7 @@ function CategoryCreate() {
             <RiDeleteBinLine
               size={30}
               onClick={() => {
-                deleteCategory(category._id);
+                deleteHandler(category, deleteCategory);
               }}
             />
           </div>
