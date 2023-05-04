@@ -3,6 +3,7 @@ import axios from "axios";
 import { useContext } from "react";
 import AuthContext from "../context/AuthContext";
 import { useState } from "react";
+import "./RegisterForm.scss";
 
 function RegisterForm() {
   const registerURL = "http://localhost:3000/users/signup";
@@ -27,11 +28,12 @@ function RegisterForm() {
     },
   });
   return (
-    <div>
+    <div className="loginPage">
       <h3>Registracija</h3>
-      <form onSubmit={formik.handleSubmit}>
+      <form onSubmit={formik.handleSubmit} className="loginForm">
         <input
           type="text"
+          className="loginInput"
           placeholder="Vardas"
           name="name"
           onChange={formik.handleChange}
@@ -40,6 +42,7 @@ function RegisterForm() {
         />
         <input
           type="email"
+          className="loginInput"
           placeholder="El. paštas"
           name="email"
           onChange={formik.handleChange}
@@ -48,13 +51,14 @@ function RegisterForm() {
         />
         <input
           type="password"
+          className="loginInput"
           placeholder="Slaptažodis"
           name="password"
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           value={formik.values.password}
         />
-        <button type="submit">Užsiregistruoti</button>
+        <button type="submit" className="gradient-class">Užsiregistruoti</button>
       </form>
       <div className="error">
         {error}
