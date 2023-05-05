@@ -1,7 +1,7 @@
 import { useFormik } from "formik";
 import axios from "axios";
 import { useContext } from "react";
-import AuthContext from "../context/AuthContext";
+import {AuthContext} from "../context/AuthContext";
 import { useState } from "react";
 import "./RegisterForm.scss";
 

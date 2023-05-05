@@ -147,7 +147,8 @@ exports.getName = (req, res) => {
 
     // Assuming the user's name is stored in the decoded token
     const userName = verified.name;
-    res.send(userName);
+    const role = verified.role;
+    res.json({name: userName, role: role});
   } catch (err) {
     res.json(err);
   }
