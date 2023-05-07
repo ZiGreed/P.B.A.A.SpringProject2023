@@ -3,7 +3,7 @@ import * as Yup from "yup";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { useContext } from "react";
-import AuthContext from "../context/AuthContext";
+import {AuthContext} from "../context/AuthContext";
 import { useState } from "react";
 import "./LoginPage.scss";
 
