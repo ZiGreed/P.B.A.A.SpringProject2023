@@ -7,7 +7,10 @@ const budgetSchema = mongoose.Schema({
     limit: {
         type: Number,
         required: [true, "limit is required"],
-    }
+    },
+    // id: {
+    //     type: Number,
+    // }
 });
 
 const Budget = mongoose.model("Budget", budgetSchema);

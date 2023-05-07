@@ -5,12 +5,12 @@ const budgetRouter = express.Router();
 budgetRouter
 .route("/")
 .get(budgetController.getBudgets)
-.post(budgetController.postBudget)
+.post(budgetController.createBudget)
 
 budgetRouter
 .route("/:id")
 .patch(budgetController.editBudget)
-.delete(budgetController.deleteBudget)
+// .delete(budgetController.deleteBudget)
 .get(budgetController.getBudgetById)
 
 module.exports = budgetRouter;

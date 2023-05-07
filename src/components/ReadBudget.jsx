@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import Vector from "./../assets/images/Vector.svg";
 import { RiDeleteBinLine, RiEdit2Line } from "react-icons/ri";
-import { AiOutlinePlusCircle, RiDeleteBin5Line } from "react-icons/ai";
+import { AiOutlinePlusCircle } from "react-icons/ai";
 import { Button } from "react-bootstrap";
 
 function ReadBudget() {
@@ -23,9 +23,9 @@ function ReadBudget() {
             <Link to={"/editbudget/" + 1} className="buttonIcons">
               <RiEdit2Line size={30} />
             </Link>
-            <Link to={"/deletebudget/" + 1} className="buttonIcons">
+            {/* <Link to={"/deletebudget/" + 1} className="buttonIcons">
               <RiDeleteBin5Line size={30} />
-            </Link>
+            </Link> */}
           </div>
         </div>
         </div>

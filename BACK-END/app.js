@@ -4,7 +4,7 @@ const incomeRouter = require("./routes/incomeRoutes");
 const expenseRouter = require("./routes/expenseRoutes")
 const categoryRouter = require("./routes/categoryRoutes")
 const userRouter = require("./routes/userRoutes");
-// const budgetRouter = require("./routes/budgetRoutes");
+const budgetRouter = require("./routes/budgetRoutes");
 const cors = require('cors');
 const cookieParser = require("cookie-parser")
 
@@ -25,7 +25,7 @@ app.use(cookieParser());
 app.use("/incomes", incomeRouter);
 app.use("/expenses", expenseRouter);
 app.use("/categories", categoryRouter);
-// app.use("/budget", budgetRouter);
+app.use("/budget", budgetRouter);
 app.use("/users", userRouter);
 
 module.exports = app;
