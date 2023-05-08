@@ -41,7 +41,7 @@ function EditCategory() {
               .patch(baseURL + id, values)
               .then((response) => console.log(response.data));
             setUpdated(true);
-            navigate("/");
+            navigate("/categorycreate/");
           }}
           enableReinitialize
         >
