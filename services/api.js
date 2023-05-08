@@ -19,16 +19,15 @@ export const updateData = (id, todoData, url) => {
     .catch((error) => console.log(error));
 };
 
-export const postData = (todoData, url) => {
-  return axios
-
+export const postData = async (todoData, url) => {
+  return await axios
     .post(url, todoData)
     .then((response) => response.data)
     .catch((error) => console.log(error));
 };
 
-export const deleteData = (id, url) => {
-  return axios
+export const deleteData = async (id, url) => {
+  return await axios
     .delete(url + id)
     .then((response) => console.log(response.data))
     .catch((error) => console.log(error));

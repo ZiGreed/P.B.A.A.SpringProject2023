@@ -32,7 +32,7 @@ export let deleteHandler = (item, deleteFunction) => {
                   onClick={() => {
                     deleteFunction(item._id);
                     onClose();
-                    window.location.reload();
+                    // window.location.reload();
                   }}
                 >
                   Ištrinti

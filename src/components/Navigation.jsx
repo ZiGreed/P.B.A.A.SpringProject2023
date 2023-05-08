@@ -6,18 +6,18 @@ import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { useContext, useEffect, useState } from "react";
-import AuthContext from "../context/AuthContext";
+import {AuthContext} from "../context/AuthContext";
 
 function Navigation() {
   const { getLoggedIn } = useContext(AuthContext);
-  const [userName, setUserName] = useState("");
+  const [userData, setUserData] = useState({});
+  const { isAdmin } = useContext(AuthContext);
 
   useEffect(() => {
     axios
       .get("http://localhost:3000/users/getName")
-      .then((res) => setUserName(res.data))
+      .then((res) => setUserData(res.data))
       .catch((error) => console.log(error));
-      
   }, []);
 
   const logOut = async () => {
@@ -51,18 +51,30 @@ function Navigation() {
               <Button className="w-100 mx-auto gradient-class">Išlaidos</Button>
             </Link>
             <Link
-                to="/budget/"
+              to="/budget/"
+              className="mb-2 w-50 mx-auto text-decoration-none"
+            >
+              <Button className="w-100 mx-auto gradient-class">
+                Biudžetas
+              </Button>
+            </Link>
+            {isAdmin && (
+              <Link
+                to="/categorycreate/"
                 className="mb-2 w-50 mx-auto text-decoration-none"
               >
-                <Button className="w-100 mx-auto gradient-class">Biudžetas</Button>
+                <Button className="w-100 mx-auto gradient-class">
+                  Kategorijos
+                </Button>
               </Link>
+            )}
           </div>
         </div>
 
         <div className="container__Bottom--Margin">
           <div className="user-logo">
             <NavUserLogo />
-            <span className="user-profile">{userName}</span>
+            <span className="user-profile">{userData.name}</span>
           </div>
           <button className="logout-button" onClick={logOut}>
             <NavLogoutButton />

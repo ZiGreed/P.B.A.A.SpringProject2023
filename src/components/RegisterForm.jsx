@@ -1,8 +1,9 @@
 import { useFormik } from "formik";
 import axios from "axios";
 import { useContext } from "react";
-import AuthContext from "../context/AuthContext";
+import {AuthContext} from "../context/AuthContext";
 import { useState } from "react";
+import "./RegisterForm.scss";
 
 function RegisterForm() {
   const registerURL = "http://localhost:3000/users/signup";
@@ -17,18 +18,22 @@ function RegisterForm() {
       password: "",
     },
     onSubmit: async (values) => {
-      await axios
-        .post(registerURL, values)
-        .catch((error) => setError(error.response.data.error));
-      getLoggedIn();
+      try {
+        await axios.post(registerURL, values);
+        getLoggedIn();
+      } catch (error) {
+        setError(error.response.data.error);
+      }
+      
     },
   });
   return (
-    <div>
+    <div className="loginPage">
       <h3>Registracija</h3>
-      <form onSubmit={formik.handleSubmit}>
+      <form onSubmit={formik.handleSubmit} className="loginForm">
         <input
           type="text"
+          className="loginInput"
           placeholder="Vardas"
           name="name"
           onChange={formik.handleChange}
@@ -37,6 +42,7 @@ function RegisterForm() {
         />
         <input
           type="email"
+          className="loginInput"
           placeholder="El. paštas"
           name="email"
           onChange={formik.handleChange}
@@ -45,13 +51,14 @@ function RegisterForm() {
         />
         <input
           type="password"
+          className="loginInput"
           placeholder="Slaptažodis"
           name="password"
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           value={formik.values.password}
         />
-        <button type="submit">Užsiregistruoti</button>
+        <button type="submit" className="gradient-class">Užsiregistruoti</button>
       </form>
       <div className="error">
         {error}
