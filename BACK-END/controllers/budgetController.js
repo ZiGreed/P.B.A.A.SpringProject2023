@@ -58,14 +58,14 @@ exports.getBudgetById = (req, res) => {
 
 
 
-// exports.deleteBudget = (req, res) => {
-//     let { id } = req.params;
-//     Budget.findByIdAndDelete(id)
-//     .then((doc) => {
-//         res.status(200).json(doc);
-//     })
-//     .catch((error) => res.status(404).json(error));
-// };
+exports.deleteBudget = (req, res) => {
+    let { id } = req.params;
+    Budget.findByIdAndDelete(id)
+    .then((doc) => {
+        res.status(200).json(doc);
+    })
+    .catch((error) => res.status(404).json(error));
+};
 
 exports.editBudget = (req, res) => {
     let { id } = req.params;

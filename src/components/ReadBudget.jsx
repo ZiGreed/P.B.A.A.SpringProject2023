@@ -3,96 +3,86 @@ import Vector from "./../assets/images/Vector.svg";
 import { RiDeleteBinLine, RiEdit2Line } from "react-icons/ri";
 import { AiOutlinePlusCircle } from "react-icons/ai";
 import { Button } from "react-bootstrap";
+import { deleteHandler } from "./servicces/deleteHandler";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
+const budgetURL = "http://localhost:3000/budget/";
 function ReadBudget() {
+  const navigate = useNavigate();
+  const [budgetData, setbudgetData] = useState([]);
+  useEffect(() => {
+    axios
+      .get(budgetURL)
+      .then((response) => setbudgetData(response.data))
+      .catch((error) => console.log(error));
+  }, []);
+  console.log(budgetData)
+  function deleteBudget(id) {
+    axios
+      .delete(budgetURL + "/" + id)
+      .then((response) => {
+        setbudgetData(budgetData.filter((expense) => expense._id !== id));
+      })
+      .catch((error) => console.log(error));
+      
+  }
+  let budgetjsx = budgetData.map((budget, index) => {
+    return (
+      <div className="card" key={index}>
+          <div className="cardIndoWrapper">
+              <div>{budget.category}</div>
+              <div>{budget.limit}</div>
+          </div>
+          <div className="ButtonsContainer">
+          <div className="buttonIcons">
+          </div>
+          <div className="buttonIcons">
+            <Link to={"/editbudget/" + budget._id} className="buttonIcons">
+              <RiEdit2Line size={30} />
+            </Link>
+          </div>
+          <div className="buttonIcons">
+          <RiDeleteBinLine
+              size={30}
+              onClick={() => {
+                deleteHandler(budget, deleteBudget);
+              }}
+            />
+          </div>
+        </div>
+        </div>
+    )
+  })
     return ( 
         <>
         <div style={{width: "100%"}} className="readExpensejsx">
       <div className="cardsWrapper">
         <div className="cardsContainerBorder">
           <div className="cardsContainer overflowHidden">
-            
-        <div className="card">
-          <div className="cardIndoWrapper">
-              <div>Maistas</div>
-          </div>
-          <div className="ButtonsContainer">
-          <div className="buttonIcons">
-          </div>
-          <div className="buttonIcons">
-            <Link to={"/editbudget/" + 1} className="buttonIcons">
-              <RiEdit2Line size={30} />
-            </Link>
-            {/* <Link to={"/deletebudget/" + 1} className="buttonIcons">
-              <RiDeleteBin5Line size={30} />
-            </Link> */}
+            {budgetjsx}
           </div>
         </div>
+        <div className="budgetBtnContainer">
+          <Link to="/budgetgraph/">
+            <Button
+              className="budgetBtn"
+            >
+              Biudžeto diagrama
+            </Button>
+          </Link>
+          <Button variant="primary" className="budgetBtn">
+          Placeholder
+          </Button>
         </div>
-
-        <div className="card">
-          <div className="cardIndoWrapper">
-              <div>Pramogos</div>
-          </div>
-          <div className="ButtonsContainer">
-          <div className="buttonIcons">
-          </div>
-          <div className="buttonIcons">
-            <Link to={"/editbudget/" + 2} className="buttonIcons">
-              <RiEdit2Line size={30} />
-            </Link>
-          </div>
-        </div>
-        </div>
-        <div className="card">
-          <div className="cardIndoWrapper">
-              <div>Buitis</div>
-          </div>
-          <div className="ButtonsContainer">
-          <div className="buttonIcons">
-            <Link to={"/editbudget/" + 3} className="buttonIcons">
-              <RiEdit2Line size={30} />
-            </Link>
-          </div>
-        </div>
-        </div>
-        <div className="card">
-          <div className="cardIndoWrapper">
-              <div>Kita</div>
-          </div>
-          <div className="ButtonsContainer">
-          <div className="buttonIcons">
-            <Link to={"/editbudget/" + 4} className="buttonIcons">
-              <RiEdit2Line size={30} />
-            </Link>
-          </div>
-        </div>
-        </div>
-            
-          </div>
-        </div>
-        {/* <div className="LinkWrapperBudget">
+        <div className="LinkWrapper">
           <Link to="/addbudget/" className="LinkButton">
             <button className="buttonAdd">
-              <img src={Vector} alt="" />
+              <img src={Vector} alt="add" />
             </button>
           </Link>
-          <Link to="/addbudget/" className="LinkButton">
-            <button>Graph</button>
-          </Link>
-        </div> */}
-        <div className="budgetBtnContainer">
-                <Link to="/budgetgraph/">
-                  <Button
-                    className="budgetBtn"
-                  >
-                    Biudžeto diagrama
-                  </Button>
-                </Link>
-                <Button variant="primary" className="budgetBtn">
-                Placeholder
-                </Button>
-              </div>
+        </div>
       </div>
     </div>
         </>

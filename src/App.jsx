@@ -16,6 +16,7 @@ import Budget from "./components/ReadBudget"
 import BudgetGraph from "./components/BudgetGraph";
 import RegisterForm from "./components/RegisterForm";
 import LoginPage from "./components/LoginPage";
+import AddBudget from "./components/AddBudget";
 import axios from "axios";
 import AuthContext from "./context/AuthContext";
 import { useContext } from "react";
@@ -39,6 +40,7 @@ function App() {
               <Route path="expenses/:id" element={<EditExpenses />} />
               <Route path="incomes/:id" element={<EditIncomes />} />
               <Route path="editbudget/:id" element={<EditBudget />} />
+              <Route path="addbudget" element={<AddBudget />} />
             <Route path="budget" element={<Budget />} />
             <Route path="budgetgraph" element={<BudgetGraph />} />
             </Route>

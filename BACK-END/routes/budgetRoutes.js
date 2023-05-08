@@ -10,7 +10,7 @@ budgetRouter
 budgetRouter
 .route("/:id")
 .patch(budgetController.editBudget)
-// .delete(budgetController.deleteBudget)
+.delete(budgetController.deleteBudget)
 .get(budgetController.getBudgetById)
 
 module.exports = budgetRouter;
