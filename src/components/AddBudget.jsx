@@ -7,36 +7,25 @@ import { useState } from "react";
 import * as Yup from "yup";
 import axios from "axios";
 import { useParams } from "react-router-dom";
-// import { FaCat, FaHouseUser } from "react-icons/fa";
-// import { GiGluttonousSmile } from "react-icons/gi";
-// import { MdFastfood } from "react-icons/md";
 
 const budgetURL = "http://localhost:3000/budget/";
 
-function EditBudget() {
-  const { id } = useParams();
+function AddBudget() {
   const navigate = useNavigate();
-  const [selectedEdit, setSelectedEdit] = useState({
-    limit: "",
-    category: ""
-  });
-
-  useEffect(() => {
-    axios.get(budgetURL + id)
-    .then((response) => setSelectedEdit(response.data))
-    .catch(err => console.log(err));
-  }, [id]);
+  const [submitted, setSubmitted] = useState();
     return ( 
         <>
-        
         <div className="incomes_expenses__background--color incomes_expenses-onMobile">
         <Formik
-          initialValues={selectedEdit}
+          initialValues={{
+            category: "",
+            limit: ""
+          }}
           validationSchema={
             Yup.object({
               limit: Yup.number()
-              .required("langelis būtinas")
-              .lessThan(1000000, "limitas turi būti mažesnis nei milijonas"),
+              .required("Langelis būtinas")
+              .lessThan(1000000, "Limitas turi būti mažesnis nei milijonas"),
               category: Yup.string()
               .required("Langelis būtinas")
               .max(25, "Pavadinimas per ilgas")
@@ -44,11 +33,11 @@ function EditBudget() {
           }
           onSubmit={(values, { resetForm }) => {
             axios
-            .patch(budgetURL + id, values)
+            .post(budgetURL, values)
             .then((response) => console.log(response.data));
             console.log(values);
             resetForm();
-            // setSubmitted(true);
+            setSubmitted(true);
           }}
           enableReinitialize
         >
@@ -64,7 +53,7 @@ function EditBudget() {
             resetForm,
           }) => (
             <Form onSubmit={handleSubmit} className="diagram-border p-4">
-              {/* {submitted && (<h4 style={{color: "orange"}}>Pateikta!</h4>)} */}
+              {submitted && (<h4 style={{color: "orange"}}>Pateikta!</h4>)}
               <Form.Group className="p-2">
                 <Form.Label>Limitas</Form.Label>
                 <Form.Control
@@ -98,7 +87,7 @@ function EditBudget() {
                 <span className="formError">
                 <ErrorMessage name="category" />
                 </span>
-              </Form.Group>
+              </Form.Group>          
               <div className="income_expensesBtn">
                 <Button
                   className="income_expensesBtn"
@@ -128,4 +117,4 @@ function EditBudget() {
      );
 }
 
-export default EditBudget;
+export default AddBudget;

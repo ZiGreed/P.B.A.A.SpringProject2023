@@ -21,6 +21,8 @@ import EditCategory from "./components/EditCategory";
 import RegisterForm from "./components/RegisterForm";
 import LoginPage from "./components/LoginPage";
 
+import AddBudget from "./components/AddBudget";
+
 import axios from "axios";
 import {AuthContext} from "./context/AuthContext";
 import { useContext } from "react";
@@ -31,18 +33,21 @@ function App() {
   const { loggedIn, isAdmin } = useContext(AuthContext);
 
   return (
-    <Layout>
-      <Routes>
-        {loggedIn ? (
-          <Route path="/" element={<MainPage />}>
-            <Route path="addIncomes" element={<AddIncomes />} />
-            <Route path="/" element={<Dashboard />} />
-            <Route path="expenses" element={<ReadExpenses />} />
-            <Route path="incomes" element={<ReadIncomes />} />
-            <Route path="addexpense" element={<AddExpenses />} />
-            <Route path="expenses/:id" element={<EditExpenses />} />
-            <Route path="incomes/:id" element={<EditIncomes />} />
-            <Route path="editbudget/:id" element={<EditBudget />} />
+
+      <Layout>
+        <Routes>
+          {loggedIn ? (
+            <Route path="/" element={<MainPage />}>
+              <Route path="addIncomes" element={<AddIncomes />} />
+              <Route path="/" element={<Dashboard />} />
+              <Route path="expenses" element={<ReadExpenses />} />
+              <Route path="incomes" element={<ReadIncomes />} />
+              <Route path="addexpense" element={<AddExpenses />} />
+              <Route path="expenses/:id" element={<EditExpenses />} />
+              <Route path="incomes/:id" element={<EditIncomes />} />
+              <Route path="editbudget/:id" element={<EditBudget />} />
+              <Route path="addbudget" element={<AddBudget />} />
+
             <Route path="budget" element={<Budget />} />
             <Route path="budgetgraph" element={<BudgetGraph />} />
             {isAdmin && (
