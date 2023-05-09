@@ -13,6 +13,15 @@ exports.getCategory = (req, res) => {
   }
 };
 
+exports.getCategorybyId = (req, res) => {
+  let { id } = req.params;
+  Category.findById(id)
+    .then((doc) => {
+      res.status(200).json(doc);
+    })
+    .catch((error) => res.status(404).json(error));
+};
+
 exports.createCategory = (req, res) => {
   const { category } = req.body;
 
