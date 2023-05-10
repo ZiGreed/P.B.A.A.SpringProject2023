@@ -2,6 +2,7 @@ const User = require("./../models/userModel");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
+// Get all users
 exports.getUsers = (req, res) => {
   try {
     User.find()
@@ -13,6 +14,28 @@ exports.getUsers = (req, res) => {
     res.status(500).json({ error: "Get request failed." });
   }
 };
+// Edit user
+exports.editUser = (req, res) => {
+  let { id } = req.params;
+  User.findByIdAndUpdate(id, req.body, {
+    new: true,
+    runValidators: true,
+  })
+    .then((doc) => {
+      res.status(200).json(doc);
+    })
+    .catch((error) => res.status(404).json(error));
+};
+
+// Delete user
+exports.deleteUser = (req, res) => {
+  let { id } = req.params;
+  User.findByIdAndDelete(id)
+    .then((doc) => {
+      res.status(200).json(doc);
+    })
+    .catch((error) => res.status(404).json(error));
+}
 
 //SIGN UP
 
