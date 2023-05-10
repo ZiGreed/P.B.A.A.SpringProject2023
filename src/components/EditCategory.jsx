@@ -15,6 +15,8 @@ function EditCategory() {
   });
   let navigate = useNavigate();
 
+
+
   const [updated, setUpdated] = useState(false);
 
   useEffect(() => {
@@ -22,6 +24,7 @@ function EditCategory() {
       .get(baseURL + id)
       .then((response) => setSelectedEdit(response.data))
       .catch((err) => console.log(err));
+      console.log();
   }, [id]);
   return (
     <>
