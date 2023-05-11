@@ -14,7 +14,6 @@ function AddCategory() {
   // Define state variables
   const [submitted, setSubmitted] = useState(false);
   const navigate = useNavigate();
-   
 
   // Render the component
   return (
@@ -59,7 +58,7 @@ function AddCategory() {
                 <Form.Label>Kategorijos pavadinimas</Form.Label>
                 <Form.Control
                   className="incomes_expensesFields"
-                  type="text" 
+                  type="text"
                   placeholder="Kategorijos pavadinimas"
                   name="category"
                   onChange={handleChange}
@@ -95,7 +94,7 @@ function AddCategory() {
                   variant="primary"
                   onClick={() => navigate("/categorycreate/")}
                 >
-                  Sukurtų Kategorijų sąrašas
+                  Kategorijos
                 </Button>
               </div>
             </Form>

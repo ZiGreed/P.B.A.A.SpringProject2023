@@ -1,8 +1,9 @@
 import { useFormik } from "formik";
 import axios from "axios";
 import { useContext } from "react";
-import {AuthContext} from "../context/AuthContext";
+import { AuthContext } from "../context/AuthContext";
 import { useState } from "react";
+import { Link, Route, Routes } from "react-router-dom";
 import "./RegisterForm.scss";
 
 function RegisterForm() {
@@ -24,7 +25,6 @@ function RegisterForm() {
       } catch (error) {
         setError(error.response.data.error);
       }
-      
     },
   });
   return (
@@ -58,11 +58,14 @@ function RegisterForm() {
           onBlur={formik.handleBlur}
           value={formik.values.password}
         />
-        <button type="submit" className="gradient-class">Užsiregistruoti</button>
+        <button type="submit" className="gradient-class">
+          Užsiregistruoti
+        </button>
+        <Link to="/" className="backLink">
+          Atgal
+        </Link>
       </form>
-      <div className="error">
-        {error}
-      </div>
+      <div className="error">{error}</div>
     </div>
   );
 }
