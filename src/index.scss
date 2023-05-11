@@ -54,7 +54,7 @@
 }
 
 .user-profile {
-  color: #008CFF;
+  color: #008cff;
   padding-top: 10%;
 }
 
@@ -388,4 +388,53 @@ main {
 
 #diagram-button {
   all: unset;
+}
+
+.admin-panel {
+  background: linear-gradient(
+      240.3deg,
+      rgba(0, 140, 255, 0.2) 31.84%,
+      rgba(14, 14, 48, 0.2) 81.84%
+    ),
+    #0e0e30;
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+  color: #fff;
+  display: flex;
+  flex-flow: column wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding: 50px;
+  width: 100%;
+  height: 100vh;
+  & select {
+    appearance: none;
+    text-overflow: "";
+    width: 100%;
+  }
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%; /* Start the gradient from the left */
+  }
+  50% {
+    background-position: 100% 50%; /* Move the gradient to the right */
+  }
+  100% {
+    background-position: 0% 50%; /* Bring the gradient back to the left */
+  }
+}
+
+.admin-buttons {
+  display: flex;
+}
+
+.password-icon {
+  color: #0d6efd;
+  &:hover {
+    cursor: pointer;
+    color: #8d0b7e;
+  }
 }

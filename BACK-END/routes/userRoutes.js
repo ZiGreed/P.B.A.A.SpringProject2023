@@ -6,6 +6,12 @@ const auth = require("./../middleware/auth")
 userRouter
 .route("/")
 .get(userController.getUsers)
+.post(userController.signup)
+
+userRouter
+.route("/:id")
+.patch(userController.editUser)
+.delete(userController.deleteUser)
 
 userRouter
 .route("/signup")

@@ -6,7 +6,7 @@ import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { useContext, useEffect, useState } from "react";
-import {AuthContext} from "../context/AuthContext";
+import { AuthContext } from "../context/AuthContext";
 
 function Navigation() {
   const { getLoggedIn } = useContext(AuthContext);
@@ -59,14 +59,24 @@ function Navigation() {
               </Button>
             </Link>
             {isAdmin && (
-              <Link
-                to="/categorycreate/"
-                className="mb-2 w-50 mx-auto text-decoration-none"
-              >
-                <Button className="w-100 mx-auto gradient-class">
-                  Kategorijos
-                </Button>
-              </Link>
+              <>
+                <Link
+                  to="/categorycreate/"
+                  className="mb-2 w-50 mx-auto text-decoration-none"
+                >
+                  <Button className="w-100 mx-auto gradient-class">
+                    Kategorijos
+                  </Button>
+                </Link>
+                <Link
+                  to="/users/"
+                  className="mb-2 w-50 mx-auto text-decoration-none"
+                >
+                  <Button className="w-100 mx-auto gradient-class">
+                    Vartotojai
+                  </Button>
+                </Link>
+              </>
             )}
           </div>
         </div>

@@ -13,6 +13,7 @@ import EditIncomes from "./components/EditIncomes";
 import EditBudget from "./components/EditBudget";
 import Budget from "./components/ReadBudget";
 import BudgetGraph from "./components/BudgetGraph";
+import Users from "./components/Users";
 
 import CategoryCreate from "./components/CategoryCreate";
 import AddCategory from "./components/AddCategory";
@@ -55,6 +56,7 @@ function App() {
                 <Route path="categorycreate" element={<CategoryCreate />} />
                 <Route path="addcategory" element={<AddCategory />} />
                 <Route path="categories/:id" element={<EditCategory />} />
+                <Route path="users" element={<Users />} />
               </>
             )}
           </Route>
