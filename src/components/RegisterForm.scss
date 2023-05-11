@@ -71,6 +71,31 @@ body {
     }
   }
   
-  .signupLink {
-    text-decoration: none;
+  .backLink {
+    background: linear-gradient(#0e0e30, #0e0e30) padding-box,
+    linear-gradient(to right, #008cff, #9900dd) border-box;
+  border-radius: 15px;
+  border: 2px solid transparent;
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
+  color: #008cff;
+  width: 90%;
+  padding: 0.5rem 1rem;
+  margin: 10px;
+  font-family: "Arimo", sans-serif;
+  cursor: pointer;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
+  text-align: center;
+  transition: all 0.2s ease-in-out;
+  text-decoration: none;
+  &:hover {
+      background: linear-gradient(270deg, #9900dd 0%, #008cff 100%);
+      color: #fff;
+    }
   }
+
+  

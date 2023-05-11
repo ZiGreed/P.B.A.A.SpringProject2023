@@ -106,7 +106,7 @@ function AddBudget() {
                   Pateikti
                 </Button>
                 <Button variant="primary" onClick={() => navigate("/budget/")}>
-                biudžetų sąrašas
+                Biudžetų sąrašas
                 </Button>
               </div>
             </Form>
