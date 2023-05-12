@@ -1,11 +1,12 @@
 const express = require("express");
 const budgetController = require("./../controllers/budgetController");
 const budgetRouter = express.Router();
+const auth = require("./../middleware/auth")
 
 budgetRouter
 .route("/")
-.get(budgetController.getBudgets)
-.post(budgetController.createBudget)
+.get(auth, budgetController.getBudgets)
+.post(auth, budgetController.createBudget)
 
 budgetRouter
 .route("/:id")
