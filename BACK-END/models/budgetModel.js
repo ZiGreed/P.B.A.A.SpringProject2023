@@ -8,6 +8,14 @@ const budgetSchema = mongoose.Schema({
         type: Number,
         required: [true, "limit is required"],
     },
+    email: {
+        type: String,
+        required: [true, "Email is required"],
+    },
+    expirationDate: {
+        type: Date,
+        required: [true, 'Expiration date is required'],
+    },
 });
 
 const Budget = mongoose.model("Budget", budgetSchema);

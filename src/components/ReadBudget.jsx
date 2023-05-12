@@ -28,7 +28,8 @@ function ReadBudget() {
       .catch((error) => console.log(error));
       
   }
-  let budgetjsx = budgetData.map((budget, index) => {
+  const currentDate = new Date();
+  let budgetjsx = budgetData.filter(budget => new Date(budget.expirationDate) > currentDate).map((budget, index) => {
     return (
       <div className="card" key={index}>
           <div className="cardIndoWrapper">
@@ -72,9 +73,6 @@ function ReadBudget() {
               Biudžeto diagrama
             </Button>
           </Link>
-          <Button variant="primary" className="budgetBtn">
-          Placeholder
-          </Button>
         </div>
         <div className="LinkWrapper">
           <Link to="/addbudget/" className="LinkButton">
