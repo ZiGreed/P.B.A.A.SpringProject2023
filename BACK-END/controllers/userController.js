@@ -9,22 +9,54 @@ exports.getUsers = (req, res) => {
       .then((doc) => {
         res.status(200).json(doc);
       })
-      .catch((error) => res.status(404).json({ error: "Bad request query." }));
+      .catch((error) => res.status(404).json({ error: "Įvyko klaida" }));
   } catch {
-    res.status(500).json({ error: "Get request failed." });
+    res.status(500).json({ error: "Įvyko klaida" });
   }
 };
 // Edit user
-exports.editUser = (req, res) => {
-  let { id } = req.params;
-  User.findByIdAndUpdate(id, req.body, {
-    new: true,
-    runValidators: true,
-  })
-    .then((doc) => {
-      res.status(200).json(doc);
-    })
-    .catch((error) => res.status(404).json(error));
+exports.editUser = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { name, email, password, role } = req.body;
+
+    // Get the current user from the JWT token
+    const token = req.cookies.token;
+    const decoded = jwt.verify(token, "TokenPassword");
+    const currentUser = await User.findById(decoded.user);
+
+    // Check if the current user is an admin or the user being edited
+    if (currentUser.role !== "admin" && currentUser._id.toString() !== id) {
+      return res.status(401).json({ error: "Neautorizuotas vartotojas" });
+    }
+
+    // If a new password was provided, hash it
+    let passwordHash;
+    if (password) {
+      const salt = await bcrypt.genSalt(10);
+      passwordHash = await bcrypt.hash(password, salt);
+    }
+
+    // Update the user with the new information
+    const updatedUser = await User.findByIdAndUpdate(
+      id,
+      {
+        name: name || undefined,
+        email: email || undefined,
+        password: passwordHash || undefined,
+        role: role || undefined,
+      },
+      { new: true, runValidators: true }
+    );
+
+    if (!updatedUser) {
+      return res.status(404).json({ error: "Vartotojas nerastas" });
+    }
+
+    res.status(200).json(updatedUser);
+  } catch (err) {
+    res.status(500).json({ error: "Įvyko klaida" });
+  }
 };
 
 // Delete user
@@ -35,22 +67,20 @@ exports.deleteUser = (req, res) => {
       res.status(200).json(doc);
     })
     .catch((error) => res.status(404).json(error));
-}
+};
 
 //SIGN UP
 
 exports.signup = (req, res) => {
   const { name, email, password, role } = req.body;
-  const passwordRegex =
-    /(?=[#$-/:-?{-~!"^_`\[\]a-zA-Z]*([0-9#$-/:-?{-~!"^_`\[\]]))(?=[#$-/:-?{-~!"^_`\[\]a-zA-Z0-9]*[a-zA-Z])[#$-/:-?{-~!"^_`\[\]a-zA-Z0-9]{6,}/;
+  console.log(password);
+  const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/;
 
   if (!passwordRegex.test(password))
-    return res
-      .status(422)
-      .json({
-        error:
-          "Password must be at least 6 characters long and contain at least one letter and one special character or number.",
-      });
+    return res.status(422).json({
+      error:
+        "Slaptažodis turi būti mažiausiai 6 simbolių ilgio ir jį turėtų sudaryti raidės ir bent vienas skaičius ar specialusis simbolis",
+    });
   else {
     bcrypt.genSalt(10, (err, salt) => {
       bcrypt.hash(password, salt, (err, passwordHash) => {
@@ -59,7 +89,7 @@ exports.signup = (req, res) => {
             if (existingUser) {
               res
                 .status(422)
-                .json({ error: "User already exists. Please log in." });
+                .json({ error: "Vartotojas egzistuoja. Prašome prisijungti" });
             } else {
               const createdUser = new User({
                 name,
@@ -94,7 +124,7 @@ exports.signup = (req, res) => {
             }
           });
         } catch {
-          res.status(500).json({ error: "Sign up failed." });
+          res.status(500).json({ error: "Registracija nepavyko" });
         }
       });
     });
@@ -106,14 +136,14 @@ exports.login = async (req, res) => {
 
     const existingUser = await User.findOne({ email });
     if (!existingUser)
-      return res.status(401).json({ error: "Wrong email or password" });
+      return res.status(401).json({ error: "Netinkamas el. paštas arba slaptažodis" });
 
     const passwordCorrect = await bcrypt.compare(
       password,
       existingUser.password
     );
     if (!passwordCorrect)
-      return res.status(401).json({ error: "Wrong email or password" });
+      return res.status(401).json({ error: "Netinkamas el. paštas arba slaptažodis" });
 
     const token = jwt.sign(
       {
@@ -133,7 +163,7 @@ exports.login = async (req, res) => {
       })
       .send();
   } catch {
-    res.status(500).json({ error: "Login failed." });
+    res.status(500).json({ error: "Prisijungimas nepavyko" });
   }
 };
 
@@ -171,7 +201,7 @@ exports.getName = (req, res) => {
     // Assuming the user's name is stored in the decoded token
     const userName = verified.name;
     const role = verified.role;
-    res.json({name: userName, role: role});
+    res.json({ name: userName, role: role });
   } catch (err) {
     res.json(err);
   }
