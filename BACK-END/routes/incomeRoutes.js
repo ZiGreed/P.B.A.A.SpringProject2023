@@ -1,16 +1,17 @@
 const express = require("express");
 const incomeController = require("./../controllers/incomeController");
 const incomeRouter = express.Router();
+const auth = require("./../middleware/auth")
 
 incomeRouter
   .route("/")
-  .get(incomeController.getIncomes)
-  .post(incomeController.postIncome);
+  .get(auth, incomeController.getIncomes)
+  .post(auth, incomeController.postIncome);
 
 incomeRouter
   .route("/:id")
-  .patch(incomeController.editIncome)
-  .delete(incomeController.deleteIncome)
-  .get(incomeController.getIncomeById)
+  .patch(auth, incomeController.editIncome)
+  .delete(auth, incomeController.deleteIncome)
+  .get(auth, incomeController.getIncomeById)
 
   module.exports = incomeRouter;
