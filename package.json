@@ -37,6 +37,7 @@
     "react-icons": "^4.8.0",
     "react-minimal-pie-chart": "^8.4.0",
     "react-router-dom": "^6.8.2",
+    "react-select": "^5.7.3",
     "recharts": "^2.5.0",
     "sass": "^1.58.3",
     "yup": "^1.0.2"

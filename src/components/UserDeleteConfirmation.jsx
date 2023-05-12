@@ -31,7 +31,7 @@ function UserDeleteConfirmation({ setIsBeingDeleted, selectedUser }) {
 
   return (
     <div>
-      <p>Ar tikrai norite pašalinti vartotoją?</p>
+      <p style={{textAlign: "center", color: "#8d0b7e"}}>Ar tikrai norite pašalinti vartotoją?</p>
       <div className="admin-buttons">
         <button
           type="button"
