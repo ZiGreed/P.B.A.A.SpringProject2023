@@ -9,7 +9,8 @@ const incomeSchema = mongoose.Schema({
   amount: Number,
   category: {
     type: String
-  }
+  },
+  userID: String
 });
 
 const Income = mongoose.model("Income", incomeSchema);

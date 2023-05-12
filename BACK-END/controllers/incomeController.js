@@ -3,7 +3,7 @@ const Income = require("./../models/incomeModel");
 
 exports.getIncomes = (req, res) => {
   const year = req.query.year;
-  let query = {};
+  let query = {userID: req.userID};
   if (year) {
     const yearRegex = new RegExp(`^${year}`);
     query.date = { $regex: yearRegex };
@@ -25,12 +25,14 @@ exports.getIncomeById = (req, res) => {
 };
 
 exports.postIncome = (req, res) => {
+  console.log(req)
   let { name, date, amount, category } = req.body;
   let income = new Income({
     name: name,
     date: date,
     amount: amount,
     category: category,
+    userID : req.userID
   });
   income.save().then((doc) => {
     res.status(200).json(doc);

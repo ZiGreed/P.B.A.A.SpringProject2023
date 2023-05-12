@@ -2,7 +2,7 @@ const Expense = require("./../models/expenseModel");
 
 exports.getExpenses = (req, res) => {
   const year = req.query.year;
-  let query = {};
+  let query = {userID: req.userID};
   if (year) {
     const yearRegex = new RegExp(`^${year}`);
     query.date = { $regex: yearRegex };
@@ -24,13 +24,16 @@ exports.getExpenseById = (req, res) => {
 };
 
 exports.postExpense = (req, res) => {
+  console.log(req);
   let { name, date, amount, category } = req.body;
   let expense = new Expense({
     name: name,
     date: date,
     amount: amount,
     category: category,
+    userID: req.userID,
   });
+
   expense.save().then((doc) => {
     res.status(200).json(doc);
   });

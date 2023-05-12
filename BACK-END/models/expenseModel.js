@@ -9,7 +9,8 @@ const expenseSchema = mongoose.Schema({
   amount: Number,
   category: {
     type: String
-  }
+  },
+  userID: String
 });
 
 const Expense = mongoose.model("Expense", expenseSchema);

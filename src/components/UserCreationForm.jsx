@@ -49,7 +49,7 @@ function UserCreationForm({ setBeingCreated }) {
 
   const options = [
     { value: "user", label: "Vartotojas" },
-    { value: "admin", label: "Administratorius" }
+    { value: "admin", label: "Administratorius" },
   ];
 
   const togglePasswordVisibility = () => {
@@ -61,21 +61,20 @@ function UserCreationForm({ setBeingCreated }) {
       name: "",
       email: "",
       password: "",
-      role: ""
+      role: "",
     },
     onSubmit: async (values, { resetForm }) => {
-        try {
-          await addUser(baseURL, values);
-          resetForm();
-        } catch (error) {
-          setError(error.response.data.error);
-        }
+      try {
+        await addUser(baseURL, values);
+        resetForm();
+      } catch (error) {
+        setError(error.response.data.error);
+      }
       console.log(values);
     },
   });
   return (
-
-    <div className={windowSize <768 && "admin-panel"}>
+    <div className={windowSize < 768 && "admin-panel"}>
       <form onSubmit={formik.handleSubmit} className="loginForm">
         <input
           type="text"
@@ -100,22 +99,24 @@ function UserCreationForm({ setBeingCreated }) {
         <div
           style={{ marginLeft: "16px", display: "flex", alignItems: "center" }}
         >
-          <input
-            type={showPassword ? "text" : "password"}
-            placeholder="Slaptažodis"
-            name="password"
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            value={formik.values.password}
-            className="gradient-class"
-            style={{ cursor: "text" }}
-          />
-          <span
-            onClick={togglePasswordVisibility}
-            style={{ cursor: "pointer" }}
-            className="password-icon"
-          >
-            {showPassword ? <RiEyeOffFill /> : <RiEyeFill />}
+          <span style={{position: "relative"}}>
+            <input
+              type={showPassword ? "text" : "password"}
+              placeholder="Slaptažodis"
+              name="password"
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.password}
+              className="gradient-class"
+              style={{ cursor: "text" }}
+            />
+            <span
+              onClick={togglePasswordVisibility}
+              style={{ cursor: "pointer", position: "absolute", right: "40px", top: "26px" }}
+              className="password-icon"
+            >
+              {showPassword ? <RiEyeOffFill /> : <RiEyeFill />}
+            </span>
           </span>
         </div>
         <div>
@@ -125,11 +126,14 @@ function UserCreationForm({ setBeingCreated }) {
             placeholder="Pasirinkti rolę"
             options={options}
             name="role"
-          >
-          </Select>
+          ></Select>
         </div>
-        <div className="admin-buttons" style={{flexWrap: "wrap"}}>
-          <button type="submit" className="gradient-class" style={{ flex: 1, flexBasis: 0 }}>
+        <div className="admin-buttons" style={{ flexWrap: "wrap" }}>
+          <button
+            type="submit"
+            className="gradient-class"
+            style={{ flex: 1, flexBasis: 0 }}
+          >
             Sukurti
           </button>
           <button
