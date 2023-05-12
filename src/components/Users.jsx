@@ -4,6 +4,8 @@ import { RiDeleteBinLine, RiEdit2Line } from "react-icons/ri";
 import UserEditForm from "./UserEditForm";
 import UserDeleteConfirmation from "./UserDeleteConfirmation";
 import UserCreationForm from "./UserCreationForm";
+import useWindowSize from "./useWindowSize";
+import Select from "react-select";
 
 function Users() {
   const [users, setUsers] = useState([]);
@@ -12,6 +14,8 @@ function Users() {
   const [isEditing, setIsEditing] = useState(false);
   const [isBeingDeleted, setIsBeingDeleted] = useState(false);
   const [beingCreated, setBeingCreated] = useState(false);
+
+  let windowSize = useWindowSize();
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -29,8 +33,48 @@ function Users() {
     );
   });
 
-  function handleSelect(e) {
-    const userId = e.target.value;
+  const customStyles = {
+    control: (provided) => ({
+      ...provided,
+      border: "2px solid #008CFF",
+      borderRadius: "10px",
+      boxShadow: "none",
+      backgroundColor: "#0E0E30",
+      "&:hover": {
+        borderColor: "#008CFF",
+      },
+    }),
+    menu: (provided) => ({
+      ...provided,
+      border: "2px solid #008CFF",
+      boxShadow: "none",
+    }),
+    option: (provided, state) => ({
+      ...provided,
+      backgroundColor: state.isFocused ? "#008CFF" : "white",
+      color: state.isFocused ? "white" : "#0E0E30",
+      "&:hover": {
+        backgroundColor: "#008CFF",
+        color: "white",
+      },
+    }),
+    placeholder: (provided) => ({
+      ...provided,
+      color: "#008CFF",
+    }),
+    singleValue: (provided) => ({
+      ...provided,
+      color: "#008CFF",
+    }),
+  };
+
+  const options = users.map((user) => ({
+    value: user._id,
+    label: user.email,
+  }));
+
+  function handleSelect(option) {
+    const userId = option.value;
     const user = users.find((user) => user._id === userId);
     setSelectedUser(user);
     setIsBeingDeleted(false);
@@ -39,69 +83,82 @@ function Users() {
   }
 
   return (
-    <div className="admin-panel">
-      {!isEditing && !isBeingDeleted && (
-        <div>
-          <button
-            type="button"
-            onClick={() => {
-              setBeingCreated(true);
-              setIsBeingDeleted(false);
-              setIsEditing(false);
-            }}
-            className="gradient-class"
-            style={{ width: "100%" }}
-          >
-            Sukurti vartotoją
-          </button>
+    <>
+      {windowSize < 768 && beingCreated ? (
+        <UserCreationForm setBeingCreated={setBeingCreated} />
+      ) : (
+        <div className="admin-panel">
+          {!isEditing && !isBeingDeleted && (
+            <div className="d-flex justify-center">
+              <button
+                type="button"
+                onClick={() => {
+                  setBeingCreated(true);
+                  setIsBeingDeleted(false);
+                  setIsEditing(false);
+                }}
+                className="gradient-class"
+                style={{ width: "100%" }}
+              >
+                Sukurti vartotoją
+              </button>
+            </div>
+          )}
+          <div className="select-container">
+            <Select
+              onChange={(e) => handleSelect(e)}
+              options={options}
+              placeholder="Pasirinkti vartotoją"
+              styles={customStyles}
+              value={
+                selectedUser
+                  ? { value: selectedUser._id, label: selectedUser.email }
+                  : null
+              }
+            />
+          </div>
+          <div className="admin-buttons">
+            <RiEdit2Line
+              size={50}
+              className="buttonIcons"
+              style={{ margin: 0 }}
+              onClick={() => {
+                setIsEditing(true);
+                setIsBeingDeleted(false);
+                setBeingCreated(false);
+              }}
+            />
+            <RiDeleteBinLine
+              size={50}
+              className="buttonIcons"
+              style={{ margin: 0 }}
+              onClick={() => {
+                setIsBeingDeleted(true);
+                setIsEditing(false);
+                setBeingCreated(false);
+              }}
+            />
+          </div>
+          <div>
+            {isEditing && (
+              <UserEditForm
+                setIsEditing={setIsEditing}
+                selectedUser={selectedUser}
+              />
+            )}
+            {isBeingDeleted && (
+              <UserDeleteConfirmation
+                setIsBeingDeleted={setIsBeingDeleted}
+                selectedUser={selectedUser}
+              />
+            )}
+            {beingCreated && (
+              <UserCreationForm setBeingCreated={setBeingCreated} />
+            )}
+          </div>
         </div>
       )}
-
-      <select
-        onChange={(e) => handleSelect(e)}
-        defaultValue=""
-        className="gradient-class"
-        style={{ cursor: "pointer", width: "35%" }}
-      >
-        <option value="">Pasirinkti vartotoją</option>
-        {usersJSX}
-      </select>
-      <div className="admin-buttons">
-        <RiEdit2Line
-          size={50}
-          className="buttonIcons"
-          onClick={() => {
-            setIsEditing(true);
-            setIsBeingDeleted(false);
-            setBeingCreated(false);
-          }}
-        />
-        <RiDeleteBinLine
-          size={50}
-          className="buttonIcons"
-          onClick={() => {
-            setIsBeingDeleted(true);
-            setIsEditing(false);
-            setBeingCreated(false);
-          }}
-        />
-      </div>
-      <div>
-        {isEditing && (
-          <UserEditForm
-            setIsEditing={setIsEditing}
-            selectedUser={selectedUser}
-          />
-        )}
-        {isBeingDeleted && (
-          <UserDeleteConfirmation
-            setIsBeingDeleted={setIsBeingDeleted}
-            selectedUser={selectedUser}
-          />
-        )}
-        {beingCreated && <UserCreationForm setBeingCreated={setBeingCreated}/>}
-      </div>
-    </div>
+    </>
   );
 }
 
