@@ -2,7 +2,7 @@ const Expense = require("./../models/expenseModel");
 
 exports.getExpenses = (req, res) => {
   const year = req.query.year;
-  let query = {userID: req.userID};
+  let query = { userID: req.userID };
   if (year) {
     const yearRegex = new RegExp(`^${year}`);
     query.date = { $regex: yearRegex };
@@ -24,7 +24,6 @@ exports.getExpenseById = (req, res) => {
 };
 
 exports.postExpense = (req, res) => {
-  console.log(req);
   let { name, date, amount, category } = req.body;
   let expense = new Expense({
     name: name,
@@ -35,6 +34,7 @@ exports.postExpense = (req, res) => {
   });
 
   expense.save().then((doc) => {
+    req.logger.info(`Vartotojas pridėjo išlaidą`);
     res.status(200).json(doc);
   });
 };
@@ -46,6 +46,7 @@ exports.editExpense = (req, res) => {
     runValidators: true,
   })
     .then((doc) => {
+      req.logger.info("Vartotojas redagavo išlaidą");
       res.status(200).json(doc);
     })
     .catch((error) => res.status(404).json(error));
@@ -55,6 +56,7 @@ exports.deleteExpense = (req, res) => {
   let { id } = req.params;
   Expense.findByIdAndDelete(id)
     .then((doc) => {
+      req.logger.info("Vartotojas panaikino išlaidą");
       res.status(200).json(doc);
     })
     .catch((error) => res.status(404).json(error));

@@ -35,6 +35,7 @@ exports.deleteBudget = (req, res) => {
     let { id } = req.params;
     Budget.findByIdAndDelete(id)
     .then((doc) => {
+        req.logger.info('Vartotojas panaikino biudžetą')
         res.status(200).json(doc);
     })
     .catch((error) => res.status(404).json(error));
@@ -47,6 +48,7 @@ exports.editBudget = (req, res) => {
         runValidators: true,
     })
     .then((doc) => {
+        req.logger.info("Vartotojas redagavo biudžetą")
         res.status(200).json(doc);
     })
     .catch((error) => res.status(404).json(error));
@@ -65,6 +67,7 @@ exports.createBudget = (req, res) => {
       expirationDate: expirationDate
     });
     budget.save().then((doc) => {
+      req.logger.info("Vartotojas sukūrė biudžetą")
       res.status(200).json(doc);
     });
   };

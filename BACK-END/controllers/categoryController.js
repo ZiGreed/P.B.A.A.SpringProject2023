@@ -37,6 +37,7 @@ exports.createCategory = (req, res) => {
         createdCategory
           .save()
           .then((doc) => {
+            req.logged.info('Administratorius sukūrė kategoriją')
             res.status(201).json(doc);
           })
           .catch((err) => res.status(404).json({ error: err.message }));
@@ -56,6 +57,7 @@ exports.editCategory = (req, res) => {
     runValidators: true,
   })
     .then((doc) => {
+      req.logger.info("Administratorius redagavo kategoriją")
       res.status(200).json(doc);
     })
     .catch((error) => res.status(404).json(error));
@@ -65,6 +67,7 @@ exports.deleteCategory = (req, res) => {
   let { id } = req.params;
   Category.findByIdAndDelete(id)
     .then((doc) => {
+      req.logger.info("Administratorius panaikino kategoriją")
       res.status(200).json(doc);
     })
     .catch((error) => res.status(404).json(error));

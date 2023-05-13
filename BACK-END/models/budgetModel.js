@@ -16,6 +16,7 @@ const budgetSchema = mongoose.Schema({
         type: Date,
         required: [true, 'Expiration date is required'],
     },
+    userID: String
 });
 
 const Budget = mongoose.model("Budget", budgetSchema);

@@ -2,11 +2,12 @@ const express = require("express");
 const userController = require("./../controllers/userController");
 const userRouter = express.Router();
 const auth = require("./../middleware/auth")
+const loggerMiddleware = require("./../middleware/logger");
 
 userRouter
 .route("/")
 .get(userController.getUsers)
-.post(userController.signup)
+.post(userController.createUser)
 
 userRouter
 .route("/:id")
