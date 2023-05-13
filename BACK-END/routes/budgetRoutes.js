@@ -7,12 +7,12 @@ const loggerMiddleware = require("./../middleware/logger");
 budgetRouter
   .route("/")
   .get(auth, budgetController.getBudgets)
-  .post(auth, budgetController.createBudget);
+  .post(auth, loggerMiddleware, budgetController.createBudget);
 
 budgetRouter
   .route("/:id")
-  .patch(auth, budgetController.editBudget)
-  .delete(auth, budgetController.deleteBudget)
+  .patch(auth, loggerMiddleware, budgetController.editBudget)
+  .delete(auth, loggerMiddleware, budgetController.deleteBudget)
   .get(auth, budgetController.getBudgetById);
 
 module.exports = budgetRouter;
