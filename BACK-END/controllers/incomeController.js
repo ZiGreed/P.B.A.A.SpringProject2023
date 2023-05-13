@@ -25,7 +25,6 @@ exports.getIncomeById = (req, res) => {
 };
 
 exports.postIncome = (req, res) => {
-  console.log(req)
   let { name, date, amount, category } = req.body;
   let income = new Income({
     name: name,
@@ -35,6 +34,7 @@ exports.postIncome = (req, res) => {
     userID : req.userID
   });
   income.save().then((doc) => {
+    req.logger.info(`Vartotojas pridėjo pajamą`);
     res.status(200).json(doc);
   });
 };
@@ -46,6 +46,7 @@ exports.editIncome = (req, res) => {
     runValidators: true,
   })
     .then((doc) => {
+      req.logger.info(`Vartotojas pridėjo pajamą`);
       res.status(200).json(doc);
     })
     .catch((error) => res.status(404).json(error));
@@ -55,6 +56,7 @@ exports.deleteIncome = (req, res) => {
   let { id } = req.params;
   Income.findByIdAndDelete(id)
     .then((doc) => {
+      req.logger.info(`Vartotojas pridėjo pajamą`);
       res.status(200).json(doc);
     })
     .catch((error) => res.status(404).json(error));

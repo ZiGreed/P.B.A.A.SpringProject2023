@@ -1,6 +1,7 @@
 const User = require("./../models/userModel");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const loggerMiddleware = require("./../middleware/logger");
 
 // Get all users
 exports.getUsers = (req, res) => {
@@ -14,6 +15,70 @@ exports.getUsers = (req, res) => {
     res.status(500).json({ error: "Įvyko klaida" });
   }
 };
+//create user
+exports.createUser = (req, res, next) => {
+  const { name, email, password, role } = req.body;
+  const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/;
+
+  if (!passwordRegex.test(password))
+    return res.status(422).json({
+      error:
+        "Slaptažodis turi būti mažiausiai 6 simbolių ilgio ir jį turėtų sudaryti raidės ir bent vienas skaičius ar specialusis simbolis",
+    });
+  else {
+    bcrypt.genSalt(10, (err, salt) => {
+      bcrypt.hash(password, salt, (err, passwordHash) => {
+        try {
+          User.findOne({ email: email }).then((existingUser) => {
+            if (existingUser) {
+              res
+                .status(422)
+                .json({ error: "Vartotojas egzistuoja. Prašome prisijungti" });
+            } else {
+              const createdUser = new User({
+                name,
+                email,
+                password: passwordHash,
+                role,
+              });
+              createdUser
+                .save()
+                
+                .then((doc) => {
+                  req.logger.info(`Administratorius sukūrė vartotoją ${createdUser.name}`)
+                  const token = jwt.sign(
+                    {
+                      id: createdUser._id,
+                      name: createdUser.name,
+                      email: createdUser.email,
+                      role: createdUser.role,
+                    },
+                    "TokenPassword"
+                  );
+                  //send the token in the cookie
+
+                  res
+                    .cookie("token", token, {
+                      httpOnly: true,
+                    })
+
+                    .send(doc);
+                })
+
+                .catch((error) =>
+                  res.status(404).json({ error: error.message })
+                );
+            }
+          });
+        } catch {
+          res.status(500).json({ error: "Registracija nepavyko" });
+        }
+      });
+    });
+  }
+};
+
+
 // Edit user
 exports.editUser = async (req, res) => {
   try {
@@ -71,9 +136,8 @@ exports.deleteUser = (req, res) => {
 
 //SIGN UP
 
-exports.signup = (req, res) => {
+exports.signup = (req, res, next) => {
   const { name, email, password, role } = req.body;
-  console.log(password);
   const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/;
 
   if (!passwordRegex.test(password))
@@ -109,15 +173,16 @@ exports.signup = (req, res) => {
                     },
                     "TokenPassword"
                   );
-
                   //send the token in the cookie
 
                   res
                     .cookie("token", token, {
                       httpOnly: true,
                     })
+
                     .send(doc);
                 })
+
                 .catch((error) =>
                   res.status(404).json({ error: error.message })
                 );
@@ -136,14 +201,18 @@ exports.login = async (req, res) => {
 
     const existingUser = await User.findOne({ email });
     if (!existingUser)
-      return res.status(401).json({ error: "Netinkamas el. paštas arba slaptažodis" });
+      return res
+        .status(401)
+        .json({ error: "Netinkamas el. paštas arba slaptažodis" });
 
     const passwordCorrect = await bcrypt.compare(
       password,
       existingUser.password
     );
     if (!passwordCorrect)
-      return res.status(401).json({ error: "Netinkamas el. paštas arba slaptažodis" });
+      return res
+        .status(401)
+        .json({ error: "Netinkamas el. paštas arba slaptažodis" });
 
     const token = jwt.sign(
       {
