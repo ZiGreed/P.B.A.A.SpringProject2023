@@ -8,6 +8,7 @@ const auth = (req, res, next) => {
 
         const verified = jwt.verify(token, "TokenPassword");
         req.userID = verified.id;
+        req.email = verified.email;
 
         next()
 
