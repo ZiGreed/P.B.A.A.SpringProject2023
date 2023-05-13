@@ -5,9 +5,7 @@ import "./ReadExpense.scss";
 import Vector from "./../assets/images/Vector.svg";
 import { deleteHandler } from "./servicces/deleteHandler";
 import { RiDeleteBinLine, RiEdit2Line } from "react-icons/ri";
-import { FaCat, FaHouseUser } from "react-icons/fa";
-import { GiGluttonousSmile } from "react-icons/gi";
-import { MdFastfood } from "react-icons/md";
+
 
 const expensesURL = "http://localhost:3000/expenses";
 
@@ -33,20 +31,6 @@ function ReadExpenses() {
   let expensesjsx = expenses.map((expense, index) => {
     return (
       <div className="card" key={expense._id}>
-        <div className="cardIcon">
-          {/* <img src="#" alt="icon/category" /> */}
-          {expense.category === "Kita" ? (
-            <FaCat size={30} />
-          ) : expense.category === "Buitis" ? (
-            <FaHouseUser size={30} />
-          ) : expense.category === "Pramogos" ? (
-            <GiGluttonousSmile size={30} />
-          ) : expense.category === "Maistas" ? (
-            <MdFastfood size={30} />
-          ) : (
-            <RiDeleteBinLine size={30} />
-          )}
-        </div>
 
         <div className="cardInfoWrapper">
           <div>{expense.name}</div>

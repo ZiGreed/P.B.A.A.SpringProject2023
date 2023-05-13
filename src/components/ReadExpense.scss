@@ -63,7 +63,7 @@
     border-radius: 15px;
     border: 1px solid transparent;
     display: grid;
-    grid-template-columns: 1fr 2fr 1fr;
+    grid-template-columns: auto auto auto;
     font-size: 1.2em;
     height: 170px;
     overflow: hidden;

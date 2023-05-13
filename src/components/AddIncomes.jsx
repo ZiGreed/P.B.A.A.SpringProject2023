@@ -1,19 +1,31 @@
 import { Formik, ErrorMessage } from "formik";
 import { Button, Form } from "react-bootstrap";
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import "./AddIncomes.scss";
-import { FaCat } from "react-icons/fa";
-import { GiReceiveMoney } from "react-icons/gi";
-import { HiGift } from "react-icons/hi";
 
 let BaseURL = "http://localhost:3000/incomes";
+const categoryURL = "http://localhost:3000/categories/";
 
 function AddIncomes() {
   const [submitted, setSubmitted] = useState(false);
   const navigate = useNavigate();
+  const [category, setCategory] = useState([new Set()]);
+
+  useEffect(() => {
+    axios
+      .get(categoryURL)
+      .then((response) => setCategory(response.data))
+      .catch((error) => console.log(error));
+  }, []);
+
+  const categoriesjsx = category.map((category, index) => (
+    <option value={category.category} key={index}>
+      {category.category}
+    </option>
+  ));
   return (
     <>
       {/* <div className="marginDiv"></div> */}
@@ -57,22 +69,6 @@ function AddIncomes() {
             resetForm,
           }) => (
             <Form onSubmit={handleSubmit} className="diagram-border p-4">
-              {values.category === "Kita" && (
-                <div className="text-center">
-                  <FaCat size={32} />
-                </div>
-              )}
-              {values.category === "Alga" && (
-                <div className="text-center">
-                  <GiReceiveMoney size={32} />
-                </div>
-              )}
-              {values.category === "Dovana" && (
-                <div className="text-center">
-                  <HiGift size={32} />
-                </div>
-              )}
-
               {submitted && <h4 style={{ color: "orange" }}>Pateikta!</h4>}
               <Form.Group className="p-2">
                 <Form.Label>Pavadinimas</Form.Label>
@@ -155,15 +151,12 @@ function AddIncomes() {
                   isInvalid={touched.category && !values.category}
                 >
                   <option value="">Pasirinkite Kategoriją</option>
-                  <option value="Alga">Alga</option>
-                  <option value="Dovana">Dovana</option>
-                  <option value="Kita">Kita</option>
+                  {categoriesjsx}
                 </Form.Control>
                 <span className="formError">
                   <ErrorMessage name="category" />
                 </span>
               </Form.Group>
-
 
               <div className="income_expensesBtn">
                 <Button
