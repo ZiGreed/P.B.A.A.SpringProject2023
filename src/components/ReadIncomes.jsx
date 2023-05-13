@@ -5,9 +5,6 @@ import "./ReadIncomes.scss";
 import Vector from "./../assets/images/Vector.svg";
 import { RiDeleteBinLine, RiEdit2Line } from "react-icons/ri";
 import { deleteHandler } from "./servicces/deleteHandler";
-import { FaCat } from "react-icons/fa"; 
-import { GiReceiveMoney } from "react-icons/gi";
-import { HiGift } from "react-icons/hi";
 
 const IncomesURL = "http://localhost:3000/incomes";
 
@@ -25,7 +22,7 @@ function ReadIncomes() {
     axios
       .delete(IncomesURL + "/" + id)
       .then((response) => {
-        setIncomes(incomes.filter((income) => income.id !== id));
+        setIncomes(incomes.filter((income) => income._id !== id));
       })
       .catch((error) => console.log(error));
   }
@@ -33,19 +30,6 @@ function ReadIncomes() {
   let incomesjsx = incomes.map((income, index) => {
     return (
       <div className="card" key={index}>
-        <div className="cardIcon">
-          {/* <img src="#" alt="icon/category" /> */}
-          {income.category === "Kita" ? (
-            <FaCat size={30} />
-          ) : income.category === "Alga" ? (
-            <GiReceiveMoney size={30} />
-          ) : income.category === "Dovana" ? (
-            <HiGift size={30} />
-          ) : (
-            <RiDeleteBinLine size={30} />
-          )}
-        </div>
-
         <div className="cardInfoWrapper">
           <div>{income.name}</div>
           <div>{income.date}</div>

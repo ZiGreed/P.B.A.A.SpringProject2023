@@ -5,32 +5,37 @@ import { useNavigate } from "react-router-dom";
 import { postData } from "../../services/api";
 import { useState, useEffect } from "react";
 import * as Yup from "yup";
-import { FaCat, FaHouseUser } from "react-icons/fa";
-import { GiGluttonousSmile } from "react-icons/gi";
-import { MdFastfood } from "react-icons/md";
 import axios from "axios";
-
 
 const expenseURL = "http://localhost:3000/expenses";
 const budgetURL = "http://localhost:3000/budget/";
-
+const categoryURL = "http://localhost:3000/categories/";
 
 function AddExpenses() {
   const [submitted, setSubmitted] = useState(false);
   const [expenses, setExpenses] = useState([]);
   const [budgets, setBudgets] = useState([]);
+  // const [category, setCategory] = useState([]);
+  const [category, setCategory] = useState([new Set()]);
   const [selectedCategory, setSelectedCategory] = useState("");
   const [expenseAmount, setExpenseAmount] = useState(0);
   const navigate = useNavigate();
 
   useEffect(() => {
-    axios.get(expenseURL)
-    .then((response) => setExpenses(response.data))
-    .catch((error) => console.error("Error fetching expenses data:", error));
+    axios
+      .get(expenseURL)
+      .then((response) => setExpenses(response.data))
+      .catch((error) => console.error("Error fetching expenses data:", error));
 
-    axios.get(budgetURL)
-    .then((response) => setBudgets(response.data))
-    .catch((error) => console.error("Error fetching budget data:", error));
+    axios
+      .get(budgetURL)
+      .then((response) => setBudgets(response.data))
+      .catch((error) => console.error("Error fetching budget data:", error));
+
+    axios
+      .get(categoryURL)
+      .then((response) => setCategory(response.data))
+      .catch((error) => console.log(error));
   }, []);
 
   const getCategoryBudgetLimit = (category) => {
@@ -49,14 +54,21 @@ function AddExpenses() {
   const handleCategoryChange = (event) => {
     // Update selectedCategory state with selected category from form
     setSelectedCategory(event);
-    console.log(selectedCategory)
+    console.log(selectedCategory);
   };
 
   const handleExpenseAmountChange = (event) => {
     // Update expenseAmount state with entered expense amount from form
     setExpenseAmount(parseFloat(event));
-    console.log(expenseAmount)
+    console.log(expenseAmount);
   };
+
+  const categoriesjsx = category.map((category, index) => (
+    <option value={category.category} key={index}>
+      {category.category}
+    </option>
+  ));
+
   return (
     <>
       <div className="incomes_expenses__background--color incomes_expenses-onMobile">
@@ -65,23 +77,19 @@ function AddExpenses() {
             name: "",
             amount: "",
             date: new Date().toISOString().slice(0, 10),
-            category: ""
+            category: "",
           }}
-          validationSchema={
-            Yup.object({
-              name: Yup.string()
+          validationSchema={Yup.object({
+            name: Yup.string()
               .required("Langelis būtinas")
               .min(2, "Pavadinimas per trumpas")
               .max(40, "Pavadinimas per ilgas"),
-              amount: Yup.number()
+            amount: Yup.number()
               .required("Langelis būtinas")
               .lessThan(1000000, "Suma turi būti mažesnė nei milijonas"),
-              date: Yup.date()
-              .max(new Date(), "data negali būti ateityje"),
-              category: Yup.string()
-              .required("Būtina pasirinkti kategoriją")
-            })
-          }
+            date: Yup.date().max(new Date(), "data negali būti ateityje"),
+            category: Yup.string().required("Būtina pasirinkti kategoriją"),
+          })}
           onSubmit={(values, { resetForm }) => {
             postData(values, expenseURL);
             console.log(values);
@@ -101,37 +109,20 @@ function AddExpenses() {
             resetForm,
           }) => (
             <Form onSubmit={handleSubmit} className="diagram-border p-4">
-               {values.category === "Kita" && (
-                <div className="text-center">
-                  <FaCat size={32} />
-                </div>
-               )}
-                {values.category === "Buitis" && (
-                <div className="text-center">
-                  <FaHouseUser size={32} /> 
-                </div>
-               )}
-                {values.category === "Pramogos" && (
-                <div className="text-center">
-                  <GiGluttonousSmile size={32} /> 
-                </div>
-               )}
-                {values.category === "Maistas" && (
-                <div className="text-center">
-                  <MdFastfood size={32} /> 
-                </div>
-               )}
-              {submitted && (<h4 style={{color: "orange"}}>Pateikta!</h4>)}
+              
+              {submitted && <h4 style={{ color: "orange" }}>Pateikta!</h4>}
               {selectedCategory && expenseAmount > 0 && (
-        <div style={{ color: "red" }}>
-          {calculateTotalExpenseAmount(selectedCategory) + expenseAmount >
-            getCategoryBudgetLimit(selectedCategory) && (
-            <div>
-              Total expenses amount for {selectedCategory} exceeds the budget limit
-            </div>
-          )}
-        </div>
-      )}
+                <div style={{ color: "red" }}>
+                  {calculateTotalExpenseAmount(selectedCategory) +
+                    expenseAmount >
+                    getCategoryBudgetLimit(selectedCategory) && (
+                    <div>
+                      Total expenses amount for {selectedCategory} exceeds the
+                      budget limit
+                    </div>
+                  )}
+                </div>
+              )}
               <Form.Group className="p-2">
                 <Form.Label>Pavadinimas</Form.Label>
                 <Form.Control
@@ -146,37 +137,37 @@ function AddExpenses() {
                   maxLength={50}
                 />
                 <span className="formError">
-                <ErrorMessage name="name" />
+                  <ErrorMessage name="name" />
                 </span>
               </Form.Group>
 
               <Form.Group className="p-2">
-              <Form.Label>Suma</Form.Label>
-              <Form.Control
-                className="incomes_expensesFields"
-                type="number"
-                step="0.01"
-                placeholder="Suma"
-                name="amount"
-                onChange={(e) => {
-                  handleChange(e);
-                  handleExpenseAmountChange(e.target.value);
-                }}
-                onBlur={(e) => {
-                  let value = parseFloat(e.target.value).toFixed(2);
-                  if (isNaN(value)) {
-                    value = "";
-                  }
-                  e.target.value = value;
-                  handleBlur(e);
-                }}
-                value={values.amount}
-                isInvalid={touched.amount && !values.amount}
-              />
-              <span className="formError">
-                <ErrorMessage name="amount" />
-              </span>
-            </Form.Group>
+                <Form.Label>Suma</Form.Label>
+                <Form.Control
+                  className="incomes_expensesFields"
+                  type="number"
+                  step="0.01"
+                  placeholder="Suma"
+                  name="amount"
+                  onChange={(e) => {
+                    handleChange(e);
+                    handleExpenseAmountChange(e.target.value);
+                  }}
+                  onBlur={(e) => {
+                    let value = parseFloat(e.target.value).toFixed(2);
+                    if (isNaN(value)) {
+                      value = "";
+                    }
+                    e.target.value = value;
+                    handleBlur(e);
+                  }}
+                  value={values.amount}
+                  isInvalid={touched.amount && !values.amount}
+                />
+                <span className="formError">
+                  <ErrorMessage name="amount" />
+                </span>
+              </Form.Group>
 
               <Form.Group className="p-2">
                 <Form.Label>Data</Form.Label>
@@ -196,30 +187,27 @@ function AddExpenses() {
               </Form.Group>
 
               <Form.Group className="p-2">
-              <Form.Label>Kategorija</Form.Label>
-              <Form.Control
-                as="select"
-                className="incomes_expensesFields select-dark"
-                name="category"
-                onChange={(e) => {
-                  handleChange(e);
-                  handleCategoryChange(e.target.value);
-                }}
-                onBlur={handleBlur}
-                value={values.category}
-                isInvalid={touched.category && !values.category}
-              >
-                <option value="">Pasirinkite Kategoriją</option>
-                <option value="Maistas">Maistas</option>
-                <option value="Pramogos">Pramogos</option>
-                <option value="Buitis">Buitis</option>
-                <option value="Kita">Kita</option>
-              </Form.Control>
-            <span className="formError">
-            <ErrorMessage name="category" />
-            </span>
-          </Form.Group>
-          
+                <Form.Label>Kategorija</Form.Label>
+                <Form.Control
+                  as="select"
+                  className="incomes_expensesFields select-dark"
+                  name="category"
+                  onChange={(e) => {
+                    handleChange(e);
+                    handleCategoryChange(e.target.value);
+                  }}
+                  onBlur={handleBlur}
+                  value={values.category}
+                  isInvalid={touched.category && !values.category}
+                >
+                  <option value="">Pasirinkite Kategoriją</option>
+                  {categoriesjsx}
+                </Form.Control>
+                <span className="formError">
+                  <ErrorMessage name="category" />
+                </span>
+              </Form.Group>
+
               <div className="income_expensesBtn">
                 <Button
                   className="income_expensesBtn"
@@ -237,8 +225,11 @@ function AddExpenses() {
                 >
                   Pateikti
                 </Button>
-                <Button variant="primary" onClick={() => navigate("/expenses/")}>
-                Išlaidų sąrašas
+                <Button
+                  variant="primary"
+                  onClick={() => navigate("/expenses/")}
+                >
+                  Išlaidų sąrašas
                 </Button>
               </div>
             </Form>
