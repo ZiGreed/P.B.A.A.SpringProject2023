@@ -71,6 +71,7 @@
     position: relative;
     align-self: stretch;
     justify-self: stretch;
+    align-items: center;
 }
 .buttonIcons:hover {
     cursor: pointer;
@@ -82,6 +83,10 @@
 .cardInfoWrapper {
     justify-self: start;
     align-self: center;
+    justify-self: center;
+}
+#budgetLimit {
+  color: #909397;
 }
 .cardPriceRed{
     color: #EF0107 ;
@@ -138,6 +143,7 @@
     display: flex;
     flex-direction: row;
     gap: 30px;
+    justify-self: center;
 }
 
 //Scrollbar
