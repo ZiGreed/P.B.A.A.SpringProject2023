@@ -72,9 +72,9 @@ function UserCreationForm({ setBeingCreated }) {
       }
       console.log(values);
     },
-  });
+  })
   return (
-    <div className={windowSize < 768 && "admin-panel"}>
+    <div className={windowSize < 768 ? "admin-panel" : ""}>
       <form onSubmit={formik.handleSubmit} className="loginForm">
         <input
           type="text"
