@@ -1,5 +1,3 @@
-//PIRKIMU-PARDAVIMU ISTORIJA
-
 import { useState, useEffect } from "react";
 import axios from "axios";
 import "./Calendar.css";
@@ -30,37 +28,43 @@ function Calendar() {
   });
 
   useEffect(() => {
-    const fetchData = async () => {
+    fetchData();
+  }, []);
+
+  async function fetchData() {
+    try {
       const [incomesResponse, expensesResponse] = await Promise.all([
         axios.get(incomesURL),
         axios.get(expensesURL),
       ]);
       setIncomes(incomesResponse.data);
       setExpenses(expensesResponse.data);
-    };
-    fetchData();
-  }, []);
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
-  function deleteAllData(id) {
-    Promise.all([
-      axios.delete(incomesURL + "/" + id),
-      axios.delete(expensesURL + "/" + id),
-    ])
-      .then((responses) => {
-        console.log(responses[0].data);
-        console.log(responses[1].data);
-        setIncomes(allData.filter((expense) => expense.id !== id));
-      })
-      .catch((error) => console.log(error));
+  async function deleteAllData(id) {
+    try {
+      await Promise.all([
+        axios.delete(incomesURL + "/" + id),
+        axios.delete(expensesURL + "/" + id),
+      ]);
+      setIncomes(incomes.filter((income) => income._id !== id));
+      setExpenses(expenses.filter((expense) => expense._id !== id));
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   const allData = [...incomeSign, ...expenseSign].sort((a, b) => {
     return new Date(b.date) - new Date(a.date);
   });
 
-  let transferjsx = allData.map((transfer, index) => {
+  const transferjsx = allData.map((transfer) => {
+  
     return (
-      <div className="historyCard" key={index}>
+      <div className="historyCard" key={transfer._id}>
         <div className="historyInfo">
           <div className="cardInfo">
             <IconHistory />
@@ -70,18 +74,13 @@ function Calendar() {
             </div>
           </div>
           <p className={transfer.amount[0] === "+" ? "greenClass" : "redClass"}>
-            {transfer.amount}
-          </p>
+            {transfer.amount}</p>
         </div>
-
+  
         <div className="transferButtons">
           <div className="buttonIcons">
             <Link
-              to={
-                transfer.amount[0] === "+"
-                  ? "/incomes/" + transfer._id
-                  : "/expenses/" + transfer._id
-              }
+              to={transfer.amount > 0 ? "/incomes/" + transfer._id : "/expenses/" + transfer._id}
               className="buttonIcons"
             >
               <RiEdit2Line size={30} />
