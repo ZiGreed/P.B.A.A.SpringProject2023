@@ -6,6 +6,7 @@ import Vector from "./../assets/images/Vector.svg";
 import { deleteHandler } from "./servicces/deleteHandler";
 import { RiDeleteBinLine, RiEdit2Line } from "react-icons/ri";
 import Papa from 'papaparse';
+import { Button } from "react-bootstrap";
 
 
 const expensesURL = "http://localhost:3000/expenses";
@@ -79,9 +80,11 @@ function ReadExpenses() {
         <div className="cardsContainerBorder">
           <div className="cardsContainer overflowHidden">{expensesjsx}</div>
         </div>
-        <button className="income_expensesBtn" onClick={handleExport}>
-            Export CSV
-          </button>
+        <div className="budgetBtnContainer">
+          <Button className="budgetBtn" onClick={handleExport}>
+              Export CSV
+          </Button>
+        </div>
         <div className="LinkWrapper">
           <Link to="/addexpense/" className="LinkButton">
             <button className="buttonAdd">
