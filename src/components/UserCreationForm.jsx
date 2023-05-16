@@ -5,9 +5,10 @@ import { RiEyeFill, RiEyeOffFill } from "react-icons/ri";
 import useWindowSize from "./useWindowSize";
 import Select from "react-select";
 
-function UserCreationForm({ setBeingCreated }) {
+function UserCreationForm({ setBeingCreated, setUsers }) {
   const baseURL = "http://localhost:3000/users/";
   const [error, setError] = useState(null);
+  const [isSubmitted, setIsSubmitted] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
 
   let windowSize = useWindowSize();
@@ -66,6 +67,9 @@ function UserCreationForm({ setBeingCreated }) {
     onSubmit: async (values, { resetForm }) => {
       try {
         await addUser(baseURL, values);
+        await setUsers(prevUsers => [...prevUsers, values]);
+        setIsSubmitted(true)
+        setTimeout(() => setIsSubmitted(false), 2000)
         resetForm();
       } catch (error) {
         setError(error.response.data.error);
@@ -153,6 +157,8 @@ function UserCreationForm({ setBeingCreated }) {
             Atgal
           </button>
         </div>
+        {isSubmitted && <div>Vartotojas sukurtas</div>}
+        {error && <div>{error}</div>}
       </form>
     </div>
   );
