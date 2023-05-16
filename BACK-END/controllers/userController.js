@@ -33,7 +33,7 @@ exports.createUser = (req, res, next) => {
             if (existingUser) {
               res
                 .status(422)
-                .json({ error: "Vartotojas egzistuoja. Prašome prisijungti" });
+                .json({ error: "Vartotojas egzistuoja." });
             } else {
               const createdUser = new User({
                 name,
@@ -43,26 +43,11 @@ exports.createUser = (req, res, next) => {
               });
               createdUser
                 .save()
-                
+
                 .then((doc) => {
-                  req.logger.info(`Administratorius sukūrė vartotoją ${createdUser.name}`)
-                  const token = jwt.sign(
-                    {
-                      id: createdUser._id,
-                      name: createdUser.name,
-                      email: createdUser.email,
-                      role: createdUser.role,
-                    },
-                    "TokenPassword"
+                  req.logger.info(
+                    `Administratorius sukūrė vartotoją ${createdUser.email}`
                   );
-                  //send the token in the cookie
-
-                  res
-                    .cookie("token", token, {
-                      httpOnly: true,
-                    })
-
-                    .send(doc);
                 })
 
                 .catch((error) =>
@@ -78,17 +63,17 @@ exports.createUser = (req, res, next) => {
   }
 };
 
-
 // Edit user
 exports.editUser = async (req, res) => {
   try {
     const { id } = req.params;
-    const { name, email, password, role } = req.body;
+
+    const { name, email, password } = req.body;
 
     // Get the current user from the JWT token
     const token = req.cookies.token;
     const decoded = jwt.verify(token, "TokenPassword");
-    const currentUser = await User.findById(decoded.user);
+    const currentUser = await User.findById(decoded.id);
 
     // Check if the current user is an admin or the user being edited
     if (currentUser.role !== "admin" && currentUser._id.toString() !== id) {
@@ -108,18 +93,21 @@ exports.editUser = async (req, res) => {
       {
         name: name || undefined,
         email: email || undefined,
-        password: passwordHash || undefined,
-        role: role || undefined,
+        password: passwordHash || undefined
       },
       { new: true, runValidators: true }
     );
 
+      
+
     if (!updatedUser) {
       return res.status(404).json({ error: "Vartotojas nerastas" });
     }
+    req.logger.info(`Administratorius redagavo vartotoją ${updatedUser.email}`)
 
     res.status(200).json(updatedUser);
   } catch (err) {
+    
     res.status(500).json({ error: "Įvyko klaida" });
   }
 };
@@ -130,6 +118,7 @@ exports.deleteUser = (req, res) => {
   User.findByIdAndDelete(id)
     .then((doc) => {
       res.status(200).json(doc);
+      req.logger.info(`Administratorius panaikino vartotoją ${doc.email}`)
     })
     .catch((error) => res.status(404).json(error));
 };
@@ -182,6 +171,10 @@ exports.signup = (req, res, next) => {
 
                     .send(doc);
                 })
+                .then(() => {
+                  req._id = createdUser._id;
+                  next();
+                })
 
                 .catch((error) =>
                   res.status(404).json({ error: error.message })
@@ -195,7 +188,7 @@ exports.signup = (req, res, next) => {
     });
   }
 };
-exports.login = async (req, res) => {
+exports.login = async (req, res, next) => {
   try {
     const { email, password } = req.body;
 
@@ -223,7 +216,8 @@ exports.login = async (req, res) => {
       },
       "TokenPassword"
     );
-
+    req._id = existingUser._id;
+    next();
     //send the token in the cookie
 
     res
@@ -236,13 +230,15 @@ exports.login = async (req, res) => {
   }
 };
 
-exports.logout = (req, res) => {
+exports.logout = (req, res, next) => {
   res
     .cookie("token", "", {
       httpOnly: true,
       expires: new Date(0),
     })
-    .send();
+    .end(() => {
+      next();
+    });
 };
 
 exports.loggedIn = (req, res) => {

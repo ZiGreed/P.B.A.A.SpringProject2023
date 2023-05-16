@@ -8,8 +8,8 @@ function UserEditForm({ setIsEditing, selectedUser }) {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const formik = useFormik({
     initialValues: {
-      name: "",
-      email: "",
+      name: selectedUser?.name || "",
+      email: selectedUser?.email || "",
       password: "",
     },
     onSubmit: async (values) => {
@@ -31,6 +31,10 @@ function UserEditForm({ setIsEditing, selectedUser }) {
       });
     }
   }, [selectedUser]);
+
+  if (!selectedUser) {
+    return null; // Render nothing if selectedUser is not available
+  }
 
   return (
     <div>
@@ -82,7 +86,7 @@ function UserEditForm({ setIsEditing, selectedUser }) {
             Atšaukti
           </button>
         </div>
-        {isSubmitted && <div>Vartotojas sėkmingai redaguotas</div>}
+        {isSubmitted && !error && <div>Vartotojas sėkmingai redaguotas</div>}
         {error && <div className="error">Įvyko klaida</div>}
       </form>
     </div>
