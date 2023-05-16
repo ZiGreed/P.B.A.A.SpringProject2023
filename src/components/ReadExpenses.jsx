@@ -5,6 +5,8 @@ import "./ReadExpense.scss";
 import Vector from "./../assets/images/Vector.svg";
 import { deleteHandler } from "./servicces/deleteHandler";
 import { RiDeleteBinLine, RiEdit2Line } from "react-icons/ri";
+import Papa from 'papaparse';
+import { Button } from "react-bootstrap";
 
 
 const expensesURL = "http://localhost:3000/expenses";
@@ -28,6 +30,18 @@ function ReadExpenses() {
       .catch((error) => console.log(error));
   }
 
+  const handleExport = () => {
+    const csv = Papa.unparse(expenses, {
+      header: true,
+    });
+
+    const csvData = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+    const csvURL = URL.createObjectURL(csvData);
+    const link = document.createElement('a');
+    link.href = csvURL;
+    link.setAttribute('download', 'expenses.csv');
+    link.click();
+  };
   let expensesjsx = expenses.map((expense, index) => {
     return (
       <div className="card" key={expense._id}>
@@ -38,24 +52,7 @@ function ReadExpenses() {
         </div>
         <div className="cardPriceRed">-{expense.amount} €</div>
 
-        
-          {/* <div className="ButtonsContainer">
-            <div className="buttonIcons">
-              <Link to={"/expenses/" + expense._id} className="buttonIcons">
-                <RiEdit2Line
-                size={30}
-                />
-              </Link>
-            </div>
-            <div className="buttonIcons">
-              <RiDeleteBinLine
-                size={30}
-                onClick={() => {
-                  deleteHandler(expense, deleteExpense);
-                }}
-              />
-            </div> */}
-
+      
         <div className="ButtonsContainer">
           <div className="buttonIcons">
             <Link to={"/expenses/" + expense._id} className="buttonIcons">
@@ -82,6 +79,11 @@ function ReadExpenses() {
       <div className="cardsWrapper">
         <div className="cardsContainerBorder">
           <div className="cardsContainer overflowHidden">{expensesjsx}</div>
+        </div>
+        <div className="budgetBtnContainer">
+          <Button className="budgetBtn" onClick={handleExport}>
+              Export CSV
+          </Button>
         </div>
         <div className="LinkWrapper">
           <Link to="/addexpense/" className="LinkButton">

@@ -9,10 +9,22 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 
 const budgetURL = "http://localhost:3000/budget/";
-
+const categoryURL = "http://localhost:3000/categories/";
 function AddBudget() {
   const navigate = useNavigate();
   const [submitted, setSubmitted] = useState();
+  const [category, setCategory] = useState([new Set()]);
+  useEffect(() => {
+    axios
+      .get(categoryURL)
+      .then((response) => setCategory(response.data))
+      .catch((error) => console.log(error));
+  }, []);
+  const categoriesjsx = category.map((category, index) => (
+    <option value={category.category} key={index}>
+      {category.category}
+    </option>
+  ));
     return ( 
         <>
         <div className="incomes_expenses__background--color incomes_expenses-onMobile">
@@ -74,20 +86,21 @@ function AddBudget() {
               <Form.Group className="p-2">
                 <Form.Label>Kategorija</Form.Label>
                 <Form.Control
+                  as="select"
                   className="incomes_expensesFields select-dark"
-                  type="text"
-                  placeholder="Kategorija"
                   name="category"
                   onChange={handleChange}
                   onBlur={handleBlur}
                   value={values.category}
                   isInvalid={touched.category && !values.category}
-                  maxLength={25}
-                />
+                >
+                  <option value="">Pasirinkite Kategoriją</option>
+                  {categoriesjsx}
+                </Form.Control>
                 <span className="formError">
-                <ErrorMessage name="category" />
+                  <ErrorMessage name="category" />
                 </span>
-              </Form.Group>          
+              </Form.Group>
               <div className="income_expensesBtn">
                 <Button
                   className="income_expensesBtn"

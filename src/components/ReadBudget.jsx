@@ -32,9 +32,9 @@ function ReadBudget() {
   let budgetjsx = budgetData.filter(budget => new Date(budget.expirationDate) > currentDate).map((budget, index) => {
     return (
       <div className="card" key={index}>
-          <div className="cardIndoWrapper">
+          <div className="cardInfoWrapper">
               <div>{budget.category}</div>
-              <div>{budget.limit}</div>
+              <div id="budgetLimit">{budget.limit} €</div>
           </div>
           <div className="ButtonsContainer">
           <div className="buttonIcons">

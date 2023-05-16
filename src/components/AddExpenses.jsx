@@ -46,8 +46,13 @@ function AddExpenses() {
   const calculateTotalExpenseAmount = () => {
     // Calculate total sum of expenses amounts
     let totalAmount = 0;
+    // expenses.forEach((expense) => {
+    //   totalAmount += parseFloat(expense.amount);
+    // });
     expenses.forEach((expense) => {
-      totalAmount += parseFloat(expense.amount);
+      if (expense.category === selectedCategory) {
+        totalAmount += parseFloat(expense.amount);
+      }
     });
     return totalAmount;
   };
@@ -56,7 +61,6 @@ function AddExpenses() {
     setSelectedCategory(event);
     console.log(selectedCategory);
   };
-
   const handleExpenseAmountChange = (event) => {
     // Update expenseAmount state with entered expense amount from form
     setExpenseAmount(parseFloat(event));
@@ -113,7 +117,7 @@ function AddExpenses() {
               {submitted && <h4 style={{ color: "orange" }}>Pateikta!</h4>}
               {selectedCategory && expenseAmount > 0 && (
                 <div style={{ color: "red" }}>
-                  {calculateTotalExpenseAmount(selectedCategory) +
+                  {getCategoryBudgetLimit(selectedCategory) > 0 && calculateTotalExpenseAmount(selectedCategory) +
                     expenseAmount >
                     getCategoryBudgetLimit(selectedCategory) && (
                     <div>
