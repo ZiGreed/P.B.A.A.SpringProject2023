@@ -7,19 +7,48 @@ import { deleteHandler } from "./servicces/deleteHandler";
 import { RiDeleteBinLine, RiEdit2Line } from "react-icons/ri";
 import Papa from 'papaparse';
 import { Button } from "react-bootstrap";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
-
+const categoryURL = "http://localhost:3000/categories/";
 const expensesURL = "http://localhost:3000/expenses";
 
 function ReadExpenses() {
   const [expenses, setExpenses] = useState([]);
+  const [fromDate, setFromDate] = useState(null);
+  const [toDate, setToDate] = useState(null);
+  const [selectedCategory, setSelectedCategory] = useState('');
+  const [category, setCategory] = useState([new Set()]);
+
+
+
+
+  const handleFromDateChange = (date) => {
+    setFromDate(date);
+  };
+  
+  const handleToDateChange = (date) => {
+    setToDate(date);
+  };
+  const handleCategoryChange = (event) => {
+    setSelectedCategory(event.target.value);
+  };
+
 
   useEffect(() => {
+    const params = {
+      from: fromDate ? fromDate.toISOString() : null,
+      to: toDate ? toDate.toISOString() : null,
+    };
     axios
-      .get(expensesURL)
+      .get(expensesURL, { params })
       .then((response) => setExpenses(response.data))
       .catch((error) => console.log(error));
-  }, []);
+      axios
+      .get(categoryURL)
+      .then((response) => setCategory(response.data))
+      .catch((error) => console.log(error));
+  }, [fromDate, toDate]);
 
   function deleteExpense(id) {
     axios
@@ -42,7 +71,34 @@ function ReadExpenses() {
     link.setAttribute('download', 'expenses.csv');
     link.click();
   };
-  let expensesjsx = expenses.map((expense, index) => {
+
+
+  const filteredExpenses = expenses.filter((expense) => {
+    const expenseDate = new Date(expense.date);
+    if (fromDate && expenseDate < fromDate) {
+      return false;
+    }
+    if (toDate && expenseDate > toDate) {
+      return false;
+    }
+    if (selectedCategory && expense.category !== selectedCategory) {
+      return false;
+    }
+    return true;
+  });
+
+const categoriesOptions = category.map((category, index) => (
+  <option value={category.category} key={index}>
+    {category.category}
+  </option>
+));
+const handleResetFilters = () => {
+  setSelectedCategory('');
+  setFromDate(null);
+  setToDate(null);
+};
+
+  let expensesjsx = filteredExpenses.map((expense, index) => {
     return (
       <div className="card" key={expense._id}>
 
@@ -77,12 +133,34 @@ function ReadExpenses() {
     <>
     <div className="readExpenseIncomejsx">
       <div className="cardsWrapper">
+        <div className="filtersContainer">
+          <div className="filterItem">
+            <span>Kategorija:</span>
+            <br />
+            <select style={{width: "150px"}} className="customDatePicker" value={selectedCategory} onChange={handleCategoryChange}>
+              <option value="">Visos kategorijos</option>
+              {categoriesOptions}
+            </select>
+          </div>
+          <div className="filterItem">
+            <span>Nuo:</span>
+            <DatePicker className="customDatePicker" selected={fromDate} onChange={handleFromDateChange} />
+          </div>
+          <div className="filterItem">
+            <span>Iki:</span>
+            <DatePicker className="customDatePicker" selected={toDate} onChange={handleToDateChange} />
+          </div>
+          
+          <Button style={{width: "100px"}} className="budgetBtn" onClick={handleResetFilters}>
+            Atstatyti
+          </Button>
+        </div>
         <div className="cardsContainerBorder">
           <div className="cardsContainer overflowHidden">{expensesjsx}</div>
         </div>
         <div className="budgetBtnContainer">
           <Button className="budgetBtn" onClick={handleExport}>
-              Export CSV
+          eksportuoti CSV
           </Button>
         </div>
         <div className="LinkWrapper">
