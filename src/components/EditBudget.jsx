@@ -7,15 +7,14 @@ import { useState } from "react";
 import * as Yup from "yup";
 import axios from "axios";
 import { useParams } from "react-router-dom";
-// import { FaCat, FaHouseUser } from "react-icons/fa";
-// import { GiGluttonousSmile } from "react-icons/gi";
-// import { MdFastfood } from "react-icons/md";
 
 const budgetURL = "http://localhost:3000/budget/";
+const categoryURL = "http://localhost:3000/categories/";
 
 function EditBudget() {
   const { id } = useParams();
   const navigate = useNavigate();
+  const [category, setCategory] = useState([new Set()]);
   const [selectedEdit, setSelectedEdit] = useState({
     limit: "",
     category: ""
@@ -25,7 +24,18 @@ function EditBudget() {
     axios.get(budgetURL + id)
     .then((response) => setSelectedEdit(response.data))
     .catch(err => console.log(err));
+
+    axios
+    .get(categoryURL)
+    .then((response) => setCategory(response.data))
+    .catch((error) => console.log(error));
   }, [id]);
+
+  const categoriesjsx = category.map((category, index) => (
+    <option value={category.category} key={index}>
+      {category.category}
+    </option>
+  ));
     return ( 
         <>
         
@@ -85,18 +95,19 @@ function EditBudget() {
               <Form.Group className="p-2">
                 <Form.Label>Kategorija</Form.Label>
                 <Form.Control
+                  as="select"
                   className="incomes_expensesFields select-dark"
-                  type="text"
-                  placeholder="Kategorija"
                   name="category"
                   onChange={handleChange}
                   onBlur={handleBlur}
                   value={values.category}
                   isInvalid={touched.category && !values.category}
-                  maxLength={25}
-                />
+                >
+                  <option value="">Pasirinkite Kategoriją</option>
+                  {categoriesjsx}
+                </Form.Control>
                 <span className="formError">
-                <ErrorMessage name="category" />
+                  <ErrorMessage name="category" />
                 </span>
               </Form.Group>
               <div className="income_expensesBtn">
