@@ -1,3 +1,4 @@
+import React from "react";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
@@ -5,7 +6,6 @@ import "./ReadExpense.scss";
 import Vector from "./../assets/images/Vector.svg";
 import { deleteHandler } from "./servicces/deleteHandler";
 import { RiDeleteBinLine, RiEdit2Line } from "react-icons/ri";
-
 
 const expensesURL = "http://localhost:3000/expenses";
 
@@ -17,6 +17,7 @@ function ReadExpenses() {
       .get(expensesURL)
       .then((response) => setExpenses(response.data))
       .catch((error) => console.log(error));
+ 
   }, []);
 
   function deleteExpense(id) {
@@ -31,15 +32,14 @@ function ReadExpenses() {
   let expensesjsx = expenses.map((expense, index) => {
     return (
       <div className="card" key={expense._id}>
-
         <div className="cardInfoWrapper">
           <div>{expense.name}</div>
-          <div>{expense.date.slice(0,10)}</div>
+          <div>{expense.date.slice(0, 10)}</div>
+          <div><b>Kategorija: </b> {expense.category}</div>
         </div>
         <div className="cardPriceRed">-{expense.amount} €</div>
 
-        
-          {/* <div className="ButtonsContainer">
+        {/* <div className="ButtonsContainer">
             <div className="buttonIcons">
               <Link to={"/expenses/" + expense._id} className="buttonIcons">
                 <RiEdit2Line
@@ -59,7 +59,6 @@ function ReadExpenses() {
         <div className="ButtonsContainer">
           <div className="buttonIcons">
             <Link to={"/expenses/" + expense._id} className="buttonIcons">
-
               <RiEdit2Line size={30} />
             </Link>
           </div>
@@ -78,20 +77,20 @@ function ReadExpenses() {
 
   return (
     <>
-    <div className="readExpenseIncomejsx">
-      <div className="cardsWrapper">
-        <div className="cardsContainerBorder">
-          <div className="cardsContainer overflowHidden">{expensesjsx}</div>
-        </div>
-        <div className="LinkWrapper">
-          <Link to="/addexpense/" className="LinkButton">
-            <button className="buttonAdd">
-              <img src={Vector} alt="" />
-            </button>
-          </Link>
+      <div className="readExpenseIncomejsx">
+        <div className="cardsWrapper">
+          <div className="cardsContainerBorder">
+            <div className="cardsContainer overflowHidden">{expensesjsx}</div>
+          </div>
+          <div className="LinkWrapper">
+            <Link to="/addexpense/" className="LinkButton">
+              <button className="buttonAdd">
+                <img src={Vector} alt="" />
+              </button>
+            </Link>
+          </div>
         </div>
       </div>
-    </div>
     </>
   );
 }

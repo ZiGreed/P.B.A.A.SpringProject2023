@@ -33,6 +33,7 @@ function ReadIncomes() {
         <div className="cardInfoWrapper">
           <div>{income.name}</div>
           <div>{income.date}</div>
+          <div><b>Kategorija: </b> {income.category}</div>
         </div>
         <div className="cardPriceGreen">+{income.amount} €</div>
 
