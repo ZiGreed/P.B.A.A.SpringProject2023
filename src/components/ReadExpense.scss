@@ -261,4 +261,31 @@
     margin-right: 20%;
   
   }
-  
+  .filtersContainer {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    justify-content: space-between;
+    justify-items: center;
+    padding: 0 0 10px 0;
+    width: 60%;
+    margin: 0 auto;
+  }
+  .filterItem {
+    color: white;
+    width: 100px;
+
+  }
+  .customDatePicker {
+    width: 100px;
+    background-color: #2d8cff;
+    // background-color: ;
+    border: 1px solid #980cdd;
+  }
+  @media only screen and (max-width: 787px) {
+    .filtersContainer{
+      margin: 0;
+    }
+    .customDatePicker{
+      width: 75px;
+    }
+  }
