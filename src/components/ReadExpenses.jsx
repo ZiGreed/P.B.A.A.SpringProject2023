@@ -128,7 +128,10 @@ const handleResetFilters = () => {
       </div>
     );
   });
-
+  const TotalAmount = () => {
+    const totalAmount = expenses.reduce((acc, item) => acc + item.amount, 0);
+    return <><div style={{color: "white"}}>Suma: -{totalAmount}€</div></>;
+  }
   return (
     <>
     <div className="readExpenseIncomejsx">
@@ -155,6 +158,7 @@ const handleResetFilters = () => {
             Atstatyti
           </Button>
         </div>
+        {TotalAmount()}
         <div className="cardsContainerBorder">
           <div className="cardsContainer overflowHidden">{expensesjsx}</div>
         </div>
