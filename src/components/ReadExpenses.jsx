@@ -1,3 +1,4 @@
+import React from "react";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
@@ -44,11 +45,13 @@ function ReadExpenses() {
       .get(expensesURL, { params })
       .then((response) => setExpenses(response.data))
       .catch((error) => console.log(error));
+    
       axios
       .get(categoryURL)
       .then((response) => setCategory(response.data))
       .catch((error) => console.log(error));
   }, [fromDate, toDate]);
+}, []);
 
   function deleteExpense(id) {
     axios
@@ -101,18 +104,15 @@ const handleResetFilters = () => {
   let expensesjsx = filteredExpenses.map((expense, index) => {
     return (
       <div className="card" key={expense._id}>
-
         <div className="cardInfoWrapper">
           <div>{expense.name}</div>
-          <div>{expense.date.slice(0,10)}</div>
+          <div>{expense.date.slice(0, 10)}</div>
+          <div><b>Kategorija: </b> {expense.category}</div>
         </div>
         <div className="cardPriceRed">-{expense.amount} €</div>
-
-      
         <div className="ButtonsContainer">
           <div className="buttonIcons">
             <Link to={"/expenses/" + expense._id} className="buttonIcons">
-
               <RiEdit2Line size={30} />
             </Link>
           </div>
@@ -175,7 +175,6 @@ const handleResetFilters = () => {
           </Link>
         </div>
       </div>
-    </div>
     </>
   );
 }
