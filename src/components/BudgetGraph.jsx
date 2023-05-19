@@ -40,7 +40,7 @@ function BudgetGraph() {
         labels: budgetCategories,
         datasets: [
             {
-                label: 'categories',
+                label: 'Kategorijos',
                 data: budgetLimits,
                 borderColor: "#018cff",
                 backgroundColor: '#FFA500',
