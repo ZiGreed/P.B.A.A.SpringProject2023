@@ -6,7 +6,7 @@ import "./ReadExpense.scss";
 import Vector from "./../assets/images/Vector.svg";
 import { deleteHandler } from "./servicces/deleteHandler";
 import { RiDeleteBinLine, RiEdit2Line } from "react-icons/ri";
-import Papa from 'papaparse';
+import Papa from "papaparse";
 import { Button } from "react-bootstrap";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -18,23 +18,19 @@ function ReadExpenses() {
   const [expenses, setExpenses] = useState([]);
   const [fromDate, setFromDate] = useState(null);
   const [toDate, setToDate] = useState(null);
-  const [selectedCategory, setSelectedCategory] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState("");
   const [category, setCategory] = useState([new Set()]);
-
-
-
 
   const handleFromDateChange = (date) => {
     setFromDate(date);
   };
-  
+
   const handleToDateChange = (date) => {
     setToDate(date);
   };
   const handleCategoryChange = (event) => {
     setSelectedCategory(event.target.value);
   };
-
 
   useEffect(() => {
     const params = {
@@ -45,13 +41,12 @@ function ReadExpenses() {
       .get(expensesURL, { params })
       .then((response) => setExpenses(response.data))
       .catch((error) => console.log(error));
-    
-      axios
+
+    axios
       .get(categoryURL)
       .then((response) => setCategory(response.data))
       .catch((error) => console.log(error));
   }, [fromDate, toDate]);
-}, []);
 
   function deleteExpense(id) {
     axios
@@ -67,14 +62,13 @@ function ReadExpenses() {
       header: true,
     });
 
-    const csvData = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+    const csvData = new Blob([csv], { type: "text/csv;charset=utf-8;" });
     const csvURL = URL.createObjectURL(csvData);
-    const link = document.createElement('a');
+    const link = document.createElement("a");
     link.href = csvURL;
-    link.setAttribute('download', 'expenses.csv');
+    link.setAttribute("download", "expenses.csv");
     link.click();
   };
-
 
   const filteredExpenses = expenses.filter((expense) => {
     const expenseDate = new Date(expense.date);
@@ -90,16 +84,16 @@ function ReadExpenses() {
     return true;
   });
 
-const categoriesOptions = category.map((category, index) => (
-  <option value={category.category} key={index}>
-    {category.category}
-  </option>
-));
-const handleResetFilters = () => {
-  setSelectedCategory('');
-  setFromDate(null);
-  setToDate(null);
-};
+  const categoriesOptions = category.map((category, index) => (
+    <option value={category.category} key={index}>
+      {category.category}
+    </option>
+  ));
+  const handleResetFilters = () => {
+    setSelectedCategory("");
+    setFromDate(null);
+    setToDate(null);
+  };
 
   let expensesjsx = filteredExpenses.map((expense, index) => {
     return (
@@ -107,7 +101,9 @@ const handleResetFilters = () => {
         <div className="cardInfoWrapper">
           <div>{expense.name}</div>
           <div>{expense.date.slice(0, 10)}</div>
-          <div><b>Kategorija: </b> {expense.category}</div>
+          <div>
+            <b>Kategorija: </b> {expense.category}
+          </div>
         </div>
         <div className="cardPriceRed">-{expense.amount} €</div>
         <div className="ButtonsContainer">
@@ -130,49 +126,71 @@ const handleResetFilters = () => {
   });
   const TotalAmount = () => {
     const totalAmount = expenses.reduce((acc, item) => acc + item.amount, 0);
-    return <><div style={{color: "white"}}>Suma: -{totalAmount}€</div></>;
-  }
+    return (
+      <>
+        <div style={{ color: "white" }}>Suma: -{totalAmount}€</div>
+      </>
+    );
+  };
   return (
     <>
-    <div className="readExpenseIncomejsx">
-      <div className="cardsWrapper">
-        <div className="filtersContainer">
-          <div className="filterItem">
-            <span>Kategorija:</span>
-            <br />
-            <select style={{width: "150px"}} className="customDatePicker" value={selectedCategory} onChange={handleCategoryChange}>
-              <option value="">Visos kategorijos</option>
-              {categoriesOptions}
-            </select>
+      <div className="readExpenseIncomejsx">
+        <div className="cardsWrapper">
+          <div className="filtersContainer">
+            <div className="filterItem">
+              <span>Kategorija:</span>
+              <br />
+              <select
+                style={{ width: "150px" }}
+                className="customDatePicker"
+                value={selectedCategory}
+                onChange={handleCategoryChange}
+              >
+                <option value="">Visos kategorijos</option>
+                {categoriesOptions}
+              </select>
+            </div>
+            <div className="filterItem">
+              <span>Nuo:</span>
+              <DatePicker
+                className="customDatePicker"
+                selected={fromDate}
+                onChange={handleFromDateChange}
+              />
+            </div>
+            <div className="filterItem">
+              <span>Iki:</span>
+              <DatePicker
+                className="customDatePicker"
+                selected={toDate}
+                onChange={handleToDateChange}
+              />
+            </div>
+
+            <Button
+              style={{ width: "100px" }}
+              className="budgetBtn"
+              onClick={handleResetFilters}
+            >
+              Atstatyti
+            </Button>
           </div>
-          <div className="filterItem">
-            <span>Nuo:</span>
-            <DatePicker className="customDatePicker" selected={fromDate} onChange={handleFromDateChange} />
+          {TotalAmount()}
+          <div className="cardsContainerBorder">
+            <div className="cardsContainer overflowHidden">{expensesjsx}</div>
           </div>
-          <div className="filterItem">
-            <span>Iki:</span>
-            <DatePicker className="customDatePicker" selected={toDate} onChange={handleToDateChange} />
+          <div className="budgetBtnContainer">
+            <Button className="budgetBtn" onClick={handleExport}>
+              eksportuoti CSV
+            </Button>
           </div>
-          
-          <Button style={{width: "100px"}} className="budgetBtn" onClick={handleResetFilters}>
-            Atstatyti
-          </Button>
-        </div>
-        {TotalAmount()}
-        <div className="cardsContainerBorder">
-          <div className="cardsContainer overflowHidden">{expensesjsx}</div>
-        </div>
-        <div className="budgetBtnContainer">
-          <Button className="budgetBtn" onClick={handleExport}>
-          eksportuoti CSV
-          </Button>
-        </div>
-        <div className="LinkWrapper">
-          <Link to="/addexpense/" className="LinkButton">
-            <button className="buttonAdd">
-              <img src={Vector} alt="" />
-            </button>
-          </Link>
+          <div className="LinkWrapper">
+            <Link to="/addexpense/" className="LinkButton">
+              <button className="buttonAdd">
+                <img src={Vector} alt="" />
+              </button>
+            </Link>
+          </div>
         </div>
       </div>
     </>
