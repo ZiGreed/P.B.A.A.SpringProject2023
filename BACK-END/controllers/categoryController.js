@@ -37,7 +37,7 @@ exports.createCategory = (req, res) => {
         createdCategory
           .save()
           .then((doc) => {
-            req.logged.info('Administratorius sukūrė kategoriją')
+            req.logger.info('Administratorius sukūrė kategoriją')
             res.status(201).json(doc);
           })
           .catch((err) => res.status(404).json({ error: err.message }));

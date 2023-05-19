@@ -20,6 +20,7 @@ const userSchema = mongoose.Schema({
         type: String, 
         default: "user"
     },
+    userID: String
 })
 
 const User = mongoose.model("User", userSchema)

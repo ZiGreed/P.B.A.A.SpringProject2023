@@ -1,8 +1,8 @@
 const winston = require("winston");
 const { createLogger, format, transports } = winston;
 
-function loggerMiddleware(req, res, next) {
-  const userID = req.userID; // Assuming you have a `user` property on the `req` object with an `id` property
+function userLoggerMiddleware(req, res, next) {
+  const userID = req.userID; // User ID for logging actions
 
   const userTransport = new winston.transports.File({
     filename: `logs/${userID}.log`,
@@ -16,9 +16,78 @@ function loggerMiddleware(req, res, next) {
     transports: [userTransport],
   });
 
-  // Add the logger to the request object
   req.logger = logger;
 
   next();
 }
-module.exports = loggerMiddleware
+
+function signupLoggerMiddleware(req, res, next) {
+  const newUserID = req._id; // User ID for new registered users
+  console.log(newUserID)
+
+  const signupTransport = new winston.transports.File({
+    filename: `logs/${newUserID}.log`,
+    format: format.combine(
+      format.timestamp({ format: "YYYY-MM-DD" }),
+      format.printf((info) => `${info.timestamp} ${info.message}`)
+    ),
+  });
+
+  const signupLogger = createLogger({
+    transports: [signupTransport],
+  });
+
+  req.signupLogger = signupLogger;
+  signupLogger.info("Vartotojas užsiregistravo");
+
+  next();
+}
+
+function loginLoggerMiddleware(req, res, next) {
+  const userID = req._id;
+  
+  const loginTransport = new winston.transports.File({
+    filename: `logs/${userID}.log`,
+    format: format.combine(
+      format.timestamp({ format: "YYYY-MM-DD" }),
+      format.printf((info) => `${info.timestamp} ${info.message}`)
+    ),
+  });
+
+  const loginLogger = createLogger({
+    transports: [loginTransport],
+  });
+
+  req.loginLogger = loginLogger;
+  loginLogger.info("Vartotojas prisijungė")
+
+  next();
+}
+
+function logoutLoggerMiddleware(req, res, next) {
+  const userID = req.userID;
+
+  const logoutTransport = new winston.transports.File({
+    filename: `logs/${userID}.log`,
+    format: format.combine(
+      format.timestamp({ format: "YYYY-MM-DD" }),
+      format.printf((info) => `${info.timestamp} ${info.message}`)
+    ),
+  });
+
+  const logoutLogger = createLogger({
+    transports: [logoutTransport],
+  });
+
+  req.logoutLogger = logoutLogger;
+  logoutLogger.info("Vartotojas atsijungė")
+
+  next();
+}
+
+module.exports = {
+  userLoggerMiddleware,
+  signupLoggerMiddleware,
+  loginLoggerMiddleware,
+  logoutLoggerMiddleware
+};

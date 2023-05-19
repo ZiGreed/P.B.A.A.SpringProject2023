@@ -153,7 +153,7 @@ function Users() {
               />
             )}
             {beingCreated && (
-              <UserCreationForm setBeingCreated={setBeingCreated} />
+              <UserCreationForm setBeingCreated={setBeingCreated} setUsers={setUsers}/>
             )}
           </div>
         </div>
