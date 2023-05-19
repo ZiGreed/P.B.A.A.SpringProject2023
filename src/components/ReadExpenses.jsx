@@ -128,7 +128,7 @@ function ReadExpenses() {
     const totalAmount = expenses.reduce((acc, item) => acc + item.amount, 0);
     return (
       <>
-        <div style={{ color: "white" }}>Suma: -{totalAmount}€</div>
+        <div style={{ color: "white" }}>Suma: -{totalAmount} €</div>
       </>
     );
   };
