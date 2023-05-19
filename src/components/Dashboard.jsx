@@ -7,10 +7,24 @@ import { Link } from "react-router-dom";
 import useWindowSize from "./useWindowSize";
 import CurrentMonthChart from "./CurrentMonthChart";
 import Calendar from "./Calendar";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 function Dashboard() {
   let windowSize = useWindowSize();
   const [historyClicked, setHistoryClicked] = useState(false);
+  const [tabKey, setTabKey] = useState("currentMonth");
+
+
+  useEffect(() => {
+    if (windowSize < 768 && historyClicked) {
+      setTabKey(null);
+    } else {
+      setTabKey("currentMonth");
+    }
+  }, [windowSize, historyClicked]);
+
+  const handleTabSelect = (key) => {
+    setTabKey(key);
+  };
 
   let renderHandle = () => {
     if (windowSize >= 768 || !historyClicked)
@@ -18,16 +32,17 @@ function Dashboard() {
         <div className="diagram-border w-100">
           <Tabs
             defaultActiveKey="currentMonth"
+            onSelect={handleTabSelect}
             className="d-flex justify-content-center"
             variant="tabs"
             fill
             id="controlled-tab-example"
           >
             <Tab eventKey="currentMonth" title="Šis mėnuo">
-              <CurrentMonthChart />
+              {tabKey === "currentMonth" && <CurrentMonthChart />}
             </Tab>
             <Tab eventKey="chooseYear" title="Šie metai">
-              <YearChart />
+              {tabKey === "chooseYear" && <YearChart />}
             </Tab>
           </Tabs>
         </div>
