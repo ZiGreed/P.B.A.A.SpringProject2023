@@ -7,7 +7,6 @@ import { BurgerIcon, NavigationLogo } from "./NavIcons";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Outlet } from "react-router-dom";
 import useWindowSize from "./useWindowSize";
-import { AuthContextProvider } from "../context/AuthContext";
 
 function MainPage() {
   const [show, setShow] = useState(false);

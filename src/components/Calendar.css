@@ -102,8 +102,8 @@ h2 {
 
 @media screen and (max-width: 767px){
   .historyTab {
-    height: 50vh;
-    margin-bottom: 30px;
+    height: 465px;
+    margin: 0;
   }
   .transferInfo {
     width: 60%;
