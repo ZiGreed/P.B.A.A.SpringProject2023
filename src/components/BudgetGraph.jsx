@@ -30,12 +30,10 @@ function BudgetGraph() {
           .then((response) => setbudgetData(response.data))
           .catch((error) => console.log(error));
       }, []);
-      console.log(budgetData)
 
       let budgetCategories = budgetData.map((item) => item.category);
       let budgetLimits = budgetData.map((item) => item.limit)
       
-      console.log(budgetCategories);
     const data = {
         labels: budgetCategories,
         datasets: [
