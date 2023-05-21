@@ -18,7 +18,6 @@ function ReadBudget() {
       .then((response) => setbudgetData(response.data))
       .catch((error) => console.log(error));
   }, []);
-  console.log(budgetData)
   function deleteBudget(id) {
     axios
       .delete(budgetURL + "/" + id)
